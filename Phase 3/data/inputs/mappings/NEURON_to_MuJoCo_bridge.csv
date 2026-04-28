@@ -1,0 +1,352 @@
+mn_type,mn_id,nerve,subsystem,thorax,side,joint,dof,actuator_name,sign,action,gain,bias,confidence,notes,target_body,target_joint,weight
+MNad01_AbN3_L,19300,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad01_AbN3_R,18939,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad01_AbN4_L,21022,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad01_AbN4_L,29602,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad01_AbN4_R,155854,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad01_AbN4_R,20052,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN2_L,18551,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN2_R,17719,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN3_L,19693,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN3_R,24225,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN4_L,18503,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN4_L,19824,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN4_L,25810,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN4_L,27651,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN4_R,154153,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN4_R,17319,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN4_R,20055,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad02_AbN4_R,20115,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad03_AbN4_L,16305,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad03_AbN4_L,28921,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad03_AbN4_L,30702,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad03_AbN4_R,16560,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad03_AbN4_R,18060,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad03_AbN4_R,27988,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad04_AbNT_L,16437,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad04_AbNT_L,16735,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad04_AbNT_R,152119,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad04_AbNT_R,16501,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad05_AbN4_L,102953,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad05_AbN4_L,17179,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad05_AbN4_L,17645,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad05_AbN4_R,14902,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad05_AbN4_R,16227,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad05_AbN4_R,16330,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad06_AbN3_L,15388,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad06_AbN3_R,14211,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad06_AbN4_L,14981,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad06_AbN4_L,15354,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad06_AbN4_L,20425,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad06_AbN4_R,101706,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad06_AbN4_R,15059,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad06_AbN4_R,18674,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad07_AbN4_L,13733,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad07_AbN4_L,14768,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad07_AbN4_R,14288,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad07_AbN4_R,22139,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad08_AbN4_L,13671,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad08_AbN4_L,15202,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad08_AbN4_L,15846,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad08_AbN4_R,13242,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad08_AbN4_R,13899,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad08_AbN4_R,159031,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad09_AbNT,100375,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad09_AbNT,13182,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad09_AbNT,13631,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad09_AbNT,13760,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad09_AbNT,14859,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad09_AbNT,14883,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad09_AbNT,15529,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad09_AbNT,16730,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad10_AbN3_L,13480,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad10_AbN3_R,14123,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad10_AbN4_L,14602,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad10_AbN4_R,14469,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad11_AbN3_L,13403,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad11_AbN3_R,13579,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad11_AbN4_L,13999,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad11_AbN4_L,18692,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad11_AbN4_L,19924,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad11_AbN4_R,13878,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad11_AbN4_R,14008,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad11_AbN4_R,19486,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad12_AbNT_L,13225,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad12_AbNT_L,14233,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad12_AbNT_R,13183,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad12_AbNT_R,14787,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN2_L,12269,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN2_R,11830,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN3_L,12844,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN3_R,13297,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN4_L,100612,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN4_L,13655,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN4_L,16178,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN4_L,23801,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN4_R,14853,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN4_R,15182,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN4_R,16375,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad13_AbN4_R,17576,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad14_AbN3_L,12802,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad14_AbN3_R,15534,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad14_AbN4_L,12810,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad14_AbN4_L,13547,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad14_AbN4_L,14241,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad14_AbN4_R,13486,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad14_AbN4_R,16367,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad14_AbN4_R,16431,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad15_AbN4_L,12612,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad15_AbN4_L,15073,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad15_AbN4_R,12509,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad15_AbN4_R,13105,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad16_AbN3_L,15296,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad16_AbN3_R,33009,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad16_AbN4_L,17894,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad16_AbN4_L,22574,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad16_AbN4_R,21057,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad16_AbN4_R,27105,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad16_AbNT_L,153863,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad16_AbNT_R,12389,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad17_AbNT_L,11624,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad17_AbNT_L,12646,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad17_AbNT_L,12682,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad17_AbNT_R,11847,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad17_AbNT_R,12468,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad17_AbNT_R,13415,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad18_AbN2_L,11572,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad18_AbN2_R,11585,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad18_AbN3_L,12209,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad18_AbN3_R,12841,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad19_AbN4_L,10753,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad19_AbN4_L,11768,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad19_AbN4_L,13719,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad19_AbN4_R,11283,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad19_AbN4_R,11897,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad19_AbN4_R,12638,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad20_AbNT_L,11232,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad20_AbNT_L,15784,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad20_AbNT_R,13356,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad20_AbNT_R,163733,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad21_AbN2_L,10482,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad21_AbN2_R,10473,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad21_AbN3_L,10548,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad21_AbN3_R,10616,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad22_AbNT,11242,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad22_AbNT,11545,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad22_AbNT_L,10386,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad22_AbNT_R,10383,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad23_AbNT_L,10505,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad23_AbNT_R,10359,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad24_AbN2_L,14871,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad24_AbN2_R,15481,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad25_AbN2_L,13924,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad25_AbN2_R,14370,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad26_AbN1_L,13717,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad26_AbN1_R,13298,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad27_AbN3_L,12445,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad27_AbN3_R,12314,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad28_AbN1_L,15523,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad28_AbN1_R,17160,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad29_AbN1_L,153281,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad29_AbN1_R,17688,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad30_AbN2_L,16068,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad30_AbN2_R,20446,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad31_AbN2_L,15561,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad31_AbN2_R,15215,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad32_AbN2_L,14461,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad32_AbN2_R,17500,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad33_AbN2_L,15801,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad33_AbN2_R,14341,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad34_AbN2_L,10787,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad34_AbN2_R,14095,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad35_AbN2_L,12756,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad35_AbN2_R,12529,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad36_AbN2_L,12506,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad36_AbN2_R,12225,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad37_AbN2_L,12185,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad38_AbN3_L,13050,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad39_AbN3_R,21264,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad40_AbN2_L,11638,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad40_AbN2_R,14613,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad41_AbN2_L,10904,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad41_AbN2_R,10840,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad42_AbN2_L,10460,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad42_AbN2_R,10782,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad43_AbN3_L,17391,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad43_AbN3_R,18376,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad44_AbN3_L,16956,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad44_AbN3_R,16949,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad45_AbN2_L,16728,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad45_AbN2_R,16750,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad46_AbN2_L,16278,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad46_AbN2_R,17583,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad47_AbN2_L,15937,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad47_AbN2_R,17100,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad48_AbNT_L,15832,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad48_AbNT_R,17030,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad49_AbNT_L,14447,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad49_AbNT_R,14505,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad50_AbNT,14234,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad50_AbNT,15736,AbNT,abdomen,Ab,,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad50_AbNT_R-AbNT_L,13444,R-AbNT,,,left,,,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad51_AbN2_L,18373,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad51_AbN2_R,14159,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad52_AbN4_L,14708,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad52_AbN4_R,13929,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad53_AbNT_L,14983,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad53_AbNT_L,16094,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad53_AbNT_R,13836,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad53_AbNT_R,14888,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad54_AbN2_L,14021,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad54_AbN2_L,14653,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad54_AbN2_R,13806,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad54_AbN2_R,14407,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad55_AbNT_L,15094,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad55_AbNT_R,13742,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad56_AbN3_L,13797,AbN3,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad56_AbN3_R,13725,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad57_AbNT_L,13392,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad57_AbNT_R,13493,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad58_AbN4_L,13188,AbN4,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad58_AbN4_R,25023,AbN4,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad59_AbN3_R,13526,AbN3,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad61_AbNT_L,13418,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad61_AbNT_R,12499,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad62_AbNT_L,14329,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad62_AbNT_R,11549,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad63_AbN2_L,11375,AbN2,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad63_AbN2_R,11428,AbN2,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad64_AbNT_L,11097,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad64_AbNT_R,11436,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad65_AbNT_L,11265,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad65_AbNT_R,10915,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad66_AbNT_L,12526,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad66_AbNT_R,10872,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad67_AbNT_L,11063,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad67_AbNT_R,10865,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad68_AbNT_L,10527,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad68_AbNT_R,10660,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad69_AbNT_L,10524,AbNT,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNad69_AbNT_R,10676,AbNT,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNfl10_ProLN_L,17664,ProLN,leg,T1,left,,,coxa_T1_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T1,coxa,1.0
+MNfl10_ProLN_R,18483,ProLN,leg,T1,right,,,coxa_T1_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T1,coxa,1.0
+MNhl01_AbN1_L,221983,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhl01_AbN1_R,15735,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhl02_AbN1_L,11813,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhl02_AbN1_R,11274,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhl29_MetaLN_L,102123,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl29_MetaLN_R,14649,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl59_MetaLN_L,11809,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl59_MetaLN_R,13543,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl60_MetaLN_L,157709,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl60_MetaLN_R,27205,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl61_MetaLN_L,27757,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl61_MetaLN_R,19744,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl62_AbN1_L,27479,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhl62_AbN1_R,17970,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhl63_MetaLN_L,25599,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl63_MetaLN_R,15550,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl64_MetaLN_L,29474,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl64_MetaLN_R,13740,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl65_MetaLN_L,19480,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl65_MetaLN_R,13144,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl66_MetaLN_L,13095,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl66_MetaLN_R,12800,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl67_MetaLN_R,11480,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl67_MetaLN_R,12504,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl68_MetaLN_L,14339,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl68_MetaLN_R,10968,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl68_MetaLN_R,13512,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl69_MetaLN_L,100824,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl70_MetaLN_L,35407,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl71_MetaLN_L,192364,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl72_MetaLN_L,37741,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl73_MetaLN_L,163009,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl74_MetaLN_L,15879,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl75_MetaLN_R,14622,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl87_MetaLN_L,17761,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl87_MetaLN_R,15857,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl88_MetaLN_L,17905,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl88_MetaLN_R,13883,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhm03_AbN1_L,10825,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhm03_AbN1_R,18566,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhm42_AbN1_L,10571,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhm42_AbN1_R,49582,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhm43_AbN1_L,17216,AbN1,abdomen,Ab,left,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNhm43_AbN1_R,24257,AbN1,abdomen,Ab,right,abdomen,main,abdomen,1.0,,1.0,0.0,medium,autofill,abdomen,abdomen,1.0
+MNml10_MesoLN_L,20378,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml10_MesoLN_R,29509,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml29_MesoLN_L,19773,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml29_MesoLN_R,12196,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml76_MesoLN_L,162825,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml76_MesoLN_R,156505,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml77_MesoLN_L,103416,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml77_MesoLN_R,200065,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_L,167919,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_L,20551,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_L,30709,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_R,30781,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_R,35950,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_R,39941,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml79_MesoLN_L,17964,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml79_MesoLN_R,32253,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml80_MesoLN_L,17697,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml80_MesoLN_L,25956,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml80_MesoLN_R,15616,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml81_MesoLN_L,13036,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml81_MesoLN_R,14828,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml82_MesoLN_L,101909,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml83_MesoLN_L,17036,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml84_MesoLN_R,16497,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml85_MesoLN_R,16017,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml86_MesoLN_R,162827,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNnm03_DProN_L,156960,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm03_DProN_L,156960,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm03_DProN_R,45594,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm03_DProN_R,45594,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm07_DProN_L,26924,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm07_DProN_L,26924,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm07_DProN_R,15789,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm07_DProN_R,15789,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm08_DProN_L,11059,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm08_DProN_L,11059,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm08_DProN_R,11954,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm08_DProN_R,11954,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm09_DProN_L,12603,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm09_DProN_L,12603,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm09_DProN_R,24149,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm09_DProN_R,24149,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm10_DProN_L,178721,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm10_DProN_L,178721,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm10_DProN_R,11033,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm10_DProN_R,11033,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm11_DProN_L,102542,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm11_DProN_L,102542,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm11_DProN_R,23937,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm11_DProN_R,23937,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm12_DProN_L,15923,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm12_DProN_L,15923,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm12_DProN_R,18717,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm12_DProN_R,18717,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm13_DProN_L,13974,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm13_DProN_L,13974,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm13_DProN_R,15244,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm13_DProN_R,15244,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm14_DProN_L,153756,DProN,head,T1,left,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm14_DProN_L,153756,DProN,head,T1,left,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm14_DProN_R,15049,DProN,head,T1,right,head,main,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNnm14_DProN_R,15049,DProN,head,T1,right,antenna,abduct,head,1.0,,1.0,0.0,medium,autofill,head,head,1.0
+MNwm34_PDMNp_L,10068,PDMN,wing,T2,left,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm34_PDMNp_R,10110,PDMN,wing,T2,right,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm35_MesoAN_L,11991,MesoAN,wing,T2,left,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm35_MesoAN_R,13665,MesoAN,wing,T2,right,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm36_MesoAN_L,10178,MesoAN,wing,T2,left,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm36_MesoAN_R,46457,MesoAN,wing,T2,right,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNxm01_PDMNa_L,12009,PDMN,wing,T2,left,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNxm01_PDMNa_R,11372,PDMN,wing,T2,right,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNxm02_DMetaN_L,13072,DMetaN,,,left,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+MNxm02_DMetaN_R,12308,DMetaN,,,right,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+MNxm03_DMetaN_L,16167,DMetaN,,,left,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+MNxm03_DMetaN_R,13478,DMetaN,,,right,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+TTMn,10068,,,,,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+TTMn,10110,,,,,,,,0.0,,1.0,0.0,low,unresolved,,,1.0

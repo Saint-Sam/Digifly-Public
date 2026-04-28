@@ -1,0 +1,39 @@
+global:
+  neural_dt_ms: 0.025
+  clip_actions: true
+
+# Example mapping — replace actuator names with those in your env
+actuators:
+  # Left front leg, coxa pitch torque (antagonist pair)
+  - pool: L1_coxa_pitch_ext
+    actuator: L1_coxa_pitch_torque
+    type: torque
+    gain: 0.8
+    sign: 1.0
+  - pool: L1_coxa_pitch_flex
+    actuator: L1_coxa_pitch_torque
+    type: torque
+    gain: 0.8
+    sign: -1.0
+
+  # Example position target for tibia
+  - pool: L1_tibia_target
+    actuator: L1_tibia_pos
+    type: position
+    angle0_deg: 15.0
+    alpha_deg: 25.0
+
+  # Abdomen tendon
+  - pool: abdomen_drive
+    actuator: abdomen_tendon
+    type: tendon
+    gain: 1.0
+
+  # Adhesion normal force
+  - pool: grip_L1
+    actuator: adhesion_L1
+    type: adhesion
+    model: logistic
+    k: 10.0
+    x0: 0.5
+    fmax: 6.0

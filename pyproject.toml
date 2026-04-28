@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digifly-public"
+version = "0.1.0"
+description = "Public-facing Digifly notebooks and helper code extracted from the current Digifly master workspace."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "neuprint-python",
+    "numpy",
+    "pandas",
+]
+
+[project.optional-dependencies]
+notebooks = [
+    "ipython",
+    "ipywidgets",
+    "jupyterlab",
+    "matplotlib",
+    "navis",
+    "networkx",
+    "openpyxl",
+    "plotly",
+    "scipy",
+    "scikit-learn",
+    "tqdm",
+    "trimesh",
+]
+mutation-app = [
+    "ipywidgets",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "pillow",
+    "plotly",
+    "pyarrow",
+    "pyvista",
+]
+
+[tool.setuptools]
+package-dir = {"" = "Phase 1"}
+packages = ["digifly_phase1"]
+py-modules = [
+    "filter_ids_by_size_and_export_swc",
+    "phase1_bridge",
+]

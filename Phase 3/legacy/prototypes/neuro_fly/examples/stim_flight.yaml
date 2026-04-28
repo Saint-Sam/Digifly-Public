@@ -1,0 +1,11 @@
+mode: flight
+T_seconds: 4.0
+stimuli:
+  - target: MN_wing_L_delta_torque
+    waveform: tonic
+    params: {amp_nA: 0.3}
+    window: {t_on_ms: 100.0, t_off_ms: 2000.0}
+  - target: MN_wing_R_delta_torque
+    waveform: tonic
+    params: {amp_nA: 0.1}
+    window: {t_on_ms: 100.0, t_off_ms: 2000.0}

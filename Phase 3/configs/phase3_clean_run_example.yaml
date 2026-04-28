@@ -1,0 +1,14 @@
+run_name: "run_debug_full"
+phase2_runs_root: "../Phase 2/data/export_swc/hemi_runs"
+hemilineage_folder: null
+mapping_csv: "data/inputs/mappings/mn_to_actuator_mapping_rebuilt.csv"
+world_xml_candidates:
+  - "data/inputs/flybody/floor.xml"
+  - "~/Desktop/Digifly/flybody-main/flybody/fruitfly/assets/floor.xml"
+run_tag: "run_debug_full_bridge"
+save_tag: null
+profile_name: null
+render_enabled: true
+tau_rise_ms: 1.0
+tau_decay_ms: 6.0
+global_scale: 1.0

@@ -1,0 +1,6 @@
+numpy
+pyyaml
+imageio
+imageio-ffmpeg
+# dm_control OR mujoco python bindings must be installed separately with the flybody env.
+# e.g., pip install mujoco dm-control

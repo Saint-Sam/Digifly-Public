@@ -1,0 +1,481 @@
+default_profile: biological_18s_preview
+
+profiles:
+  realistic_baseline:
+    signal:
+      loop_total_ms: 80.0
+      settle_ms: 0.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 1.5
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: []
+    control_map:
+      target_ctrl_fraction: 0.55
+      percentile: 95.0
+      bias_to_mid: true
+      clip: true
+    render:
+      camera_name: track2
+      camera_distance_factor: 8.0
+      camera_fovy_deg: 75.0
+      render_hz: 120
+      slowmo: 12.0
+      width: 1280
+      height: 720
+
+  balanced_showcase:
+    signal:
+      loop_total_ms: 220.0
+      settle_ms: 4.0
+      right_leg_phase_ms: 1.5
+      ramp_ms: 3.0
+      front_scale: 1.0
+      mid_scale: 0.85
+      hind_scale: 0.5
+      zero_actuators: ["abdomen"]
+    control_map:
+      target_ctrl_fraction: 0.68
+      percentile: 95.0
+      bias_to_mid: true
+      clip: true
+    render:
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 120
+      slowmo: 30.0
+      width: 1280
+      height: 720
+
+  biological_18s_preview:
+    signal:
+      stretch_total_ms: 18000.0
+      settle_ms: 0.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 150.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+    control_map:
+      target_ctrl_fraction: 0.6
+      percentile: 95.0
+      bias_to_mid: true
+      clip: true
+    render:
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 1.0
+      width: 1280
+      height: 720
+
+  glia_raw_slowmo_preview:
+    signal:
+      settle_ms: 0.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 5.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+    control_map:
+      target_ctrl_fraction: 0.6
+      percentile: 95.0
+      bias_to_mid: true
+      clip: true
+    render:
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 20.0
+      width: 1280
+      height: 720
+
+  glia_jump_wingbeat_preview:
+    signal:
+      settle_ms: 333.0
+      tail_ms: 180.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 0.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+      jump_pulse:
+        enabled: true
+        rise_ms: 1.0
+        decay_ms: 7.0
+        threshold_frac: 0.08
+        amplitude_scale: 1.0
+      wingbeat:
+        enabled: true
+        frequency_hz: 180.0
+        onset_threshold_frac: 0.08
+        envelope_power: 0.65
+        amplitude_scale: 1.0
+        left_phase_deg: 0.0
+        right_phase_deg: 0.0
+        harmonic_mix: 0.15
+    control_map:
+      target_ctrl_fraction: 0.95
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+      output_gains:
+        coxa_T2_left: 1.7
+        femur_T2_left: 1.9
+        tibia_T2_left: 1.05
+        coxa_T2_right: 1.7
+        femur_T2_right: 1.9
+        tibia_T2_right: 1.05
+    render:
+      # T2 jump tuning knobs:
+      # - jump_pulse.amplitude_scale: scales the shaped neural kick before mapping
+      # - output_gains: post-map control scaling
+      # - actuator_boosts: MuJoCo-side strength boost during preview/render
+      actuator_boosts:
+        - targets: [coxa_T2_left, coxa_T2_right]
+          gear_mult: 8.0
+          forcerange_mult: 4.0
+        - targets: [femur_T2_left, femur_T2_right]
+          gear_mult: 24.0
+          forcerange_mult: 8.0
+        - targets: [tibia_T2_left, tibia_T2_right]
+          gear_mult: 6.0
+          forcerange_mult: 3.0
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 12.0
+      width: 1280
+      height: 720
+
+  glia_jump_wingbeat_preview_femur20:
+    signal:
+      settle_ms: 333.0
+      tail_ms: 180.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 0.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+      jump_pulse:
+        enabled: true
+        rise_ms: 1.0
+        decay_ms: 7.0
+        threshold_frac: 0.08
+        amplitude_scale: 1.0
+      wingbeat:
+        enabled: true
+        frequency_hz: 180.0
+        onset_threshold_frac: 0.08
+        envelope_power: 0.65
+        amplitude_scale: 1.0
+        left_phase_deg: 0.0
+        right_phase_deg: 0.0
+        harmonic_mix: 0.15
+    control_map:
+      target_ctrl_fraction: 0.95
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+      output_gains:
+        coxa_T2_left: 1.7
+        femur_T2_left: 1.9
+        tibia_T2_left: 1.05
+        coxa_T2_right: 1.7
+        femur_T2_right: 1.9
+        tibia_T2_right: 1.05
+    render:
+      actuator_boosts:
+        - targets: [coxa_T2_left, coxa_T2_right]
+          gear_mult: 8.0
+          forcerange_mult: 4.0
+        - targets: [femur_T2_left, femur_T2_right]
+          gear_mult: 20.0
+          forcerange_mult: 8.0
+        - targets: [tibia_T2_left, tibia_T2_right]
+          gear_mult: 6.0
+          forcerange_mult: 3.0
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 12.0
+      width: 1280
+      height: 720
+
+  glia_jump_wingbeat_preview_femur24:
+    signal:
+      settle_ms: 333.0
+      tail_ms: 180.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 0.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+      jump_pulse:
+        enabled: true
+        rise_ms: 1.0
+        decay_ms: 7.0
+        threshold_frac: 0.08
+        amplitude_scale: 1.0
+      wingbeat:
+        enabled: true
+        frequency_hz: 180.0
+        onset_threshold_frac: 0.08
+        envelope_power: 0.65
+        amplitude_scale: 1.0
+        left_phase_deg: 0.0
+        right_phase_deg: 0.0
+        harmonic_mix: 0.15
+    control_map:
+      target_ctrl_fraction: 0.95
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+      output_gains:
+        coxa_T2_left: 1.7
+        femur_T2_left: 1.9
+        tibia_T2_left: 1.05
+        coxa_T2_right: 1.7
+        femur_T2_right: 1.9
+        tibia_T2_right: 1.05
+    render:
+      actuator_boosts:
+        - targets: [coxa_T2_left, coxa_T2_right]
+          gear_mult: 8.0
+          forcerange_mult: 4.0
+        - targets: [femur_T2_left, femur_T2_right]
+          gear_mult: 24.0
+          forcerange_mult: 8.0
+        - targets: [tibia_T2_left, tibia_T2_right]
+          gear_mult: 6.0
+          forcerange_mult: 3.0
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 12.0
+      width: 1280
+      height: 720
+
+  glia_jump_no_wing_preview_femur20:
+    signal:
+      settle_ms: 333.0
+      tail_ms: 180.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 0.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen", "wing_pitch_left", "wing_pitch_right"]
+      jump_pulse:
+        enabled: true
+        rise_ms: 1.0
+        decay_ms: 7.0
+        threshold_frac: 0.08
+        amplitude_scale: 1.0
+      wingbeat:
+        enabled: false
+        frequency_hz: 180.0
+        onset_threshold_frac: 0.08
+        envelope_power: 0.65
+        amplitude_scale: 1.0
+        left_phase_deg: 0.0
+        right_phase_deg: 0.0
+        harmonic_mix: 0.15
+    control_map:
+      target_ctrl_fraction: 0.95
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+      output_gains:
+        coxa_T2_left: 1.7
+        femur_T2_left: 1.9
+        tibia_T2_left: 1.05
+        coxa_T2_right: 1.7
+        femur_T2_right: 1.9
+        tibia_T2_right: 1.05
+        wing_pitch_left: 0.0
+        wing_pitch_right: 0.0
+    render:
+      actuator_boosts:
+        - targets: [coxa_T2_left, coxa_T2_right]
+          gear_mult: 8.0
+          forcerange_mult: 4.0
+        - targets: [femur_T2_left, femur_T2_right]
+          gear_mult: 20.0
+          forcerange_mult: 8.0
+        - targets: [tibia_T2_left, tibia_T2_right]
+          gear_mult: 6.0
+          forcerange_mult: 3.0
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 12.0
+      width: 1280
+      height: 720
+
+  glia_jump_no_wing_preview_femur24:
+    signal:
+      settle_ms: 333.0
+      tail_ms: 180.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 0.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen", "wing_pitch_left", "wing_pitch_right"]
+      jump_pulse:
+        enabled: true
+        rise_ms: 1.0
+        decay_ms: 7.0
+        threshold_frac: 0.08
+        amplitude_scale: 1.0
+      wingbeat:
+        enabled: false
+        frequency_hz: 180.0
+        onset_threshold_frac: 0.08
+        envelope_power: 0.65
+        amplitude_scale: 1.0
+        left_phase_deg: 0.0
+        right_phase_deg: 0.0
+        harmonic_mix: 0.15
+    control_map:
+      target_ctrl_fraction: 0.95
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+      output_gains:
+        coxa_T2_left: 1.7
+        femur_T2_left: 1.9
+        tibia_T2_left: 1.05
+        coxa_T2_right: 1.7
+        femur_T2_right: 1.9
+        tibia_T2_right: 1.05
+        wing_pitch_left: 0.0
+        wing_pitch_right: 0.0
+    render:
+      actuator_boosts:
+        - targets: [coxa_T2_left, coxa_T2_right]
+          gear_mult: 8.0
+          forcerange_mult: 4.0
+        - targets: [femur_T2_left, femur_T2_right]
+          gear_mult: 24.0
+          forcerange_mult: 8.0
+        - targets: [tibia_T2_left, tibia_T2_right]
+          gear_mult: 6.0
+          forcerange_mult: 3.0
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 12.0
+      width: 1280
+      height: 720
+
+  dng100_looped_18s_preview:
+    signal:
+      loop_total_ms: 15000.0
+      settle_ms: 3000.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 0.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+    control_map:
+      target_ctrl_fraction: 0.6
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+    render:
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 1.0
+      width: 1280
+      height: 720
+
+  dng100_200hz_slow_18s_preview:
+    signal:
+      loop_total_ms: 3750.0
+      stretch_total_ms: 15000.0
+      settle_ms: 3000.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 0.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+    control_map:
+      target_ctrl_fraction: 0.6
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+    render:
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 1.0
+      width: 1280
+      height: 720
+
+  dng100_paper_rate_slow_preview:
+    signal:
+      stretch_total_ms: 18000.0
+      settle_ms: 3000.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 300.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+    control_map:
+      target_ctrl_fraction: 0.6
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+    render:
+      camera_name: hero
+      camera_distance_factor: 8.0
+      camera_fovy_deg: 60.0
+      render_hz: 60
+      slowmo: 1.0
+      width: 1280
+      height: 720
+
+  expected_gait_compare:
+    signal:
+      settle_ms: 250.0
+      right_leg_phase_ms: 0.0
+      ramp_ms: 450.0
+      front_scale: 1.0
+      mid_scale: 1.0
+      hind_scale: 1.0
+      zero_actuators: ["abdomen"]
+    control_map:
+      target_ctrl_fraction: 0.25
+      percentile: 95.0
+      bias_to_mid: false
+      clip: true
+    render:
+      camera_name: track2
+      camera_distance_factor: 9.0
+      camera_fovy_deg: 75.0
+      render_hz: 60
+      slowmo: 1.0
+      width: 1280
+      height: 720

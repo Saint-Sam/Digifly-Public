@@ -1,0 +1,34 @@
+global:
+  neural_dt_ms: 0.025
+  clip_actions: true
+actuators:
+- pool: L1_coxa_pitch_ext
+  actuator: walker/coxa_T1_left
+  type: torque
+  gain: 0.8
+  sign: 1.0
+- pool: L1_coxa_pitch_flex
+  actuator: walker/coxa_T1_left
+  type: torque
+  gain: 0.8
+  sign: -1.0
+- pool: L1_femur_drive
+  actuator: walker/femur_T1_left
+  type: torque
+  gain: 0.6
+  sign: 1.0
+- pool: L1_tibia_drive
+  actuator: walker/tibia_T1_left
+  type: torque
+  gain: 0.6
+  sign: 1.0
+- pool: abdomen_drive
+  actuator: walker/abdomen
+  type: torque
+  gain: 0.4
+  sign: 1.0
+- pool: head_drive
+  actuator: walker/head
+  type: torque
+  gain: 0.2
+  sign: 1.0

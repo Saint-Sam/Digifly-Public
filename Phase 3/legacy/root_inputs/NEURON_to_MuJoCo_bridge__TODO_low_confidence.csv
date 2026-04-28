@@ -1,0 +1,75 @@
+mn_type,mn_id,nerve,subsystem,thorax,side,joint,dof,actuator_name,sign,action,gain,bias,confidence,notes,target_body,target_joint,weight
+MNfl10_ProLN_L,17664,ProLN,leg,T1,left,,,coxa_T1_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T1,coxa,1.0
+MNfl10_ProLN_R,18483,ProLN,leg,T1,right,,,coxa_T1_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T1,coxa,1.0
+MNhl29_MetaLN_L,102123,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl29_MetaLN_R,14649,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl59_MetaLN_L,11809,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl59_MetaLN_R,13543,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl60_MetaLN_L,157709,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl60_MetaLN_R,27205,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl61_MetaLN_L,27757,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl61_MetaLN_R,19744,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl63_MetaLN_L,25599,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl63_MetaLN_R,15550,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl64_MetaLN_L,29474,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl64_MetaLN_R,13740,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl65_MetaLN_L,19480,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl65_MetaLN_R,13144,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl66_MetaLN_L,13095,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl66_MetaLN_R,12800,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl67_MetaLN_R,11480,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl67_MetaLN_R,12504,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl68_MetaLN_L,14339,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl68_MetaLN_R,10968,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl68_MetaLN_R,13512,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl69_MetaLN_L,100824,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl70_MetaLN_L,35407,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl71_MetaLN_L,192364,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl72_MetaLN_L,37741,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl73_MetaLN_L,163009,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl74_MetaLN_L,15879,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl75_MetaLN_R,14622,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl87_MetaLN_L,17761,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl87_MetaLN_R,15857,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl88_MetaLN_L,17905,MetaLN,leg,T3,left,,,coxa_T3_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNhl88_MetaLN_R,13883,MetaLN,leg,T3,right,,,coxa_T3_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T3,coxa,1.0
+MNml10_MesoLN_L,20378,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml10_MesoLN_R,29509,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml29_MesoLN_L,19773,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml29_MesoLN_R,12196,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml76_MesoLN_L,162825,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml76_MesoLN_R,156505,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml77_MesoLN_L,103416,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml77_MesoLN_R,200065,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_L,167919,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_L,20551,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_L,30709,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_R,30781,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_R,35950,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml78_MesoLN_R,39941,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml79_MesoLN_L,17964,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml79_MesoLN_R,32253,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml80_MesoLN_L,17697,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml80_MesoLN_L,25956,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml80_MesoLN_R,15616,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml81_MesoLN_L,13036,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml81_MesoLN_R,14828,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml82_MesoLN_L,101909,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml83_MesoLN_L,17036,MesoLN,leg,T2,left,,,coxa_T2_left,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml84_MesoLN_R,16497,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml85_MesoLN_R,16017,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNml86_MesoLN_R,162827,MesoLN,leg,T2,right,,,coxa_T2_right,1.0,,1.0,0.0,low,placeholder; refine to femur/tibia/twist if known,leg_T2,coxa,1.0
+MNwm34_PDMNp_L,10068,PDMN,wing,T2,left,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm34_PDMNp_R,10110,PDMN,wing,T2,right,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm35_MesoAN_L,11991,MesoAN,wing,T2,left,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm35_MesoAN_R,13665,MesoAN,wing,T2,right,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm36_MesoAN_L,10178,MesoAN,wing,T2,left,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNwm36_MesoAN_R,46457,MesoAN,wing,T2,right,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNxm01_PDMNa_L,12009,PDMN,wing,T2,left,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNxm01_PDMNa_R,11372,PDMN,wing,T2,right,wing,pitch,wing_pitch_left,1.0,,1.0,0.0,low,placeholder; might be roll/yaw,wing,wing_pitch,1.0
+MNxm02_DMetaN_L,13072,DMetaN,,,left,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+MNxm02_DMetaN_R,12308,DMetaN,,,right,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+MNxm03_DMetaN_L,16167,DMetaN,,,left,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+MNxm03_DMetaN_R,13478,DMetaN,,,right,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+TTMn,10068,,,,,,,,0.0,,1.0,0.0,low,unresolved,,,1.0
+TTMn,10110,,,,,,,,0.0,,1.0,0.0,low,unresolved,,,1.0

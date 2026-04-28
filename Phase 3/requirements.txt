@@ -1,0 +1,9 @@
+numpy
+pandas
+PyYAML
+matplotlib
+imageio
+imageio-ffmpeg
+mujoco
+jupyterlab
+ipykernel

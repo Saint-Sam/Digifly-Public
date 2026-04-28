@@ -1,0 +1,7 @@
+Paste your full neuPrint token into a local file named:
+
+Neuprint Token.txt
+
+That file is ignored by git. The token should usually look like a long JWT
+starting with "eyJ" and containing two dots. You can also create it from the
+notebook by running ensure_neuprint_token().

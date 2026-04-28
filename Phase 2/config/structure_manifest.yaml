@@ -1,0 +1,62 @@
+version: "0.1"
+generated_utc: "2026-01-28T19:30:29Z"
+
+# How the validator finds the repo root (walks upward until all markers exist)
+project_root_markers:
+  - digifly/__init__.py
+  - config/structure_manifest.yaml
+
+# Paths that MUST exist
+required_paths:
+  - path: digifly/__init__.py
+    type: file
+  - path: digifly/tools/validate_repo.py
+    type: file
+  - path: config/structure_manifest.yaml
+    type: file
+  - path: tests/test_repo_structure.py
+    type: file
+
+# Paths that SHOULD exist (warn by default; error in --strict)
+recommended_paths:
+  - path: digifly/build
+    type: dir
+  - path: digifly/sim
+    type: dir
+  - path: digifly/io
+    type: dir
+  - path: digifly/phase2/extensions/glia_editing/selectors
+    type: dir
+  - path: digifly/phase2/extensions/glia_editing/mutation
+    type: dir
+  - path: README.md
+    type: file
+
+# Simple sanity globs
+glob_rules:
+  - glob: digifly/**/*.py
+    min_count: 1
+  - glob: config/*.yaml
+    min_count: 1
+
+# API contracts: modules must import; attributes must exist; optional callable check
+python_contracts:
+  - module: digifly.tools.validate_repo
+    must_have: [validate_repo, load_manifest, main]
+    callable: [validate_repo, load_manifest, main]
+  - module: digifly.tools.glia_editing.launch_swc_box_selector
+    must_have: [main]
+    callable: [main]
+  - module: digifly.tools.glia_editing.launch_morphology_mutation
+    must_have: [main]
+    callable: [main]
+
+# Placeholder for Phase 2 public entry points.
+# Add your canonical Phase 2 module/function names here during refactor, e.g.:
+#   - module: digifly.phase2.runner
+#     must_have: [run_hemi_walking_with_smoketest]
+phase2_contracts:
+  - name: "Phase 2 runner entry point (placeholder)"
+    note: "Fill this in when you decide the canonical Phase 2 entry point(s)."
+    module: ""
+    must_have: []
