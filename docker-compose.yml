@@ -1,0 +1,55 @@
+services:
+  phase2-jupyter:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.phase2
+    image: ${DIGIFLY_PHASE2_IMAGE:-digifly-public-phase2:latest}
+    working_dir: /workspace
+    environment:
+      NEURON_MODULE_OPTIONS: -nogui
+      MPLBACKEND: Agg
+      PYTHONPATH: "/workspace/Phase 2:/workspace/Phase 1:/workspace"
+      DIGIFLY_WORKSPACE: /workspace
+      DIGIFLY_PHASE2_ROOT: "/workspace/Phase 2"
+      DIGIFLY_SWC_DIR: "/workspace/Phase 1/manc_v1.2.1/export_swc"
+      DIGIFLY_GAP_MECH_DIR: /opt/digifly-mechanisms
+    ports:
+      - "127.0.0.1:${DIGIFLY_JUPYTER_PORT:-8888}:8888"
+    volumes:
+      - .:/workspace
+      - phase2-jupyter-home:/home/digifly
+    command:
+      - jupyter
+      - lab
+      - --ip=0.0.0.0
+      - --port=8888
+      - --no-browser
+      - --ServerApp.token=
+      - --ServerApp.password=
+      - --ServerApp.root_dir=/workspace
+
+  phase2-test:
+    image: ${DIGIFLY_PHASE2_IMAGE:-digifly-public-phase2:latest}
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.phase2
+    working_dir: /workspace
+    profiles:
+      - test
+    environment:
+      NEURON_MODULE_OPTIONS: -nogui
+      MPLBACKEND: Agg
+      PYTHONPATH: "/workspace/Phase 2:/workspace/Phase 1:/workspace"
+      DIGIFLY_WORKSPACE: /workspace
+      DIGIFLY_PHASE2_ROOT: "/workspace/Phase 2"
+      DIGIFLY_SWC_DIR: "/workspace/Phase 1/manc_v1.2.1/export_swc"
+      DIGIFLY_GAP_MECH_DIR: /opt/digifly-mechanisms
+    volumes:
+      - .:/workspace
+    command: >
+      bash -lc "python docker/phase2_smoke_test.py &&
+      cd 'Phase 2' &&
+      python -m pytest -q tests"
+
+volumes:
+  phase2-jupyter-home:

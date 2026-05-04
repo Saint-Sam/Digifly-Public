@@ -1,0 +1,86 @@
+name: Phase 2 Docker Image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - ".github/workflows/phase2-docker.yml"
+      - ".dockerignore"
+      - "docker/**"
+      - "docker-compose.yml"
+      - "Phase 1/manc_v1.2.1/**"
+      - "Phase 2/**"
+  pull_request:
+    paths:
+      - ".github/workflows/phase2-docker.yml"
+      - ".dockerignore"
+      - "docker/**"
+      - "docker-compose.yml"
+      - "Phase 1/manc_v1.2.1/**"
+      - "Phase 2/**"
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: phase2-docker-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  IMAGE_NAME: digifly-public-phase2
+
+jobs:
+  build:
+    name: Build Phase 2 Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Compute GHCR image name
+        id: image
+        shell: bash
+        run: |
+          owner_lc="${GITHUB_REPOSITORY_OWNER,,}"
+          image_repo="ghcr.io/${owner_lc}/${IMAGE_NAME}"
+          echo "IMAGE_REPO=${image_repo}" >> "${GITHUB_ENV}"
+          echo "image_repo=${image_repo}" >> "${GITHUB_OUTPUT}"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ steps.image.outputs.image_repo }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix=sha-
+
+      - name: Build and optionally publish image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile.phase2
+          platforms: linux/amd64
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

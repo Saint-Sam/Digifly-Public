@@ -1,0 +1,45 @@
+.git/
+.DS_Store
+Thumbs.db
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+**/.ipynb_checkpoints/
+*.ipynb~
+
+Neuprint Token.txt
+**/Neuprint Token.txt
+
+Phase 1/Glia IDs/
+Phase 1/export_swc/
+Phase 1/outputs/
+Phase 1/*/Glia IDs/
+Phase 1/*/export_swc/
+Phase 1/*/outputs/
+Phase 1/*/archived_swcs/
+*.swc
+
+Phase 2/data/arm64/
+Phase 2/data/x86_64/
+Phase 2/data/export_swc/
+Phase 2/data/export_swc_reduced/
+Phase 2/**/hemi_runs/
+Phase 2/**/runs/
+Phase 2/**/edges/
+Phase 2/**/_network_build_cache/
+Phase 2/**/*.sqlite
+Phase 2/**/*.sqlite-*
+Phase 2/notebooks/debug/outputs/
+Phase 2/apps/VIP_Glia_Sim/notebooks/debug/outputs/
+Phase 2/apps/VIP_Glia_Sim/notebooks/debug/runs/
+Phase 2/outputs/
+Phase 2/raw_data/
+
+Phase 3/data/derived/
+Phase 3/data/outputs/
+Phase 3/neuro_fly/outputs/

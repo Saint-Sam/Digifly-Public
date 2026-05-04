@@ -38,6 +38,15 @@ Alternatively, place a local token in `Phase 1/Neuprint Token.txt`. The local pr
 python -m pip install -e ".[notebooks]"
 ```
 
+For Phase 2 on Windows, prefer Docker instead of native NEURON setup:
+
+```bash
+docker compose up --build phase2-jupyter
+```
+
+Then open `http://localhost:8888` and use `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`.
+See `docs/phase2_docker_setup.md` for the full Windows-first path, including the optional prebuilt GitHub Container Registry image.
+
 ## To-do
 
 - Phase 3 needs original NeuroMechFly v2 files to work, add information on download and citations

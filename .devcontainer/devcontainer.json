@@ -1,0 +1,16 @@
+{
+  "name": "Digifly Phase 2",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "phase2-jupyter",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [8888],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  },
+  "postCreateCommand": "python docker/phase2_smoke_test.py"
+}

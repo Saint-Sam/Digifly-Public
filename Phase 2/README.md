@@ -37,6 +37,24 @@ env NEURON_MODULE_OPTIONS=-nogui python -m pytest -q tests
 
 The `NEURON_MODULE_OPTIONS=-nogui` setting avoids display-window startup issues on headless or notebook-driven runs.
 
+## Docker Runtime
+
+For Windows users, the recommended Phase 2 runtime is Docker instead of native Windows NEURON:
+
+```bash
+docker compose up --build phase2-jupyter
+```
+
+Open `http://localhost:8888`, then open `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`.
+
+To test the container:
+
+```bash
+docker compose --profile test run --rm phase2-test
+```
+
+The Docker image installs NEURON, compiles the Phase 2 `.mod` mechanisms, and mounts the repo at `/workspace`. See `../docs/phase2_docker_setup.md`.
+
 ## Main Entry Points
 
 - `digifly.phase2.api.run_walking_simulation`

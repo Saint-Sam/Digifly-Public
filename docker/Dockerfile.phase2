@@ -1,0 +1,56 @@
+FROM python:3.11-slim-bookworm
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    NEURON_MODULE_OPTIONS=-nogui \
+    MPLBACKEND=Agg \
+    PYTHONPATH="/workspace/Phase 2:/workspace/Phase 1:/workspace" \
+    DIGIFLY_PHASE2_ROOT="/workspace/Phase 2" \
+    DIGIFLY_SWC_DIR="/workspace/Phase 1/manc_v1.2.1/export_swc" \
+    DIGIFLY_GAP_MECH_DIR="/opt/digifly-mechanisms"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bash \
+    build-essential \
+    ca-certificates \
+    cmake \
+    curl \
+    git \
+    libgl1 \
+    libglib2.0-0 \
+    libgomp1 \
+    libopenmpi-dev \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    make \
+    openmpi-bin \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tmp/digifly-build
+COPY docker/requirements-phase2.txt /tmp/digifly-build/requirements-phase2.txt
+
+RUN python -m pip install --upgrade pip wheel "setuptools<81" \
+    && python -m pip install --no-cache-dir -r /tmp/digifly-build/requirements-phase2.txt
+
+RUN mkdir -p /opt/digifly-mechanisms
+COPY ["Phase 2/data/Gap.mod", "/opt/digifly-mechanisms/Gap.mod"]
+COPY ["Phase 2/data/RectGap.mod", "/opt/digifly-mechanisms/RectGap.mod"]
+COPY ["Phase 2/data/HeteroRectGap.mod", "/opt/digifly-mechanisms/HeteroRectGap.mod"]
+
+RUN cd /opt/digifly-mechanisms \
+    && nrnivmodl Gap.mod RectGap.mod HeteroRectGap.mod \
+    && python -c "from neuron import h, load_mechanisms; names=('Gap','RectGap','HeteroRectGap'); missing=[m for m in names if not hasattr(h, m)]; load_mechanisms('/opt/digifly-mechanisms') if missing else None; missing=[m for m in names if not hasattr(h, m)]; assert not missing, missing; print('[digifly docker] NEURON mechanisms compiled and loadable')"
+
+RUN useradd --create-home --shell /bin/bash digifly \
+    && mkdir -p /workspace \
+    && chown -R digifly:digifly /workspace /home/digifly
+
+USER digifly
+WORKDIR /workspace
+
+EXPOSE 8888
+
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--ServerApp.token=", "--ServerApp.password=", "--ServerApp.root_dir=/workspace"]
