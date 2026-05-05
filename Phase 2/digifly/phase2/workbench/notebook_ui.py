@@ -47,10 +47,10 @@ class Phase2WorkbenchUI:
             tooltip="Open a Plotly browser-native flow visualizer for the most recent completed workbench run.",
         )
         self.mutation_button = widgets.Button(
-            description="Open PyVista App",
+            description="Open PyVista Desktop App",
             button_style="warning",
             disabled=True,
-            tooltip="Launch the morphology mutation app with the most recent completed workbench run.",
+            tooltip="Desktop-only PyVista app. Docker/headless sessions should use Open Browser Visualizer.",
         )
         self.status_html = widgets.HTML()
         self.notes_html = widgets.HTML()
@@ -218,12 +218,27 @@ class Phase2WorkbenchUI:
                 self.last_run_result = result
                 self.last_run_dir = _result_run_dir(result)
                 self.browser_visualizer_button.disabled = self.last_run_dir is None
-                self.mutation_button.disabled = self.last_run_dir is None
+                self.mutation_button.disabled = True
+                pyvista_warning = None
+                if self.last_run_dir is not None:
+                    try:
+                        pyvista_warning = build_mutation_launch_plan(
+                            state,
+                            phase2_root=self.phase2_root,
+                            flow_run_dir=self.last_run_dir,
+                        ).warning
+                    except Exception as exc:
+                        pyvista_warning = str(exc)
+                    self.mutation_button.disabled = pyvista_warning is not None
                 self._display_voltage_traces(result)
                 if self.last_run_dir is not None:
                     print(f"\nBrowser visualizer ready for run: {self.last_run_dir}")
-                    print(f"PyVista mutation app ready for run: {self.last_run_dir}")
-                    self.status_html.value = "<p><b>Run completed.</b> Voltage traces loaded; browser visualizer and PyVista app launchers are ready.</p>"
+                    if pyvista_warning:
+                        print(f"PyVista desktop app unavailable in this session: {pyvista_warning}")
+                        self.status_html.value = "<p><b>Run completed.</b> Voltage traces loaded; browser visualizer is ready. PyVista is desktop-only and is unavailable in this Docker/headless session.</p>"
+                    else:
+                        print(f"PyVista mutation app ready for run: {self.last_run_dir}")
+                        self.status_html.value = "<p><b>Run completed.</b> Voltage traces loaded; browser visualizer and PyVista app launchers are ready.</p>"
                 else:
                     self.status_html.value = "<p><b>Run completed.</b> See output below.</p>"
             except Exception as exc:

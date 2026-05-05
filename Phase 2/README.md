@@ -93,6 +93,8 @@ The standalone VIP glia morphology mutation app is staged under `apps/VIP_Glia_S
 
 Use `apps/VIP_Glia_Sim/notebooks/test_launch_morphology_mutation_standalone.ipynb` for a clean public smoke-test launch. The notebook resolves the copied app root, checks dependencies, prints the launch command, runs an app `--help` probe, and launches the PyVista desktop app from a final explicit cell.
 
+The PyVista mutation app is a desktop GUI path. In Docker/JupyterLab, use the workbench `Open Browser Visualizer` button after a run completes; it renders the latest run directly in the browser with Plotly.
+
 SWC exports are intentionally not tracked. Set `DIGIFLY_SWC_DIR`, or copy `apps/VIP_Glia_Sim/notebooks/local_config.example.py` to the ignored `local_config.py` and point `SWC_DIR` at a real `export_swc` folder. Shared-run outputs are written under `SWC_DIR/hemi_runs`, so Docker runs launched from Jupyter persist in `Phase 1/manc_v1.2.1/export_swc/hemi_runs` on the host repo. For local testing, the launcher can seed `Phase 1/manc_v1.2.1/export_swc` by copying requested neuron folders from a configured source export.
 
 ## Mechanism Notes

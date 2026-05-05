@@ -14,6 +14,11 @@ SWC_SUFFIX_PRIORITY = (
     "_healed_final.swc",
     "_healed.swc",
 )
+SCENE_BG = "#070b16"
+PAPER_BG = "#05070d"
+PANEL_BG = "#080d18"
+GRID_COLOR = "#263247"
+AXIS_COLOR = "#cbd5e1"
 
 
 @dataclass(frozen=True)
@@ -181,8 +186,8 @@ def build_browser_flow_figure(
                 y=line_y,
                 z=line_z,
                 mode="lines",
-                line={"color": colors[nid], "width": 3},
-                opacity=0.42,
+                line={"color": colors[nid], "width": 6},
+                opacity=0.62,
                 name=f"{nid} morphology",
                 hoverinfo="skip",
             ),
@@ -215,7 +220,7 @@ def build_browser_flow_figure(
         all_point_y.extend(sample["y"].astype(float).tolist())
         all_point_z.extend(sample["z"].astype(float).tolist())
         radius = np.clip(sample["radius"].astype(float).to_numpy(), 0.04, 1.2)
-        all_point_size.extend((4.0 + radius * 8.0).tolist())
+        all_point_size.extend((5.5 + radius * 10.0).tolist())
         all_point_custom.extend([[nid, int(node_id)] for node_id in sample["id"]])
 
     if not np.isfinite(y_min) or not np.isfinite(y_max):
@@ -239,9 +244,14 @@ def build_browser_flow_figure(
                 "color": initial_intensity,
                 "cmin": 0.0,
                 "cmax": 1.0,
-                "colorscale": "Turbo",
+                "colorscale": _flow_colorscale(),
                 "opacity": 0.94,
-                "colorbar": {"title": "activity", "len": 0.72},
+                "colorbar": {
+                    "title": {"text": "activity", "font": {"color": AXIS_COLOR}},
+                    "len": 0.72,
+                    "tickfont": {"color": AXIS_COLOR},
+                    "outlinecolor": GRID_COLOR,
+                },
             },
             customdata=all_point_custom,
             name="browser flow",
@@ -270,7 +280,7 @@ def build_browser_flow_figure(
             x=[float(frame_times[0]), float(frame_times[0])],
             y=y_range,
             mode="lines",
-            line={"color": "#111111", "width": 2, "dash": "dot"},
+            line={"color": "#f8fafc", "width": 2, "dash": "dot"},
             name="time",
             hoverinfo="skip",
         ),
@@ -299,7 +309,7 @@ def build_browser_flow_figure(
         {
             "args": [
                 [str(i)],
-                {"frame": {"duration": frame_ms, "redraw": False}, "mode": "immediate"},
+                {"frame": {"duration": frame_ms, "redraw": True}, "mode": "immediate"},
             ],
             "label": f"{float(t):.0f}",
             "method": "animate",
@@ -309,14 +319,21 @@ def build_browser_flow_figure(
     fig.update_layout(
         title=f"Browser flow visualizer: {inputs.run_dir.name}",
         height=720,
+        paper_bgcolor=PAPER_BG,
+        plot_bgcolor=PANEL_BG,
+        font={"color": AXIS_COLOR},
         margin={"l": 0, "r": 0, "t": 54, "b": 0},
         scene={
             "xaxis_title": "x",
             "yaxis_title": "y",
             "zaxis_title": "z",
             "aspectmode": "data",
-            "bgcolor": "#ffffff",
+            "bgcolor": SCENE_BG,
+            "xaxis": _scene_axis(),
+            "yaxis": _scene_axis(),
+            "zaxis": _scene_axis(),
         },
+        hoverlabel={"bgcolor": "#111827", "font": {"color": "#f8fafc"}, "bordercolor": GRID_COLOR},
         legend={"orientation": "h", "yanchor": "bottom", "y": -0.08, "xanchor": "left", "x": 0.0},
         updatemenus=[
             {
@@ -333,7 +350,7 @@ def build_browser_flow_figure(
                         "args": [
                             None,
                             {
-                                "frame": {"duration": frame_ms, "redraw": False},
+                                "frame": {"duration": frame_ms, "redraw": True},
                                 "fromcurrent": True,
                                 "transition": {"duration": 0},
                             },
@@ -345,7 +362,7 @@ def build_browser_flow_figure(
                         "args": [
                             [None],
                             {
-                                "frame": {"duration": 0, "redraw": False},
+                                "frame": {"duration": 0, "redraw": True},
                                 "mode": "immediate",
                                 "transition": {"duration": 0},
                             },
@@ -363,13 +380,32 @@ def build_browser_flow_figure(
                 "len": 0.76,
                 "xanchor": "left",
                 "yanchor": "top",
-                "currentvalue": {"prefix": "sim ms: "},
+                "currentvalue": {"prefix": "sim ms: ", "font": {"color": AXIS_COLOR}},
+                "font": {"color": AXIS_COLOR},
+                "bgcolor": "#111827",
+                "activebgcolor": "#2563eb",
+                "bordercolor": GRID_COLOR,
                 "pad": {"t": 0, "b": 0},
             }
         ],
     )
-    fig.update_xaxes(title_text="time (ms)", row=1, col=2)
-    fig.update_yaxes(title_text="soma voltage (mV)", range=y_range, row=1, col=2)
+    fig.update_xaxes(
+        title_text="time (ms)",
+        row=1,
+        col=2,
+        color=AXIS_COLOR,
+        gridcolor=GRID_COLOR,
+        zerolinecolor=GRID_COLOR,
+    )
+    fig.update_yaxes(
+        title_text="soma voltage (mV)",
+        range=y_range,
+        row=1,
+        col=2,
+        color=AXIS_COLOR,
+        gridcolor=GRID_COLOR,
+        zerolinecolor=GRID_COLOR,
+    )
     return fig
 
 
@@ -499,6 +535,27 @@ def _palette(neuron_ids: Iterable[int]) -> dict[int, str]:
     return {int(nid): colors[i % len(colors)] for i, nid in enumerate(sorted(set(int(x) for x in neuron_ids)))}
 
 
+def _flow_colorscale() -> list[list[Any]]:
+    return [
+        [0.00, "#0b1020"],
+        [0.15, "#12356f"],
+        [0.35, "#1455d9"],
+        [0.58, "#06b6d4"],
+        [0.78, "#e0f7ff"],
+        [1.00, "#ffffff"],
+    ]
+
+
+def _scene_axis() -> dict[str, Any]:
+    return {
+        "backgroundcolor": SCENE_BG,
+        "gridcolor": GRID_COLOR,
+        "zerolinecolor": GRID_COLOR,
+        "showbackground": True,
+        "color": AXIS_COLOR,
+    }
+
+
 def _edge_line_coords(nodes: pd.DataFrame, *, max_edges: int) -> tuple[list[float | None], list[float | None], list[float | None]]:
     pos = {
         int(row.id): (float(row.x), float(row.y), float(row.z))
@@ -613,7 +670,7 @@ def _node_flow_intensity(
 ) -> np.ndarray:
     n_frames = len(frame_times)
     n_nodes = len(dists_um)
-    out = np.repeat((0.08 + 0.52 * base_norm[:, None]), n_nodes, axis=1)
+    out = np.repeat((0.04 + 0.44 * base_norm[:, None]), n_nodes, axis=1)
     if spike_times.size == 0:
         return np.clip(out, 0.0, 1.0)
     arrivals = spike_times[:, None] + dists_um[None, :] / max(1e-6, float(flow_speed_um_per_ms))
@@ -628,5 +685,5 @@ def _node_flow_intensity(
         after = ~before
         if np.any(after):
             pulse[after] = np.exp(-dt[after] / decay)
-        out[frame_idx, :] = np.maximum(out[frame_idx, :], np.max(0.15 + 0.85 * pulse, axis=0))
+        out[frame_idx, :] = np.maximum(out[frame_idx, :], np.max(0.08 + 0.92 * pulse, axis=0))
     return np.clip(out, 0.0, 1.0)

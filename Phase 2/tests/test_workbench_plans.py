@@ -257,8 +257,16 @@ def test_browser_visualizer_builds_plotly_flow_figure(tmp_path):
     fig = build_browser_flow_figure(run_dir=run_dir, swc_dir=swc_dir, max_frames=4, playback_seconds=1.0)
 
     assert len(fig.frames) == 4
+    assert fig.layout.paper_bgcolor == "#05070d"
+    assert fig.layout.scene.bgcolor == "#070b16"
     assert any(trace.name == "browser flow" for trace in fig.data)
+    morphology_trace = next(trace for trace in fig.data if trace.name == "10000 morphology")
+    assert morphology_trace.line.width == 6
+    flow_trace = next(trace for trace in fig.data if trace.name == "browser flow")
+    assert min(flow_trace.marker.size) >= 7.5
     assert "Play" in fig.layout.updatemenus[0].buttons[0].label
+    assert fig.layout.updatemenus[0].buttons[0].args[1]["frame"]["redraw"] is True
+    assert fig.layout.sliders[0].steps[0].args[1]["frame"]["redraw"] is True
 
 
 def test_hemi_project_plan_derives_core_ids_from_master_csv(tmp_path):
