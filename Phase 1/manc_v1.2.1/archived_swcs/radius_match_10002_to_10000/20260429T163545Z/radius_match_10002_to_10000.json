@@ -1,0 +1,133 @@
+{
+  "generated_utc": "2026-04-29T16:35:45.021349+00:00",
+  "operation": "set_highlighted_10002_radii_to_current_10000_changed_compartment_radius",
+  "reference_swc": "Phase 1/manc_v1.2.1/export_swc/DN/DNp01/10000/10000_axodendro_with_synapses.swc",
+  "reference_nodes_10000": [
+    {
+      "node_id": 101,
+      "radius_um": 0.332
+    },
+    {
+      "node_id": 102,
+      "radius_um": 0.332
+    },
+    {
+      "node_id": 103,
+      "radius_um": 0.332
+    },
+    {
+      "node_id": 104,
+      "radius_um": 0.332
+    },
+    {
+      "node_id": 105,
+      "radius_um": 0.332
+    }
+  ],
+  "target_swc": "Phase 1/manc_v1.2.1/export_swc/DN/DNp01/10002/10002_axodendro_with_synapses.swc",
+  "backup_before_target_swc": "Phase 1/manc_v1.2.1/archived_swcs/radius_match_10002_to_10000/20260429T163545Z/10002_axodendro_with_synapses_BEFORE_radius_match.swc",
+  "target_nodes_10002": [
+    {
+      "neuron_id": 10002,
+      "node_id": 250,
+      "parent_node_id": 249,
+      "swc_type": 2,
+      "x": 22.72,
+      "y": 34.752,
+      "z": 68.288,
+      "old_radius_um": 0.032,
+      "new_radius_um": 0.332
+    },
+    {
+      "neuron_id": 10002,
+      "node_id": 251,
+      "parent_node_id": 250,
+      "swc_type": 2,
+      "x": 22.72,
+      "y": 34.688,
+      "z": 68.352,
+      "old_radius_um": 0.032,
+      "new_radius_um": 0.332
+    },
+    {
+      "neuron_id": 10002,
+      "node_id": 254,
+      "parent_node_id": 253,
+      "swc_type": 2,
+      "x": 22.528,
+      "y": 35.2,
+      "z": 68.544,
+      "old_radius_um": 0.032,
+      "new_radius_um": 0.332
+    },
+    {
+      "neuron_id": 10002,
+      "node_id": 255,
+      "parent_node_id": 254,
+      "swc_type": 2,
+      "x": 22.464,
+      "y": 35.2,
+      "z": 70.464,
+      "old_radius_um": 0.059,
+      "new_radius_um": 0.332
+    },
+    {
+      "neuron_id": 10002,
+      "node_id": 256,
+      "parent_node_id": 255,
+      "swc_type": 2,
+      "x": 22.656,
+      "y": 35.2,
+      "z": 70.528,
+      "old_radius_um": 0.149,
+      "new_radius_um": 0.332
+    },
+    {
+      "neuron_id": 10002,
+      "node_id": 364,
+      "parent_node_id": 256,
+      "swc_type": 2,
+      "x": 22.528,
+      "y": 35.328,
+      "z": 70.784,
+      "old_radius_um": 0.096,
+      "new_radius_um": 0.332
+    },
+    {
+      "neuron_id": 10002,
+      "node_id": 365,
+      "parent_node_id": 255,
+      "swc_type": 2,
+      "x": 22.4,
+      "y": 35.264,
+      "z": 70.464,
+      "old_radius_um": 0.032,
+      "new_radius_um": 0.332
+    },
+    {
+      "neuron_id": 10002,
+      "node_id": 367,
+      "parent_node_id": 366,
+      "swc_type": 2,
+      "x": 22.464,
+      "y": 35.136,
+      "z": 68.288,
+      "old_radius_um": 0.032,
+      "new_radius_um": 0.332
+    }
+  ],
+  "verification": {
+    "node_count": 2253,
+    "radius_diff_nodes": [
+      250,
+      251,
+      254,
+      255,
+      256,
+      364,
+      365,
+      367
+    ],
+    "non_radius_geometry_diff_count": 0
+  }
+}
