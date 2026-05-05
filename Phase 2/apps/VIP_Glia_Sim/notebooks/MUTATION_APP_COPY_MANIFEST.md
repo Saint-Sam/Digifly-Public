@@ -2,206 +2,100 @@
 
 Date: 2026-04-27
 
-Imported public destination:
+Public destination:
 
 - `Phase 2/apps/VIP_Glia_Sim`
 
-This note is the safe copy map for moving the current `VIP_Glia_Sim` mutation app into `Digifly Public` as a new standalone source tree.
+This manifest documents the standalone morphology mutation app bundle and the files required for the launcher notebooks.
 
-## Source of truth
+## App Bundle
 
-If the goal is to preserve the current app behavior, including the newer `neuroglancer` render mode and the exact launcher behavior in `launch_morphology_mutation.ipynb`, the source of truth is:
+Required runtime files:
 
-- `<source VIP_Glia_Sim>/tools/morphology_mutation_app.py`
-- `<source VIP_Glia_Sim>/tools/morphology_mutation.py`
-- `<source VIP_Glia_Sim>/tools/morphology_mutation_notebook_helpers.py`
-- `<source VIP_Glia_Sim>/notebooks/launch_morphology_mutation.ipynb`
+- `tools/morphology_mutation_app.py`
+  Main desktop app entry point.
 
-Do not use the older `Phase 2/digifly/phase2/extensions/...` copies as the source for the new standalone version if you want the latest testing changes.
+- `tools/morphology_mutation.py`
+  Backend mutation project, SWC loading, save bundle logic, manifest writing, and Phase 2 overlay writing.
 
-## Minimum files to copy
+- `tools/morphology_mutation_notebook_helpers.py`
+  Notebook helper functions for reading mutation manifests, connection specs, AIS/biophysics sidecars, and simulation overrides.
 
-These are the files required to preserve the direct launcher workflow in `launch_morphology_mutation.ipynb`.
+- `tools/__init__.py`
+  Package marker for clean imports.
 
-- `<source VIP_Glia_Sim>/tools/morphology_mutation_app.py`
-  Why: main desktop app entry point. It imports `tools.morphology_mutation` directly near the top of the file.
+Required launcher/testing notebooks:
 
-- `<source VIP_Glia_Sim>/tools/morphology_mutation.py`
-  Why: backend mutation project, SWC loading, save bundle logic, manifest writing, Phase 2 overlay writing.
+- `notebooks/launch_morphology_mutation.ipynb`
+  Standard standalone launcher.
 
-- `<source VIP_Glia_Sim>/tools/__init__.py`
-  Why: not strictly required for the app launch itself, but safe to copy with the package so notebook imports remain clean.
+- `notebooks/test_launch_morphology_mutation_standalone.ipynb`
+  Minimal standalone launch test.
 
-- `<source VIP_Glia_Sim>/notebooks/launch_morphology_mutation.ipynb`
-  Why: this is the direct launcher notebook the user asked to preserve as-is.
+- `notebooks/README_MORPHOLOGY_MUTATION.md`
+  App usage notes.
 
-- `<source VIP_Glia_Sim>/notebooks/README_MORPHOLOGY_MUTATION.md`
-  Why: usage notes and app-level documentation.
+## Optional Selector Workflow
 
-## Backend/support files worth copying with it
+Selector-side files are optional and can be included when the SWC box selector workflow is needed:
 
-These are not strictly required to open the app window from `launch_morphology_mutation.ipynb`, but they are part of the mutation-app ecosystem and are worth copying if the new location should be fully reusable.
+- `tools/swc_box_selector_app.py`
+- `tools/swc_interactive_selector.py`
+- `notebooks/launch_swc_box_selector.ipynb`
+- `notebooks/README_INTERACTIVE_SELECTOR.md`
 
-- `<source VIP_Glia_Sim>/tools/morphology_mutation_notebook_helpers.py`
-  Why: lets notebooks read mutation manifests, mutation connection specs, AIS/biophysics sidecars, and build simulation overrides from saved mutation bundles.
+## Runtime Paths
 
-- `<source VIP_Glia_Sim>/notebooks/glia_simulation.ipynb`
-  Why: contains the helper launch path that calls `tools/morphology_mutation_app.py`, passes `--flow-run-dir`, and later imports `tools.morphology_mutation_notebook_helpers`.
+The launcher resolves paths relative to the public repository whenever possible:
 
-- `<source VIP_Glia_Sim>/notebooks/glia_circuit_growth_stages_v1.ipynb`
-  Why: this notebook reuses helper definitions from `glia_simulation.ipynb` and can launch the mutation app through that path.
+- App root: `Phase 2/apps/VIP_Glia_Sim`
+- App script: `Phase 2/apps/VIP_Glia_Sim/tools/morphology_mutation_app.py`
+- Public MANC SWC cache: `Phase 1/manc_v1.2.1/export_swc`
+- Public MANC run cache: `Phase 1/manc_v1.2.1/export_swc/hemi_runs`
+- Phase 2 root: `Phase 2`
+- Default output root: `Phase 2/apps/VIP_Glia_Sim/notebooks/debug/outputs`
+- Default flow runs root: `Phase 2/apps/VIP_Glia_Sim/notebooks/debug/runs`
 
-## Optional selector-side files
+Additional SWC source roots may be configured through `local_config.py` or environment variables. Private source locations are not required by the public bundle.
 
-Copy these too if the new standalone source tree should keep the selector workflow, not just the mutation app launcher.
+The launcher searches `SWC_DIR/hemi_runs` and the public MANC run cache before the older debug run folder, so Docker/Jupyter simulation results remain visible to the mutation app from the mounted repository.
 
-- `<source VIP_Glia_Sim>/tools/swc_box_selector_app.py`
-- `<source VIP_Glia_Sim>/tools/swc_interactive_selector.py`
-- `<source VIP_Glia_Sim>/notebooks/launch_swc_box_selector.ipynb`
-- `<source VIP_Glia_Sim>/notebooks/README_INTERACTIVE_SELECTOR.md`
+Flow movie export defaults to the full simulation span compressed into 20 seconds at 30 fps, with a widened rise/decay pulse profile for demo visibility. The overlay is available in both skeleton and neuroglancer-like volume render modes.
 
-## What the launcher depends on
+## External Dependencies
 
-The launcher notebook currently points at these runtime locations:
+Required Python packages:
 
-- App root:
-  `<source VIP_Glia_Sim>`
+- `numpy`
+- `pandas`
+- `pyvista`
 
-- App script:
-  `<source VIP_Glia_Sim>/tools/morphology_mutation_app.py`
+Recommended Python packages:
 
-- SWC data root:
-  `<source Phase 2>/data/export_swc`
+- `pillow`
+- `matplotlib`
 
-- Phase 2 repo root:
-  `<source Phase 2>`
+Optional packages for helper paths that read parquet/feather:
 
-- Default output root:
-  `<source VIP_Glia_Sim>/notebooks/debug/outputs`
+- `pyarrow`
 
-- Default flow runs root:
-  `<source VIP_Glia_Sim>/notebooks/debug/runs`
+## Flow Overlay Input
 
-When the code is copied to `Digifly Public`, the notebook paths should be updated to the new app root. The SWC and Phase 2 paths may stay external if that is intentional.
+When launching with `--flow-run-dir`, the app expects the run directory to contain:
 
-## External dependencies not inside VIP_Glia_Sim
+- `config.json`
+- `records.csv`
 
-The current mutation app is mostly self-contained, but it still expects some external data/runtime context.
+Spike CSVs may also be read from the same run directory when present.
 
-- SWC files under a real SWC root
-  Current expectation:
-  `<source Phase 2>/data/export_swc`
+## Generated Outputs
 
-- Optional Phase 2 import fallback
-  `tools/morphology_mutation.py` can fall back to `digifly.phase2.neuron_build.swc_cell.find_swc` if the local SWC glob lookup does not find a match.
+Runtime outputs are not source files and should remain untracked:
 
-- Optional flow overlay input
-  If launching with `--flow-run-dir`, the app expects that directory to contain at least:
-  - `config.json`
-  - `records.csv`
-  It may also read spike CSVs from the same run directory.
+- `notebooks/debug/outputs`
+- `notebooks/debug/runs`
+- `morphology_mutation_*` bundle folders
 
-- Python packages
-  Required:
-  - `numpy`
-  - `pandas`
-  - `pyvista`
-  Recommended:
-  - `pillow`
-  - `matplotlib`
-  Optional for helper paths that read parquet/feather:
-  - `pyarrow`
+## Refresh Notes
 
-## Generated outputs that do not need to be copied as source
-
-These are runtime outputs, not source files:
-
-- `<source VIP_Glia_Sim>/notebooks/debug/outputs`
-- `<source VIP_Glia_Sim>/notebooks/debug/runs`
-- mutation bundle folders such as `morphology_mutation_*`
-
-Copy them only if you want to preserve prior saved runs or manifests.
-
-## Existing mutation-app copies found on Desktop
-
-### Current working standalone/testing source
-
-- `<source VIP_Glia_Sim>/tools/morphology_mutation_app.py`
-- `<source VIP_Glia_Sim>/tools/morphology_mutation.py`
-- `<source VIP_Glia_Sim>/tools/morphology_mutation_notebook_helpers.py`
-- `<source VIP_Glia_Sim>/notebooks/launch_morphology_mutation.ipynb`
-
-### Older Phase 2 extension-style copies
-
-- `<source Phase 2>/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation_app.py`
-- `<source Phase 2>/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation.py`
-- `<source Phase 2>/digifly/phase2/extensions/glia_editing/selectors/swc_box_selector_app.py`
-
-- `Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation_app.py`
-- `Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation.py`
-- `Phase 2/digifly/phase2/extensions/glia_editing/selectors/swc_box_selector_app.py`
-
-- `<source Digifly_MASTER>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation_app.py`
-- `<source Digifly_MASTER>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation.py`
-- `<source Digifly_MASTER>/Phase 2/digifly/phase2/extensions/glia_editing/selectors/swc_box_selector_app.py`
-
-- `<source Digifly-MASTER_MULTIPROCESS>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation_app.py`
-- `<source Digifly-MASTER_MULTIPROCESS>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation.py`
-- `<source Digifly-MASTER_MULTIPROCESS>/Phase 2/digifly/phase2/extensions/glia_editing/selectors/swc_box_selector_app.py`
-
-### Archive/backups
-
-- `<archive Digifly-Master_2026-03-13>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation_app.py`
-- `<archive Digifly-Master_2026-03-13>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation.py`
-- `<archive Digifly-Master_2026-03-13>/Phase 2/digifly/phase2/extensions/glia_editing/selectors/swc_box_selector_app.py`
-
-- `<archive Digifly_MASTER_2026-03-14_Pre-refactor>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation_app.py`
-- `<archive Digifly_MASTER_2026-03-14_Pre-refactor>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation.py`
-- `<archive Digifly_MASTER_2026-03-14_Pre-refactor>/Phase 2/digifly/phase2/extensions/glia_editing/selectors/swc_box_selector_app.py`
-
-- `<archive Digifly-MASTER_MULTIPROCESS_backup_2026-03-15>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation_app.py`
-- `<archive Digifly-MASTER_MULTIPROCESS_backup_2026-03-15>/Phase 2/digifly/phase2/extensions/glia_editing/mutation/morphology_mutation.py`
-- `<archive Digifly-MASTER_MULTIPROCESS_backup_2026-03-15>/Phase 2/digifly/phase2/extensions/glia_editing/selectors/swc_box_selector_app.py`
-
-### Hemilineage simulation-local copies
-
-- `<source Digifly-MASTER_MULTIPROCESS>/Hemilineage Simulations/MANC_121_SIZ_activeK_pas/tools/morphology_mutation_app.py`
-- `<source Digifly-MASTER_MULTIPROCESS>/Hemilineage Simulations/MANC_121_SIZ_activeK_pas/tools/morphology_mutation.py`
-- `<source Digifly-MASTER_MULTIPROCESS>/Hemilineage Simulations/MANC_121_SIZ_only/tools/morphology_mutation_app.py`
-- `<source Digifly-MASTER_MULTIPROCESS>/Hemilineage Simulations/MANC_121_SIZ_only/tools/morphology_mutation.py`
-- `<source Digifly-MASTER_MULTIPROCESS>/Hemilineage Simulations/Escape-SIZ/tools/morphology_mutation_app.py`
-- `<source Digifly-MASTER_MULTIPROCESS>/Hemilineage Simulations/Escape-SIZ/tools/morphology_mutation.py`
-
-## Safest copy unit
-
-If the new home under `Digifly Public` should work without hunting for sibling imports, the safest source unit to copy is:
-
-- the entire folder:
-  `<source VIP_Glia_Sim>/tools`
-
-plus:
-
-- `<source VIP_Glia_Sim>/notebooks/launch_morphology_mutation.ipynb`
-- `<source VIP_Glia_Sim>/notebooks/README_MORPHOLOGY_MUTATION.md`
-
-If you also want the simulation-side integration to remain intact, add:
-
-- `<source VIP_Glia_Sim>/notebooks/glia_simulation.ipynb`
-- `<source VIP_Glia_Sim>/notebooks/glia_circuit_growth_stages_v1.ipynb`
-
-## Recommended destination layout
-
-To avoid colliding with the older `Digifly Public/Phase 2/digifly/phase2/extensions/...` copy, prefer a new standalone source tree such as:
-
-- `Phase 2/apps/VIP_Glia_Sim/tools/...`
-- `Phase 2/apps/VIP_Glia_Sim/notebooks/...`
-
-That keeps the new standalone mutation source clearly separate from the legacy Phase 2 extension copy.
-
-## Practical next step
-
-If the next job is the actual migration, copy from `VIP_Glia_Sim`, not from `Digifly Public/Phase 2`, then patch the copied notebook root paths so:
-
-- `WORK_ROOT` points to the new `Digifly Public/.../VIP_Glia_Sim`
-- `APP_PATH` points to the copied `tools/morphology_mutation_app.py`
-- any intentionally external `SWC_DIR` and `PHASE2_ROOT` paths remain correct
+When refreshing the standalone app bundle, update the copied files in place and keep launcher paths repository-relative. Any intentionally external SWC source should be configured through `local_config.py` or environment variables, not hardcoded in notebooks.

@@ -32,7 +32,7 @@ New additive workflow for multi-SWC morphology editing, built to avoid breaking 
 - optional direction metadata
 5. Flow visualization:
 - load an existing simulation run directory (`config.json` + `records.csv`)
-- export an activity-flow movie over the skeleton
+- export an activity-flow movie over the skeleton or neuroglancer-like volume view
 - optional pair focus, e.g. `10000 -> 10068`
 6. Validation reports:
 - connectivity components
@@ -83,11 +83,11 @@ Includes:
 - `w`: toggle skeleton / 3D tubes
 - `3`: toggle classic / Vaa3D-like style
 - `m`: save white-background photo export
-- `0`: export flow movie from the configured run dir
+- `0`: export flow movie from the configured run dir; by default the full run is compressed into a smooth 20-second movie with widened rise/decay pulses
 
 ## Using mutated SWCs in simulations
 
-Use `phase2_morph_overlay` as your `morph_swc_dir` in simulation configs when the loaded neuron set matches the mutation-app neuron set.
+Use `phase2_morph_overlay` as `morph_swc_dir` in simulation configs when the loaded neuron set matches the mutation-app neuron set.
 
 This keeps baseline source SWCs untouched while letting Phase 2 resolve canonical per-neuron SWC names.
 If an AIS primary node was assigned in the mutation app, the saved bundle also writes `ais_overrides.csv` into the overlay so Phase 2 can pick it up automatically.
@@ -103,4 +103,4 @@ Main helper:
 Direct connectivity overlay helper:
 
 - `build_forced_chem_edges_from_mutation_connections(...)`
-- Produces a `_forced_chem_only_edges`-style CSV you can wire via `edges_path/edges_csv`.
+- Produces a `_forced_chem_only_edges`-style CSV for `edges_path` or `edges_csv`.

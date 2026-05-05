@@ -1,7 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import os
+from pathlib import Path
 from typing import Any, Dict, Iterable, List, Sequence
+
+
+PUBLIC_MANC_LABEL = "manc_v1.2.1"
 
 
 @dataclass(frozen=True)
@@ -96,7 +101,7 @@ CONTROL_SPECS: List[ControlSpec] = [
         section="Paths",
         control_type="text",
         default="",
-        help_text="Shared runner only. Leave blank to use SWC_DIR/hemi_runs.",
+        help_text="Shared runner only. Defaults to SWC_DIR/hemi_runs so Docker writes run outputs into the mounted repo.",
         runner_scopes=("shared_runner",),
     ),
     ControlSpec(
@@ -813,7 +818,96 @@ CONTROL_SPECS: List[ControlSpec] = [
 
 
 def default_state() -> Dict[str, Any]:
-    return {spec.key: spec.default for spec in CONTROL_SPECS}
+    state = {spec.key: spec.default for spec in CONTROL_SPECS}
+    _apply_environment_path_defaults(state)
+    return state
+
+
+def _apply_environment_path_defaults(state: Dict[str, Any]) -> None:
+    """Pre-fill path fields from Docker/local environment variables when available."""
+
+    swc_dir = os.environ.get("DIGIFLY_SWC_DIR", "").strip()
+    if swc_dir:
+        swc_root = Path(swc_dir).expanduser().resolve()
+        state["swc_dir"] = str(swc_root)
+        state["runs_root"] = str((swc_root / "hemi_runs").resolve())
+    else:
+        swc_root = _infer_public_swc_dir()
+        if swc_root is not None:
+            state["swc_dir"] = str(swc_root)
+            state["runs_root"] = str((swc_root / "hemi_runs").resolve())
+
+    morph_swc_dir = os.environ.get("DIGIFLY_MORPH_SWC_DIR", "").strip()
+    if morph_swc_dir:
+        state["morph_swc_dir"] = morph_swc_dir
+
+    gap_mech_dir = os.environ.get("DIGIFLY_GAP_MECH_DIR", "").strip()
+    if gap_mech_dir:
+        state["gap_mechanisms_dir"] = gap_mech_dir
+
+    phase2_root = os.environ.get("DIGIFLY_PHASE2_ROOT", "").strip()
+    workspace = os.environ.get("DIGIFLY_WORKSPACE", "").strip()
+    if phase2_root:
+        state["projects_root"] = str((Path(phase2_root).expanduser() / "outputs" / "workbench_projects").resolve())
+    elif workspace:
+        state["projects_root"] = str((Path(workspace).expanduser() / "Phase 2" / "outputs" / "workbench_projects").resolve())
+
+
+def _infer_public_swc_dir() -> Path | None:
+    """Infer the public Phase 1 SWC root from a repo checkout."""
+
+    candidates: list[Path] = []
+    for repo_root in _candidate_repo_roots():
+        candidates.extend(
+            [
+                repo_root / "Phase 1" / PUBLIC_MANC_LABEL / "export_swc",
+                repo_root / "Phase 1" / "export_swc",
+                repo_root / "Phase 2" / "data" / "export_swc",
+            ]
+        )
+        phase1_root = repo_root / "Phase 1"
+        if phase1_root.exists():
+            candidates.extend(sorted(phase1_root.glob("*/export_swc")))
+
+    for candidate in _dedupe_paths(candidates):
+        if candidate.exists() and candidate.is_dir():
+            return candidate
+    return None
+
+
+def _candidate_repo_roots() -> list[Path]:
+    candidates: list[Path] = []
+
+    workspace = os.environ.get("DIGIFLY_WORKSPACE", "").strip()
+    if workspace:
+        candidates.append(Path(workspace))
+
+    phase2_root = os.environ.get("DIGIFLY_PHASE2_ROOT", "").strip()
+    if phase2_root:
+        candidates.append(Path(phase2_root).expanduser().parent)
+
+    module_phase2_root = Path(__file__).resolve().parents[3]
+    candidates.append(module_phase2_root.parent)
+
+    cwd = Path.cwd()
+    candidates.append(cwd)
+    candidates.extend(cwd.parents)
+    return _dedupe_paths(candidates)
+
+
+def _dedupe_paths(paths: Iterable[Path]) -> list[Path]:
+    seen: set[str] = set()
+    out: list[Path] = []
+    for path in paths:
+        try:
+            resolved = Path(path).expanduser().resolve()
+        except Exception:
+            continue
+        key = str(resolved)
+        if key not in seen:
+            seen.add(key)
+            out.append(resolved)
+    return out
 
 
 def control_by_key() -> Dict[str, ControlSpec]:

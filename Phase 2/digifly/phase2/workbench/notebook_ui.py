@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any, Dict
-import json
 
 from .cache_identity import format_impact_summary
 from .controls import CONTROL_SPECS, ControlSpec, control_by_key, default_state, sections_for_state, specs_in_section
+from .mutation_launcher import build_mutation_launch_plan, launch_mutation_app, log_tail
 from .presets import PRESETS, apply_preset, get_preset, iter_notes, preset_options
 from .runner import build_execution_plan, execute_plan
 from .validation import validate_state
@@ -29,6 +30,8 @@ class Phase2WorkbenchUI:
         self.rows: Dict[str, widgets.Widget] = {}
         self.sections: Dict[str, widgets.Widget] = {}
         self.current_state = default_state()
+        self.last_run_result: Dict[str, Any] | None = None
+        self.last_run_dir: Path | None = None
 
         self.preset_dropdown = widgets.Dropdown(options=preset_options(), value=PRESETS[0].slug, description="Preset")
         self.apply_preset_button = widgets.Button(description="Apply Preset", button_style="")
@@ -36,6 +39,12 @@ class Phase2WorkbenchUI:
         self.validate_button = widgets.Button(description="Validate", button_style="")
         self.bundle_button = widgets.Button(description="Write Bundle", button_style="")
         self.run_button = widgets.Button(description="Run", button_style="success")
+        self.mutation_button = widgets.Button(
+            description="Open Mutation App",
+            button_style="warning",
+            disabled=True,
+            tooltip="Launch the morphology mutation app with the most recent completed workbench run.",
+        )
         self.status_html = widgets.HTML()
         self.notes_html = widgets.HTML()
         self.output = widgets.Output(layout=widgets.Layout(border="1px solid #ddd", padding="8px"))
@@ -63,6 +72,7 @@ class Phase2WorkbenchUI:
                 self.validate_button,
                 self.bundle_button,
                 self.run_button,
+                self.mutation_button,
             ]
         )
         display(widgets.VBox([header, toolbar, self.status_html, self.notes_html, self.form, self.output]))
@@ -89,6 +99,7 @@ class Phase2WorkbenchUI:
         self.validate_button.on_click(lambda _: self._validate())
         self.bundle_button.on_click(lambda _: self._write_bundle_only())
         self.run_button.on_click(lambda _: self._run())
+        self.mutation_button.on_click(lambda _: self._launch_mutation_app())
         self.widgets["runner_kind"].observe(lambda _: self._refresh_form(), names="value")
         self.widgets["mode"].observe(lambda _: self._refresh_form(), names="value")
 
@@ -195,10 +206,129 @@ class Phase2WorkbenchUI:
             try:
                 result = execute_plan(state, preset_slug=self.preset_dropdown.value, phase2_root=self.phase2_root)
                 print(json.dumps(result, indent=2, default=str))
-                self.status_html.value = "<p><b>Run completed.</b> See output below.</p>"
+                self.last_run_result = result
+                self.last_run_dir = _result_run_dir(result)
+                self.mutation_button.disabled = self.last_run_dir is None
+                self._display_voltage_traces(result)
+                if self.last_run_dir is not None:
+                    print(f"\nMutation app ready for run: {self.last_run_dir}")
+                    self.status_html.value = "<p><b>Run completed.</b> Voltage traces loaded; mutation app launcher is ready.</p>"
+                else:
+                    self.status_html.value = "<p><b>Run completed.</b> See output below.</p>"
             except Exception as exc:
                 print(f"Run failed: {exc}")
                 self.status_html.value = f"<p><b>Run failed.</b> {exc}</p>"
+
+    def _launch_mutation_app(self) -> None:
+        state = self._state_from_widgets()
+        with self.output:
+            if self.last_run_dir is None:
+                print("No completed workbench run is available yet. Run a simulation first.")
+                self.status_html.value = "<p><b>Mutation app not launched.</b> Run a simulation first.</p>"
+                return
+            try:
+                plan = build_mutation_launch_plan(
+                    state,
+                    phase2_root=self.phase2_root,
+                    flow_run_dir=self.last_run_dir,
+                )
+                print("\nLaunching morphology mutation app with latest workbench run:")
+                print(f"  run_dir: {plan.flow_run_dir}")
+                print(f"  swc_dir: {plan.swc_dir}")
+                print(f"  neuron_ids: {plan.neuron_ids}")
+                if plan.warning:
+                    print(f"\nWarning: {plan.warning}")
+                print("\nCommand:")
+                print(plan.command_text())
+                launch = launch_mutation_app(plan)
+                if launch.get("blocked"):
+                    print("\nDesktop launch skipped.")
+                    print(launch.get("reason") or "Current Python session cannot launch the desktop app.")
+                    print("\nRun the printed command from a desktop Python session to open the current PyVista app.")
+                    self.status_html.value = "<p><b>Mutation app not launched.</b> Desktop display is unavailable in this kernel.</p>"
+                elif launch["returncode"] is None:
+                    print(f"\nLaunched morphology mutation app (PID={launch['pid']}).")
+                    print(f"Launcher log: {launch['log_path']}")
+                    self.status_html.value = "<p><b>Mutation app launched.</b> Latest workbench run is connected as flow input.</p>"
+                else:
+                    print(f"\nMutation app exited early with code {launch['returncode']}.")
+                    print(f"Launcher log: {launch['log_path']}")
+                    print("--- launcher log tail ---")
+                    print(log_tail(launch["log_path"]))
+                    self.status_html.value = "<p><b>Mutation app launch failed.</b> See output below.</p>"
+            except Exception as exc:
+                print(f"Mutation app launch failed: {exc}")
+                self.status_html.value = f"<p><b>Mutation app launch failed.</b> {exc}</p>"
+
+    def _display_voltage_traces(self, result: Dict[str, Any]) -> None:
+        run_dir = _result_run_dir(result)
+        if run_dir is None:
+            print("\nVoltage traces: no run output directory found in result.")
+            return
+        records_path = run_dir / "records.csv"
+        if not records_path.exists():
+            print(f"\nVoltage traces: records.csv not found at {records_path}")
+            return
+
+        try:
+            import matplotlib.pyplot as plt
+            import pandas as pd
+        except Exception as exc:
+            print(f"\nVoltage traces: pandas/matplotlib unavailable: {exc}")
+            return
+
+        try:
+            df = pd.read_csv(records_path)
+        except Exception as exc:
+            print(f"\nVoltage traces: could not read {records_path}: {exc}")
+            return
+
+        time_col = _find_time_column(df)
+        trace_cols = [str(col) for col in df.columns if str(col).endswith("_soma_v")]
+        if time_col is None or not trace_cols:
+            print(f"\nVoltage traces: no soma voltage traces found in {records_path}")
+            return
+
+        max_traces = 12
+        plot_cols = trace_cols[:max_traces]
+        ax = df.plot(x=time_col, y=plot_cols, figsize=(10, 4), linewidth=1.4)
+        ax.set_xlabel("Time (ms)")
+        ax.set_ylabel("Soma voltage (mV)")
+        ax.set_title(f"Voltage traces: {run_dir.name}")
+        ax.grid(True, alpha=0.25)
+        if len(trace_cols) > max_traces:
+            ax.text(
+                0.01,
+                0.98,
+                f"Showing {max_traces} of {len(trace_cols)} traces",
+                transform=ax.transAxes,
+                va="top",
+                ha="left",
+                fontsize=9,
+            )
+        plt.tight_layout()
+        display(ax.figure)
+        plt.close(ax.figure)
+
+
+def _result_run_dir(result: Dict[str, Any]) -> Path | None:
+    if not isinstance(result, dict):
+        return None
+    payload = result.get("result")
+    if not isinstance(payload, dict):
+        return None
+    for key in ("output_dir", "baseline_out_dir", "metadata_dir", "project_root"):
+        value = payload.get(key)
+        if value:
+            return Path(str(value)).expanduser().resolve()
+    return None
+
+
+def _find_time_column(df: Any) -> str | None:
+    for name in ("t_ms", "time_ms", "time", "t"):
+        if name in df.columns:
+            return str(name)
+    return str(df.columns[0]) if len(df.columns) else None
 
 
 def launch_workbench(phase2_root: str | Path):

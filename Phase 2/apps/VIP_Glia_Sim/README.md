@@ -1,6 +1,6 @@
 # VIP Glia Morphology Mutation App
 
-Standalone Phase 2 app imported from `Digifly_NEW/VIP_Glia_Sim`.
+Standalone Phase 2 morphology mutation app.
 
 This copy preserves the current morphology mutation app behavior while keeping it separate from the older `digifly.phase2.extensions.glia_editing` package.
 
@@ -25,9 +25,28 @@ The launch notebooks resolve paths in this order:
 
 - `DIGIFLY_VIP_GLIA_ROOT`, otherwise this copied app folder
 - `DIGIFLY_PHASE2_ROOT`, otherwise the surrounding `Phase 2` folder
-- `DIGIFLY_SWC_DIR`, otherwise `Phase 2/data/export_swc`
+- `DIGIFLY_SWC_DIR` or `notebooks/local_config.py`
+- `Phase 1/manc_v1.2.1/export_swc`
+- other public `Phase 1/*/export_swc` folders when they contain the requested neuron IDs
 
-`Phase 2/data/export_swc` is intentionally ignored by git. For real testing, point `DIGIFLY_SWC_DIR` at a local Phase 1 SWC export folder or copy data into the ignored local location.
+If the requested SWCs are missing from Digifly Public, the launcher seeds the local MANC cache by copying matching neuron folders from `DIGIFLY_SOURCE_SWC_DIR` or `FALLBACK_SWC_DIR`.
+
+For flow visualization, the launcher auto-searches finished Phase 2 runs in this order:
+
+- `DIGIFLY_FLOW_RUNS_ROOTS` / `FLOW_RUNS_ROOTS`
+- `DIGIFLY_FLOW_RUNS_ROOT` / `FLOW_RUNS_ROOT`
+- `SWC_DIR/hemi_runs`
+- `Phase 1/manc_v1.2.1/export_swc/hemi_runs`
+- `Phase 2/data/export_swc/hemi_runs`
+- `notebooks/debug/runs`
+
+Set `DIGIFLY_FLOW_RUN_DIR` or `FLOW_RUN_DIR` to force a specific run directory.
+
+Press `0` in the app to export the flow movie. The default export uses the full simulation time span and compresses it into a 20-second, 30-fps movie with a widened rise/decay pulse; set `--flow-duration-sec`, `--flow-fps`, `--flow-pulse-sigma-ms`, `--flow-speed-um-per-ms`, or `--flow-max-ms` to override that behavior. The same flow overlay works in skeleton and neuroglancer-like volume render modes.
+
+`Phase 2/data/export_swc` is intentionally ignored by git. For real testing, point `DIGIFLY_SWC_DIR` at a local Phase 1 SWC export folder, or copy `notebooks/local_config.example.py` to the ignored `notebooks/local_config.py` and set `SWC_DIR`.
+
+The launch notebooks validate requested neuron IDs before starting the desktop process, so a missing SWC folder now fails with an actionable path error instead of silently launching and exiting.
 
 ## Generated Outputs
 

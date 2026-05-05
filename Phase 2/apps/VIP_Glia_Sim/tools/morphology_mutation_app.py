@@ -154,6 +154,53 @@ def _parse_neuron_color_overrides(raw: Optional[str]) -> Dict[int, str]:
     return out
 
 
+def _flow_movie_frame_times(
+    t_ms: Sequence[float],
+    *,
+    flow_max_ms: Optional[float],
+    frame_stride: int,
+    fps: int,
+    duration_sec: Optional[float],
+) -> np.ndarray:
+    """Choose simulation times for movie frames.
+
+    When duration_sec is positive, the full selected simulation interval is
+    resampled to fps * duration_sec frames. This compresses long runs, such as
+    1000 ms simulations, into a smooth fixed-duration visualization.
+    """
+
+    vals = np.asarray(t_ms, dtype=float)
+    vals = vals[np.isfinite(vals)]
+    if vals.size == 0:
+        return vals
+    if flow_max_ms is not None:
+        vals = vals[vals <= float(flow_max_ms)]
+    if vals.size < 2:
+        return vals
+
+    duration = 0.0 if duration_sec is None else float(duration_sec)
+    if duration > 0.0:
+        n_frames = max(2, int(round(duration * max(1, int(fps)))))
+        return np.linspace(float(vals[0]), float(vals[-1]), n_frames, dtype=float)
+
+    frame_times = vals[:: max(1, int(frame_stride))]
+    return frame_times if frame_times.size >= 2 else vals
+
+
+def _asymmetric_flow_pulse(dt_ms: np.ndarray, *, rise_ms: float, decay_ms: float) -> np.ndarray:
+    """Return a soft pre-arrival ramp and slower post-arrival fade."""
+
+    dt = np.asarray(dt_ms, dtype=float)
+    pulse = np.zeros_like(dt, dtype=float)
+    before = dt < 0.0
+    if np.any(before):
+        pulse[before] = np.exp(-0.5 * (dt[before] / max(1e-6, float(rise_ms))) ** 2)
+    after = ~before
+    if np.any(after):
+        pulse[after] = np.exp(-dt[after] / max(1e-6, float(decay_ms)))
+    return pulse
+
+
 def _resolve_flow_cmap(style: str):
     mode = str(style).strip().lower()
     if mode == "neuron_yellow":
@@ -307,6 +354,7 @@ class MorphologyMutationApp:
         flow_syn_delay_ms: Optional[float],
         flow_threshold_mV: float,
         flow_max_ms: Optional[float],
+        flow_duration_sec: Optional[float],
         neuron_color_overrides: Optional[Dict[int, str]],
         flow_preserve_camera: bool,
         flow_overlay_style: str,
@@ -381,6 +429,10 @@ class MorphologyMutationApp:
         self.flow_threshold_mV = float(flow_threshold_mV)
         self.flow_max_ms = (
             None if (flow_max_ms is None or float(flow_max_ms) <= 0.0) else float(flow_max_ms)
+        )
+        self.flow_duration_sec = (
+            None if (flow_duration_sec is None or float(flow_duration_sec) <= 0.0)
+            else float(flow_duration_sec)
         )
         self.flow_preserve_camera = bool(flow_preserve_camera)
         self.flow_overlay_style = str(flow_overlay_style).strip().lower()
@@ -2858,7 +2910,7 @@ class MorphologyMutationApp:
             idx = np.where(mask)[0]
             base_trace = np.asarray(flow["voltage_norm"].get(int(nid), np.zeros_like(flow["t_ms"])), dtype=float)
             base_val = float(np.interp(float(frame_t_ms), flow["t_ms"], base_trace))
-            vals = np.full(len(idx), 0.18 * base_val, dtype=float)
+            vals = np.full(len(idx), 0.42 * base_val, dtype=float)
 
             for ev in flow["events_by_neuron"].get(int(nid), []):
                 dist_map = self._distance_map(int(nid), int(ev["source_node_id"]))
@@ -2867,9 +2919,13 @@ class MorphologyMutationApp:
                 if not np.any(valid):
                     continue
                 for t0 in np.asarray(ev["times_ms"], dtype=float):
-                    dt = float(frame_t_ms) - (float(t0) + dists[valid] / self.flow_speed_um_per_ms)
-                    pulse = np.exp(-0.5 * (dt / self.flow_pulse_sigma_ms) ** 2)
-                    vals[valid] = np.maximum(vals[valid], np.clip(0.2 + 0.85 * pulse, 0.0, 1.0))
+                    arrival = float(t0) + dists[valid] / self.flow_speed_um_per_ms
+                    dt = float(frame_t_ms) - arrival
+                    sigma = max(1e-6, float(self.flow_pulse_sigma_ms))
+                    rise = max(1e-6, sigma * 0.75)
+                    decay = max(1e-6, sigma * 1.8)
+                    pulse = _asymmetric_flow_pulse(dt, rise_ms=rise, decay_ms=decay)
+                    vals[valid] = np.maximum(vals[valid], np.clip(0.12 + 0.88 * pulse, 0.0, 1.0))
 
             out[idx] = np.clip(vals, 0.0, 1.0)
         return out
@@ -2907,7 +2963,10 @@ class MorphologyMutationApp:
             if tms.size == 0:
                 continue
             dt = float(frame_t_ms) - tms
-            pulse = np.exp(-0.5 * (dt / max(0.5, self.flow_pulse_sigma_ms * 1.5)) ** 2)
+            sigma = max(0.5, float(self.flow_pulse_sigma_ms) * 1.5)
+            rise = max(0.5, sigma * 0.75)
+            decay = max(0.5, sigma * 1.8)
+            pulse = _asymmetric_flow_pulse(dt, rise_ms=rise, decay_ms=decay)
             vals[i] = float(np.clip(np.max(pulse), 0.0, 1.0))
         return vals
 
@@ -2921,16 +2980,23 @@ class MorphologyMutationApp:
             print(f"[flow] export unavailable: {e}")
             return
 
-        t_ms = np.asarray(flow["t_ms"], dtype=float)
-        if self.flow_max_ms is not None:
-            t_ms = t_ms[t_ms <= float(self.flow_max_ms)]
-        if t_ms.size < 2:
+        frame_times = _flow_movie_frame_times(
+            flow["t_ms"],
+            flow_max_ms=self.flow_max_ms,
+            frame_stride=self.flow_frame_stride,
+            fps=self.flow_fps,
+            duration_sec=self.flow_duration_sec,
+        )
+        if frame_times.size < 2:
             print("[flow] not enough time samples to export movie")
             return
 
-        frame_times = t_ms[:: self.flow_frame_stride]
-        if frame_times.size < 2:
-            frame_times = t_ms
+        movie_duration = float(frame_times.size) / float(max(1, self.flow_fps))
+        print(
+            f"[flow] exporting {frame_times.size} frames at {self.flow_fps} fps "
+            f"({float(frame_times[0]):.3f}-{float(frame_times[-1]):.3f} ms "
+            f"compressed to {movie_duration:.2f} s)"
+        )
 
         pair_label = (
             f"{int(self.flow_focus_pair[0])}_to_{int(self.flow_focus_pair[1])}"
@@ -2965,6 +3031,7 @@ class MorphologyMutationApp:
                 pass
             if not self.flow_preserve_camera:
                 self._focus_camera_on_neurons()
+            volume_mode = self.render_mode == "neuroglancer"
             flow_actor = self.plotter.add_mesh(
                 flow_poly,
                 name="flow_overlay",
@@ -2973,10 +3040,17 @@ class MorphologyMutationApp:
                 clim=[0.0, 1.0],
                 show_scalar_bar=False,
                 render_lines_as_tubes=True,
-                line_width=max(4.0, float(self.skeleton_line_width) + 2.0),
-                opacity=1.0,
+                line_width=(
+                    max(8.0, float(self.skeleton_line_width) + 5.0)
+                    if volume_mode else max(4.0, float(self.skeleton_line_width) + 2.0)
+                ),
+                opacity=0.98 if volume_mode else 1.0,
                 pickable=False,
                 copy_mesh=False,
+                lighting=False,
+                ambient=1.0,
+                diffuse=0.0,
+                specular=0.0,
             )
             if conn_mesh is not None:
                 conn_actor = self.plotter.add_mesh(
@@ -2987,10 +3061,17 @@ class MorphologyMutationApp:
                     clim=[0.0, 1.0],
                     show_scalar_bar=False,
                     render_lines_as_tubes=True,
-                    line_width=max(3.0, float(self.skeleton_line_width)),
-                    opacity=0.95,
+                    line_width=(
+                        max(6.0, float(self.skeleton_line_width) + 2.0)
+                        if volume_mode else max(3.0, float(self.skeleton_line_width))
+                    ),
+                    opacity=0.98 if volume_mode else 0.95,
                     pickable=False,
                     copy_mesh=False,
+                    lighting=False,
+                    ambient=1.0,
+                    diffuse=0.0,
+                    specular=0.0,
                 )
 
             self.plotter.open_movie(str(out_mp4), framerate=self.flow_fps)
@@ -3003,7 +3084,7 @@ class MorphologyMutationApp:
             mwriter = getattr(self.plotter, "mwriter", None)
 
         try:
-            for frame_t in frame_times:
+            for frame_idx, frame_t in enumerate(frame_times):
                 flow_signal_arr[:] = self._flow_signal_values(float(frame_t), flow)
                 if conn_signal_arr is not None:
                     conn_signal_arr[:] = self._flow_connection_values(float(frame_t), conn_records)
@@ -3021,7 +3102,7 @@ class MorphologyMutationApp:
                 except Exception:
                     pass
                 self.plotter.add_text(
-                    f"Flow preview  t={float(frame_t):.2f} ms",
+                    f"Flow preview  sim t={float(frame_t):.2f} ms  video={frame_idx / max(1, self.flow_fps):.2f}s",
                     position=(0.02, 0.96),
                     viewport=True,
                     name="flow_status",
@@ -3537,10 +3618,10 @@ def _arg_parser() -> argparse.ArgumentParser:
         default=None,
         help="Optional pre,post neuron ID pair to focus the flow movie on, e.g. 10000,10068.",
     )
-    p.add_argument("--flow-fps", type=int, default=20)
+    p.add_argument("--flow-fps", type=int, default=30)
     p.add_argument("--flow-frame-stride", type=int, default=4)
-    p.add_argument("--flow-speed-um-per-ms", type=float, default=220.0)
-    p.add_argument("--flow-pulse-sigma-ms", type=float, default=0.6)
+    p.add_argument("--flow-speed-um-per-ms", type=float, default=25.0)
+    p.add_argument("--flow-pulse-sigma-ms", type=float, default=18.0)
     p.add_argument("--flow-syn-delay-ms", type=float, default=None)
     p.add_argument("--flow-threshold-mv", type=float, default=0.0)
     p.add_argument(
@@ -3559,8 +3640,14 @@ def _arg_parser() -> argparse.ArgumentParser:
     p.add_argument(
         "--flow-max-ms",
         type=float,
-        default=25.0,
+        default=0.0,
         help="Upper time limit for movie export. Use <=0 for full run.",
+    )
+    p.add_argument(
+        "--flow-duration-sec",
+        type=float,
+        default=20.0,
+        help="Movie duration in seconds. Positive values resample the selected simulation span to fps*duration frames.",
     )
     p.add_argument(
         "--start-solo",
@@ -3622,6 +3709,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         flow_syn_delay_ms=args.flow_syn_delay_ms,
         flow_threshold_mV=float(args.flow_threshold_mv),
         flow_max_ms=args.flow_max_ms,
+        flow_duration_sec=args.flow_duration_sec,
         neuron_color_overrides=_parse_neuron_color_overrides(args.neuron_color_overrides),
         flow_preserve_camera=bool(args.flow_preserve_camera),
         flow_overlay_style=str(args.flow_overlay_style),
