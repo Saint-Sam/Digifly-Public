@@ -10,6 +10,7 @@ This repo keeps the active Digifly phase-based layout so notebooks, helper files
 
 ## Current Contents
 
+- `START_HERE_Digifly_Phase2.ipynb`: notebook launcher that starts/opens the Docker-hosted Phase 2 Workbench.
 - `Phase 1/Phase 1.ipynb`: sanitized public copy of the current Phase 1 notebook.
 - `Phase 1/phase1_bridge.py`: current Phase 1 bridge/helper module.
 - `Phase 1/filter_ids_by_size_and_export_swc.py`: helper used by the Phase 1 notebook for Excel ID filtering and SWC export.
@@ -39,7 +40,27 @@ Alternatively, place a local token in `Phase 1/Neuprint Token.txt`. The local pr
 python -m pip install -e ".[notebooks]"
 ```
 
-For Phase 2 on Windows, prefer Docker instead of native NEURON setup:
+For Phase 2 on Windows, use Docker instead of native NEURON setup. The simplest path is:
+
+```text
+Open START_HERE_Digifly_Phase2.ipynb and run the single code cell.
+```
+
+If the notebook is opened outside Docker, that cell starts Docker and opens the Docker-hosted Phase 2 Workbench. If the notebook is already opened inside Docker, it opens the Workbench directly.
+
+If Windows does not know how to open `.ipynb` files yet, double-click:
+
+```text
+Start_Digifly_Phase2_Windows.bat
+```
+
+That Command Prompt launcher starts Docker and opens:
+
+```text
+START_HERE_Digifly_Phase2.ipynb
+```
+
+Manual Docker startup also works:
 
 ```bash
 docker compose up --build phase2-jupyter

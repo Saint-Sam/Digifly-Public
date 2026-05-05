@@ -27,6 +27,7 @@ services:
       - --ServerApp.token=
       - --ServerApp.password=
       - --ServerApp.root_dir=/workspace
+      - --ServerApp.default_url=/lab/tree/START_HERE_Digifly_Phase2.ipynb
 
   phase2-test:
     image: ${DIGIFLY_PHASE2_IMAGE:-digifly-public-phase2:latest}

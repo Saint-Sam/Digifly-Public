@@ -42,6 +42,14 @@ The `NEURON_MODULE_OPTIONS=-nogui` setting avoids display-window startup issues 
 
 For Windows users, the recommended Phase 2 runtime is Docker instead of native Windows NEURON:
 
+```text
+Open START_HERE_Digifly_Phase2.ipynb from the repo root and run its single code cell
+```
+
+That start notebook opens the Phase 2 Workbench through Docker. If Windows does not know how to open `.ipynb` files yet, double-click `Start_Digifly_Phase2_Windows.bat` from the repo root to open the start notebook.
+
+Manual startup:
+
 ```bash
 docker compose up --build phase2-jupyter
 ```

@@ -6,14 +6,35 @@ This is the recommended Phase 2 path for Windows users. It avoids native Windows
 
 1. Install Docker Desktop.
 2. Clone or download the Digifly Public repo.
-3. Open a terminal in the repo folder.
-4. Run:
+3. Open this notebook from the repo folder and run its single code cell:
+
+```text
+START_HERE_Digifly_Phase2.ipynb
+```
+
+The notebook starts Docker when needed and opens the Docker-hosted Phase 2 Workbench.
+
+If Windows does not know how to open `.ipynb` files yet, double-click this Command Prompt launcher from the repo folder:
+
+```text
+Start_Digifly_Phase2_Windows.bat
+```
+
+The launcher uses Command Prompt, not PowerShell. It starts Docker Compose in the background and opens the same start notebook:
+
+```text
+START_HERE_Digifly_Phase2.ipynb
+```
+
+4. In the Workbench, use the `Single Neuron Debug` preset, then click `Run`. After the run finishes, click `Open Browser Visualizer`.
+
+Manual terminal startup is also available:
 
 ```bash
 docker compose up --build phase2-jupyter
 ```
 
-5. Open:
+Then open:
 
 ```text
 http://localhost:8888
@@ -31,10 +52,10 @@ Then open:
 http://localhost:8889
 ```
 
-6. In JupyterLab, open:
+In JupyterLab, open:
 
 ```text
-Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb
+START_HERE_Digifly_Phase2.ipynb
 ```
 
 After a workbench run completes, click `Open Browser Visualizer` to load the latest run into the Plotly browser-native flow viewer. This path works inside Docker on Windows because it renders in JupyterLab and does not require PyVista, VTK desktop windows, or a Windows NEURON install.
