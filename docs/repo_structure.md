@@ -1,23 +1,19 @@
 # Digifly Public Repo Structure
 
-## Source Of Truth
-
-Use `Digifly-MASTER_MULTIPROCESS` as the ground truth for current structure, filenames, and notebook/helper formats.
-
 ## Chosen Public Layout
 
-The public project intentionally mirrors the master repo's active workflow roots:
+The public project intentionally mirrors Digifly's active workflow roots:
 
 - `Phase 1/`
 - `Phase 2/` later
 - `Phase 3/`
 - `docs/`
 
-This keeps migration low-risk because the active Digifly notebooks and helper files already assume phase-oriented roots.
+This keeps the project low-risk because the active Digifly notebooks and helper files already assume phase-oriented roots.
 
 ## Phase 1 Public Import
 
-Included from `Digifly-MASTER_MULTIPROCESS/Phase 1/`:
+Included Phase 1 assets:
 
 - `Phase 1.ipynb`
 - `phase1_bridge.py`
@@ -66,9 +62,8 @@ Choice 1 outputs are grouped by dataset slug, for example:
 
 ## Phase 3 Working Import
 
-`Phase 3/` was imported directly from
-`Digifly-MASTER_MULTIPROCESS/Phase 3_WORKING/` as a cleanup staging copy.
-Only obvious local noise was excluded during import:
+`Phase 3/` is staged as a cleanup copy of the working Phase 3 tree.
+Only obvious local noise is excluded:
 
 - `.DS_Store`
 - `__pycache__/`
@@ -90,7 +85,7 @@ and `Phase 3/data/outputs/`; both are ignored by git.
 ## Phase 2 Framework Staging
 
 `Phase 2/` now contains a lean public staging copy of the reusable NEURON
-simulation framework from `Digifly-MASTER_MULTIPROCESS/Phase 2/`.
+simulation framework.
 
 Included:
 

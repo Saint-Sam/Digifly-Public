@@ -28,6 +28,9 @@ build/
 Neuprint Token.txt
 **/Neuprint Token.txt
 
+# Local machine-specific launcher config
+/Phase 2/apps/VIP_Glia_Sim/notebooks/local_config.py
+
 # Phase 1 local datasets / exports
 /Phase 1/Glia IDs/
 /Phase 1/export_swc/

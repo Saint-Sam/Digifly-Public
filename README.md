@@ -6,7 +6,7 @@ The project follows a three-phase pipeline:
 - `Phase 2`: Run NEURON-based simulations on pulled neurons
 - `Phase 3`: Use motor-neuron outputs from Phase 2 to control NeuroMechFly, a MuJoCo model of Drosophila. 
 
-This repo keeps the master workspace's phase-based layout so notebooks and helper files can migrate without a second path-refactor project.
+This repo keeps the active Digifly phase-based layout so notebooks, helper files, and simulation assets remain easy to locate.
 
 ## Current Contents
 
@@ -17,7 +17,7 @@ This repo keeps the master workspace's phase-based layout so notebooks and helpe
 - `Phase 2/`: lean public staging copy of the reusable NEURON simulation framework.
 - `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`: notebook-first interactive workbench for shared runs and hemilineage project runs.
 - `Phase 2/apps/VIP_Glia_Sim/`: standalone morphology mutation app imported from the current `VIP_Glia_Sim` source.
-- `Phase 3/`: direct import of `Digifly-MASTER_MULTIPROCESS/Phase 3_WORKING`, with cache/checkpoint files excluded.
+- `Phase 3/`: staged Phase 3 working tree, with cache/checkpoint files excluded.
 - `docs/repo_structure.md`: layout and curation notes for future Phase 2/Phase 3 imports.
 - `docs/phase2_simulation_framework_audit.md`: audit of Phase 2 and Hemilineage Simulations, with framework-vs-experiment triage.
 - `docs/hemilineage_experiment_feature_inventory.md`: inventory of Hemilineage Simulation experiment features, knobs, error-log requirements, and the proposed Phase 2 workbench shape.
@@ -27,7 +27,7 @@ This repo keeps the master workspace's phase-based layout so notebooks and helpe
 The public notebook does not include a hardcoded neuPrint token. Before running Phase 1, set:
 
 ```bash
-export NEUPRINT_TOKEN="your-token-here"
+export NEUPRINT_TOKEN="<neuprint-token>"
 ```
 
 Alternatively, place a local token in `Phase 1/Neuprint Token.txt`. The local project token file is gitignored, and the notebook can create it through `ensure_neuprint_token()`.
@@ -52,6 +52,6 @@ See `docs/phase2_docker_setup.md` for the full Windows-first path, including the
 - Phase 3 needs original NeuroMechFly v2 files to work, add information on download and citations
 - More use notes on Phase 1
 - Update Visualizer
-- Phase 2 app: make app
+- Continue polishing the Phase 2 workbench and browser-based visualization path
 
 No license has been selected yet.

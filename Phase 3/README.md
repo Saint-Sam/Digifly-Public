@@ -20,7 +20,7 @@ That notebook is the best current baseline for:
 
 - The current folder was backed up to `../Phase 3_OLD`.
 - Legacy root-level clutter was moved under `legacy/`.
-- The user notebook now resolves paths from this workspace instead of older `Digifly_MASTER` and `Digifly_NEW` folders.
+- The main notebook resolves paths from this workspace instead of older local workspace folders.
 - Profile `control_map` settings now affect MuJoCo scaling during render.
 - Hemilineage mode now filters `spike_times.csv` through `added_motor_neuron_ids.csv` before building controls.
 - Outputs now default to `data/.../<save_tag>/<run_name>/`, with `save_tag` defaulting to the `Hemi_XXX` folder name.

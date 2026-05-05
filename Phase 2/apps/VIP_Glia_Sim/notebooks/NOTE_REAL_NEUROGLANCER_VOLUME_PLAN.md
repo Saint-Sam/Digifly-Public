@@ -19,7 +19,7 @@ This explains the current limitations:
 - interactive speed drops because PyVista/VTK is resampling one in-memory volume rather than streaming multiscale chunks
 - the surface can look slightly "built from shapes" because it is inferred from SWC radii, not from real EM/segmentation voxels
 
-## What we learned about the real MANC data
+## Real MANC Data Notes
 
 The source seen in Neuroglancer through neuPrint points to the MANC bucket:
 

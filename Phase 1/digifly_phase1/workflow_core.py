@@ -183,7 +183,7 @@ import os as _os  # at the top once
 # export and synapse-mapping behavior; the public menu calls the entry point
 # `option_20_build_and_map()` below.
 def _edges_ego_csv_path(bid, out_dir):
-    # EXACT filename pattern to match your sample: edges_ego_<bid>__rawsyn.csv
+    # Exact filename pattern: edges_ego_<bid>__rawsyn.csv
     from pathlib import Path
     return Path(out_dir) / f"edges_ego_{int(bid)}__rawsyn.csv"
 def _option20_outdir_for_bid(bid, base_out, client):
@@ -191,7 +191,7 @@ def _option20_outdir_for_bid(bid, base_out, client):
     Decide where Option 20 should read/write data for a given bodyId.
 
     Priority:
-      1) If we already have an SWC for this bodyId anywhere under base_out,
+      1) If an SWC for this bodyId already exists anywhere under base_out,
          use that folder (avoids creating 'No/None' or duplicate trees).
       2) Otherwise, query neuPrint for metadata and choose:
            - family:  AN / IN / DN / MN / SN / UNKNOWN
@@ -224,7 +224,7 @@ def _option20_outdir_for_bid(bid, base_out, client):
             except Exception:
                 continue
             if b == bid:
-                # This is the folder you've already been using for this neuron
+                # Reuse the existing canonical folder for this neuron.
                 return p.parent
 
     # ------------------------------------------------------------------
@@ -256,7 +256,7 @@ def _option20_outdir_for_bid(bid, base_out, client):
 
         # ---- folder within family ----
         if fam == "MN":
-            # For MNs you wanted the full instance like MNwm19_PDMNa_R
+            # Motor neurons use the full instance when available, e.g. MNwm19_PDMNa_R.
             if inst:
                 folder_name = inst
             elif ntype:
@@ -291,7 +291,7 @@ def _list_outgoing_partners(client, body_id, min_total_weight=1):
     )
     try:
         df = client.fetch_custom(cypher, format='pandas')  # uses default dataset from client
-        # If your neuprint client requires params via string formatting, fallback below
+        # Fallback for neuPrint clients that require params via string formatting.
         if isinstance(df, tuple):  # some versions return (df, msg)
             df = df[0]
         if df is None or df.empty:
@@ -459,7 +459,7 @@ def _list_types_by_prefix(prefix, client, pattern=None, extra_cols=("instance","
     Returns {label: [bodyIds]} where *label* is the primary type column.
     If `pattern` is provided, it is used as a regex (case-insensitive) and
     applied as 'contains' rather than 'starts with'.
-    We also search a few extra label columns for the same pattern.
+    A few extra label columns are searched for the same pattern.
     """
     df,_ = fetch_neurons(NeuronCriteria(status="Traced"), client=client)
     if df.empty:
@@ -636,7 +636,7 @@ def _export_one_neuron(body_id, out_dir, client, upsample_nm=UPSAMPLE_NM):
     # --- SAFE synapse export: posts fast-path + pres via partner chunks ---
     from neuprint import NeuronCriteria, SynapseCriteria, fetch_synapse_connections
     
-    # posts (your fast path that already works)
+    # posts
     try:
         post_df = fetch_synapse_connections(
             target_criteria=NeuronCriteria(bodyId=[int(body_id)]),
@@ -668,7 +668,7 @@ def _export_one_neuron(body_id, out_dir, client, upsample_nm=UPSAMPLE_NM):
         print(f"[TRACE] pres partner-chunk fetch failed for {body_id}: {e}")
         syn_pre = pd.DataFrame(columns=['x','y','z','type'])
     
-    # merge & save (nm→µm is handled later during mapping; if you want µm now, divide here)
+    # Merge and save. nm→µm conversion is handled later during mapping.
     syn = pd.concat([syn_post, syn_pre], ignore_index=True)
     syn.to_csv(syn_path, index=False)
     
@@ -836,7 +836,7 @@ def _run_mapping_for(body_id, out_dir):
     soma_xyz_hint = None   # (µm, 3)
     soma_r_hint   = None   # (µm, float)
 
-    # parse bodyId from header if present (we wrote "# bodyId <id>" earlier)
+    # parse bodyId from header if present
     body_id = None
     for L in header:
         if "bodyId" in L:
@@ -872,14 +872,14 @@ def _run_mapping_for(body_id, out_dir):
                     if pd.notnull(rad):
                         soma_r_hint = float(rad) / 1000.0
         except Exception as _e:
-            # Silent fallback: we'll use percentile method below
+            # Silent fallback: use percentile method below.
             pass
 
     # ── Build soma region: NeuPrint‐guided if possible, else percentile method ──
 
     radii  = np.array([nodes[n][5] for n in order], float)
 
-    # Try to figure neuron type once (only if we have a client/body_id)
+    # Resolve neuron type once when a client/body_id is available.
     ntype = None
     try:
         _client_nt = globals().get("client", None)
@@ -904,7 +904,7 @@ def _run_mapping_for(body_id, out_dir):
     # ── Build soma region (MN-aware): NeuPrint‐guided if possible, else MN ball / percentile ──
     from collections import deque
 
-    # figure neuron type and MN flag (we did a best-effort fetch above)
+    # Use the best-effort neuron type fetch to set the MN flag.
     ntu  = (ntype or "").upper()
     is_mn = ntu.startswith("MN") or ("MOTOR" in ntu)
 
@@ -1086,7 +1086,7 @@ def _run_mapping_for(body_id, out_dir):
                     region.add(nb); Q.append(nb)
 
 
-    # ── Reabsorb tiny branches (kept exactly as you had) ──
+    # ── Reabsorb tiny branches ──
     non_region = set(nodes) - region
     entry_pts  = [nb for v in region for nb in adj[v] if nb in non_region]
     seen = set(); branches = []
@@ -1426,7 +1426,7 @@ def _run_mapping_for(body_id, out_dir):
         df = df[map_cols]
     df.to_csv(MAP_CSV, index=False)
 
-    # node-label check summary (like your checker)
+    # node-label check summary
     acc = df[df["accepted"]==True]
     def _to_bool(v): return str(v).strip().lower() in ("true","t","1","yes","y")
     pre_tot = (df["syn_type"]=="pre").sum()
@@ -1733,7 +1733,7 @@ def option_20_build_and_map(
     
         - Ensures healed SWC + mapped-with-synapses exist in the canonical
           Option-20 folder for this BID.
-        - Explicitly skips edges_ego build (we've disabled that).
+        - Explicitly skips edges_ego build.
         - Ensures <bid>_synapses_new.csv exists AND has pre_id/post_id/x/y/z/type.
           If not, it is rebuilt using batched custom-Cypher via
           update_synapse_csvs_with_coords().
@@ -2127,7 +2127,7 @@ def option_20_build_and_map(
                 print(f"  (No types for {fam})")
                 continue
 
-            # We still print by "instance_label", but we no longer use it
+            # Print by "instance_label", but do not use it for grouping.
             # to build paths – run_one() always defers to _option20_outdir_for_bid.
             for instance_label, body_ids in sorted(tmap.items()):
                 print(f"\n  • Instance {instance_label} ({len(body_ids)} neuron"
@@ -2279,7 +2279,7 @@ def update_synapse_csvs_with_coords(
         # prefer TYPE if present
         for bid, folder in type_hits.items():
             hits.append((bid, folder))
-        # add INSTANCE only if we never saw a TYPE folder
+        # add INSTANCE only when no TYPE folder was observed.
         for bid, folder in inst_hits.items():
             if bid not in type_hits:
                 hits.append((bid, folder))
@@ -2446,7 +2446,7 @@ def export_all_neuroncriteria_template(
     if body_ids is None:
         # 1a) Build criteria + fetch all matching neurons
         nc = NeuronCriteria(**criteria_kwargs)
-        # IMPORTANT: don't print nc directly, its __repr__ is broken in your neuprint
+        # IMPORTANT: avoid printing nc directly; some neuPrint clients have a broken __repr__.
         print("[INFO] Fetching neurons with NeuronCriteria and kwargs:", criteria_kwargs)
         df_neurons, _ = fetch_neurons(nc, client=np_client)
     else:
@@ -2481,7 +2481,7 @@ def export_all_neuroncriteria_template(
 
     print(f"[INFO] Retrieved {len(df_neurons)} neurons and {len(df_neurons.columns)} raw columns.")
 
-    # 2) NeuronCriteria-style template fields we want as columns
+    # 2) NeuronCriteria-style template fields to include as columns.
     template_fields = [
         "bodyId",
         "type",
@@ -2591,8 +2591,7 @@ def get_male_cns_client():
         return male_cns_client
     except NameError:
         print(f"[neuprint] Creating client for dataset '{MALE_CNS_DATASET}'")
-        # If you normally rely on env-based auth, this is enough.
-        # If you need a token, add token=... here.
+        # Token handling is centralized through get_neuprint_token().
         male_cns_client = neu.Client(
             MALE_CNS_SERVER,
             dataset=MALE_CNS_DATASET,
@@ -2849,7 +2848,7 @@ def run_pair_path_queries_parallel(
 def _nt_class_from_value(v: str) -> str:
     """
     Map neuPrint neurotransmitter labels to 'exc', 'inh', or 'other/unknown'.
-    Customize if you want glutamate treated differently for your use case.
+    Adjust this mapping if glutamate should be handled differently.
     """
     if v is None:
         return "unknown"
@@ -2877,7 +2876,7 @@ def fetch_nt_for_bodyids(bodyIds, client=None):
     """
     Robustly fetch a transmitter label for each bodyId.
     Different datasets may store this under different property names.
-    We try several common fields and coalesce to the first non-null.
+    Several common fields are coalesced to the first non-null value.
     Returns a dict: {bodyId:int -> nt_value:str or None}
     """
     if client is None:
@@ -2937,7 +2936,7 @@ def fetch_nt_for_bodyids_chunked(bodyIds, client=None, chunk_size: int = 5000):
     return out
 def ask_polarity_filters():
     """
-    Ask user for the two nuanced filters you described.
+    Ask for optional neurotransmitter polarity filters.
     Returns:
       start_exclude: set({'exc','inh'}) for upstream neurons
       pretarget_exclude: set({'exc','inh'}) for penultimate (pre-target) neuron
@@ -3121,7 +3120,7 @@ def run_pathfinding_option_26():
         use_all_paths=use_all_paths,
         min_weight=min_weight,
         path_kwargs=path_kwargs,
-        max_workers=48,  # you set 48; keep if it works for you
+        max_workers=48,
     )
 
     if not all_results:
@@ -3154,10 +3153,10 @@ def run_pathfinding_option_26():
     paths_df["downstream_predictedNT_class"] = paths_df["downstream_predictedNT"].apply(_nt_class_from_value)
 
 
-    # Apply "pre-target exc/inh" filter AFTER we have the path table
+    # Apply "pre-target exc/inh" filter after path table construction.
     paths_df = filter_paths_by_pretarget_nt(paths_df, pretarget_exclude, client=client)
     if paths_df is None or paths_df.empty:
-        print("\n[RESULT] All paths were filtered out by your pre-target exc/inh filter.")
+        print("\n[RESULT] All paths were filtered out by the pre-target exc/inh filter.")
         return
 
     print("\n[RESULT] Combined path table shape:", paths_df.shape)

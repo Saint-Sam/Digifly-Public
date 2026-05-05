@@ -2,10 +2,10 @@
 
 Date: 2026-04-22
 
-Ground truth reviewed:
+Sources reviewed:
 
-- `Digifly-MASTER_MULTIPROCESS/Phase 2`
-- `Digifly-MASTER_MULTIPROCESS/Hemilineage Simulations`
+- Phase 2 simulation framework
+- Hemilineage Simulations workspace
 
 ## Bottom Line
 
@@ -139,7 +139,7 @@ Best public role: keep and expand.
 
 ## Hemilineage Simulations Triage
 
-### Keep As Future Public CLI Candidates
+### Keep As Future Public CLI Tools
 
 These are useful, but should be adapted before importing because their path assumptions still point at the old master workspace layout:
 

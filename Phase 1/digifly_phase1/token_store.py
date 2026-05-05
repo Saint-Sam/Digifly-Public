@@ -15,10 +15,10 @@ from pathlib import Path
 TOKEN_FILE_NAME = "Neuprint Token.txt"
 PLACEHOLDER_TOKENS = {
     "",
-    "your-token-here",
-    "paste-your-token-here",
+    "<neuprint-token>",
+    "paste-neuprint-token-here",
     "paste token here",
-    "paste your neuprint token here",
+    "paste neuprint token here",
 }
 
 
@@ -70,7 +70,7 @@ def get_neuprint_token(*, required: bool = True) -> str | None:
         if token:
             raise RuntimeError(
                 "A neuPrint token was found, but it does not look valid. "
-                f"Replace the contents of {path} with your full neuPrint token, "
+                f"Replace the contents of {path} with a full neuPrint token, "
                 "or set NEUPRINT_TOKEN."
             )
         raise RuntimeError(

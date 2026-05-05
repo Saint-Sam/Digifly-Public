@@ -2,9 +2,9 @@
 
 Date: 2026-04-22
 
-Ground truth reviewed:
+Sources reviewed:
 
-- `Digifly-MASTER_MULTIPROCESS/Hemilineage Simulations`
+- Hemilineage Simulations workspace
 - top-level Hemilineage notebooks
 - `Escape-SIZ/Escape-SIZ.ipynb`
 - Hemilineage support modules
@@ -164,7 +164,7 @@ Important knobs:
 
 Public role:
 
-This should become a `DNg100 Circuit` preset family. It is too specific to be the only Phase 2 workflow, but it contains important reusable machinery for explicit circuit construction and parameterized edge materialization.
+Target public role: a `DNg100 Circuit` preset family. The workflow is too specific to be the only Phase 2 surface, but it contains important reusable machinery for explicit circuit construction and parameterized edge materialization.
 
 ### 4. HH, SBI, And Paper-Rate Search
 

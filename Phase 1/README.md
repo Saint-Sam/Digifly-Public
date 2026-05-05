@@ -12,13 +12,13 @@ Phase 1 imports neuPrint data and exports neuron morphology/synapse artifacts fo
 
 ## Token
 
-Before running notebook cells that call neuPrint, either set `NEUPRINT_TOKEN` in your shell/notebook environment or save the token to the local file `Neuprint Token.txt`.
+Before running notebook cells that call neuPrint, either set `NEUPRINT_TOKEN` in the shell/notebook environment or save the token to the local file `Neuprint Token.txt`.
 
 ```bash
-export NEUPRINT_TOKEN="your-token-here"
+export NEUPRINT_TOKEN="<neuprint-token>"
 ```
 
-The notebook can also create `Neuprint Token.txt` for you through `ensure_neuprint_token()`. Local token files named `Neuprint Token.txt` are intentionally ignored by git. If you see a 401, replace the local token file with the complete neuPrint token; partial or placeholder tokens are rejected by the Phase 1 helper.
+The notebook can also create `Neuprint Token.txt` through `ensure_neuprint_token()`. Local token files named `Neuprint Token.txt` are intentionally ignored by git. A 401 response usually means the local token file is incomplete, expired, or still contains placeholder text.
 
 ## Menu Structure
 

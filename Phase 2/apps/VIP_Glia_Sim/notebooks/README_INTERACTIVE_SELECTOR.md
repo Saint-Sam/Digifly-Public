@@ -12,7 +12,7 @@ Module used:
 
 - `../tools/swc_interactive_selector.py`
 
-Expected dependencies in your notebook kernel:
+Expected dependencies in the notebook kernel:
 
 - `numpy`
 - `pandas`

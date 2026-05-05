@@ -37,7 +37,7 @@ CORE_CHOICES: list[Choice] = [
         "2",
         choice_2_batch_filter_export.TITLE,
         "Reads body IDs from an Excel sheet, computes a size metric, keeps IDs "
-        "above your threshold, then exports a filtered SWC bundle plus kept, "
+        "above the selected threshold, then exports a filtered SWC bundle plus kept, "
         "dropped, failed, and bodyId-list reports.",
         choice_2_batch_filter_export.run,
     ),
