@@ -30,6 +30,22 @@ def _write_edges_csv(path: pathlib.Path) -> None:
         writer.writerow({"pre_id": 10000, "post_id": 10002})
 
 
+def _write_simple_swc(path: pathlib.Path, neuron_id: int) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "\n".join(
+            [
+                f"# bodyId {int(neuron_id)}",
+                "1 1 0.0 0.0 0.0 0.5 -1",
+                "2 2 10.0 0.0 0.0 0.2 1",
+                "3 2 20.0 0.0 0.0 0.2 2",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
 def test_custom_shared_plan_builds_from_preset(tmp_path):
     _ensure_import_path()
     from digifly.phase2.workbench.presets import apply_preset
@@ -211,6 +227,38 @@ def test_notebook_ui_resolves_run_dir_and_time_column(tmp_path):
 
     assert _result_run_dir(result) == out_dir.resolve()
     assert _find_time_column(pd.DataFrame({"t_ms": [0.0], "10000_soma_v": [-65.0]})) == "t_ms"
+
+
+def test_browser_visualizer_builds_plotly_flow_figure(tmp_path):
+    _ensure_import_path()
+    from digifly.phase2.workbench.browser_visualizer import (
+        build_browser_flow_figure,
+        find_swc_file,
+        recorded_neuron_ids,
+    )
+
+    swc_dir = tmp_path / "export_swc"
+    _write_simple_swc(swc_dir / "DN" / "DNp01" / "10000" / "10000_healed.swc", 10000)
+    preferred = swc_dir / "DN" / "DNp01" / "10000" / "10000_axodendro_with_synapses.swc"
+    _write_simple_swc(preferred, 10000)
+    _write_simple_swc(swc_dir / "DN" / "DNp01" / "10000" / "10000_axodendro_with_synapses_OLD_test.swc", 10000)
+
+    run_dir = swc_dir / "hemi_runs" / "single_neuron_debug"
+    run_dir.mkdir(parents=True)
+    with (run_dir / "records.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["t_ms", "10000_soma_v"])
+        writer.writeheader()
+        for t_ms, v in [(0.0, -65.0), (1.0, -40.0), (2.0, 25.0), (3.0, -55.0)]:
+            writer.writerow({"t_ms": t_ms, "10000_soma_v": v})
+
+    assert recorded_neuron_ids(run_dir) == [10000]
+    assert find_swc_file(swc_dir, 10000) == preferred.resolve()
+
+    fig = build_browser_flow_figure(run_dir=run_dir, swc_dir=swc_dir, max_frames=4, playback_seconds=1.0)
+
+    assert len(fig.frames) == 4
+    assert any(trace.name == "browser flow" for trace in fig.data)
+    assert "Play" in fig.layout.updatemenus[0].buttons[0].label
 
 
 def test_hemi_project_plan_derives_core_ids_from_master_csv(tmp_path):

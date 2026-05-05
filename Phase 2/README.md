@@ -13,6 +13,7 @@ This public copy is intentionally lean. It includes the framework code, tests, m
 - `data/*.mod`: NEURON gap-junction mechanism sources
 - `notebooks/run_simulation.ipynb`: unified Phase 2 runner notebook
 - `notebooks/Digifly_Phase2_Workbench.ipynb`: interactive workbench notebook built on the public preset/manifest layer
+- `notebooks/launch_browser_flow_visualizer.ipynb`: browser-native Plotly flow visualizer for completed runs
 - `tests/`: focused framework tests
 - `config/structure_manifest.yaml`: lightweight structure validation manifest
 
@@ -46,6 +47,7 @@ docker compose up --build phase2-jupyter
 ```
 
 Open `http://localhost:8888`, then open `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`.
+After a run completes, click `Open Browser Visualizer` to view the morphology/activity animation directly in JupyterLab.
 
 To test the container:
 
@@ -62,6 +64,7 @@ The Docker image installs NEURON, compiles the Phase 2 `.mod` mechanisms, and mo
 - `digifly.phase2.hemi.sim_project.run_full_hemilineage_project`
 - `digifly.phase2.hemi.sim_project.run_hemilineage_benchmark`
 - `digifly.phase2.workbench.launch_workbench`
+- `digifly.phase2.workbench.launch_browser_flow_visualizer`
 
 The notebook `notebooks/Digifly_Phase2_Workbench.ipynb` is now the notebook-first public control surface. `notebooks/run_simulation.ipynb` remains the lower-level runner notebook.
 

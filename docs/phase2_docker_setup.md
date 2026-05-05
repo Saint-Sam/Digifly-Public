@@ -37,6 +37,8 @@ http://localhost:8889
 Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb
 ```
 
+After a workbench run completes, click `Open Browser Visualizer` to load the latest run into the Plotly browser-native flow viewer. This path works inside Docker on Windows because it renders in JupyterLab and does not require PyVista, VTK desktop windows, or a Windows NEURON install.
+
 The container sets `NEURON_MODULE_OPTIONS=-nogui`, installs NEURON, compiles the Phase 2 gap-junction mechanisms, and exposes the repo at `/workspace`.
 
 ## Test The Container
@@ -97,6 +99,18 @@ Phase 1/manc_v1.2.1/export_swc
 ```
 
 Generated outputs stay in ignored repo folders such as `Phase 2/outputs/` and notebook debug folders.
+
+Completed shared-run outputs also persist under:
+
+```text
+Phase 1/manc_v1.2.1/export_swc/hemi_runs
+```
+
+The standalone browser viewer can be opened from:
+
+```text
+Phase 2/notebooks/launch_browser_flow_visualizer.ipynb
+```
 
 ## VS Code Dev Container
 

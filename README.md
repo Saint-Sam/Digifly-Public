@@ -16,6 +16,7 @@ This repo keeps the active Digifly phase-based layout so notebooks, helper files
 - `Phase 1/digifly_phase1/`: modular Phase 1 package with the menu, token handling, and one module per current Choice.
 - `Phase 2/`: lean public staging copy of the reusable NEURON simulation framework.
 - `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`: notebook-first interactive workbench for shared runs and hemilineage project runs.
+- `Phase 2/notebooks/launch_browser_flow_visualizer.ipynb`: browser-native Plotly flow viewer for Docker/JupyterLab sessions.
 - `Phase 2/apps/VIP_Glia_Sim/`: standalone morphology mutation app imported from the current `VIP_Glia_Sim` source.
 - `Phase 3/`: staged Phase 3 working tree, with cache/checkpoint files excluded.
 - `docs/repo_structure.md`: layout and curation notes for future Phase 2/Phase 3 imports.
@@ -45,6 +46,7 @@ docker compose up --build phase2-jupyter
 ```
 
 Then open `http://localhost:8888` and use `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`.
+After a run finishes, use **Open Browser Visualizer** in the workbench to view the activity animation inside JupyterLab.
 See `docs/phase2_docker_setup.md` for the full Windows-first path, including the optional prebuilt GitHub Container Registry image.
 
 ## To-do

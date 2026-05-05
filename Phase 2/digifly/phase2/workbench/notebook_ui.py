@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 from .cache_identity import format_impact_summary
+from .browser_visualizer import launch_browser_flow_visualizer
 from .controls import CONTROL_SPECS, ControlSpec, control_by_key, default_state, sections_for_state, specs_in_section
 from .mutation_launcher import build_mutation_launch_plan, launch_mutation_app, log_tail
 from .presets import PRESETS, apply_preset, get_preset, iter_notes, preset_options
@@ -39,8 +40,14 @@ class Phase2WorkbenchUI:
         self.validate_button = widgets.Button(description="Validate", button_style="")
         self.bundle_button = widgets.Button(description="Write Bundle", button_style="")
         self.run_button = widgets.Button(description="Run", button_style="success")
+        self.browser_visualizer_button = widgets.Button(
+            description="Open Browser Visualizer",
+            button_style="success",
+            disabled=True,
+            tooltip="Open a Plotly browser-native flow visualizer for the most recent completed workbench run.",
+        )
         self.mutation_button = widgets.Button(
-            description="Open Mutation App",
+            description="Open PyVista App",
             button_style="warning",
             disabled=True,
             tooltip="Launch the morphology mutation app with the most recent completed workbench run.",
@@ -72,6 +79,7 @@ class Phase2WorkbenchUI:
                 self.validate_button,
                 self.bundle_button,
                 self.run_button,
+                self.browser_visualizer_button,
                 self.mutation_button,
             ]
         )
@@ -99,6 +107,7 @@ class Phase2WorkbenchUI:
         self.validate_button.on_click(lambda _: self._validate())
         self.bundle_button.on_click(lambda _: self._write_bundle_only())
         self.run_button.on_click(lambda _: self._run())
+        self.browser_visualizer_button.on_click(lambda _: self._launch_browser_visualizer())
         self.mutation_button.on_click(lambda _: self._launch_mutation_app())
         self.widgets["runner_kind"].observe(lambda _: self._refresh_form(), names="value")
         self.widgets["mode"].observe(lambda _: self._refresh_form(), names="value")
@@ -208,16 +217,37 @@ class Phase2WorkbenchUI:
                 print(json.dumps(result, indent=2, default=str))
                 self.last_run_result = result
                 self.last_run_dir = _result_run_dir(result)
+                self.browser_visualizer_button.disabled = self.last_run_dir is None
                 self.mutation_button.disabled = self.last_run_dir is None
                 self._display_voltage_traces(result)
                 if self.last_run_dir is not None:
-                    print(f"\nMutation app ready for run: {self.last_run_dir}")
-                    self.status_html.value = "<p><b>Run completed.</b> Voltage traces loaded; mutation app launcher is ready.</p>"
+                    print(f"\nBrowser visualizer ready for run: {self.last_run_dir}")
+                    print(f"PyVista mutation app ready for run: {self.last_run_dir}")
+                    self.status_html.value = "<p><b>Run completed.</b> Voltage traces loaded; browser visualizer and PyVista app launchers are ready.</p>"
                 else:
                     self.status_html.value = "<p><b>Run completed.</b> See output below.</p>"
             except Exception as exc:
                 print(f"Run failed: {exc}")
                 self.status_html.value = f"<p><b>Run failed.</b> {exc}</p>"
+
+    def _launch_browser_visualizer(self) -> None:
+        state = self._state_from_widgets()
+        with self.output:
+            self.output.clear_output()
+            if self.last_run_dir is None:
+                print("No completed workbench run is available yet. Run a simulation first.")
+                self.status_html.value = "<p><b>Browser visualizer not opened.</b> Run a simulation first.</p>"
+                return
+            try:
+                swc_dir = Path(str(state.get("swc_dir", ""))).expanduser().resolve()
+                print("Opening browser-native flow visualizer:")
+                print(f"  run_dir: {self.last_run_dir}")
+                print(f"  swc_dir: {swc_dir}")
+                launch_browser_flow_visualizer(run_dir=self.last_run_dir, swc_dir=swc_dir)
+                self.status_html.value = "<p><b>Browser visualizer opened.</b> Use Play in the Plotly figure to animate the latest run.</p>"
+            except Exception as exc:
+                print(f"Browser visualizer failed: {exc}")
+                self.status_html.value = f"<p><b>Browser visualizer failed.</b> {exc}</p>"
 
     def _launch_mutation_app(self) -> None:
         state = self._state_from_widgets()
