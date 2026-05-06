@@ -56,6 +56,17 @@ def _col_num(df: pd.DataFrame, names: Sequence[str], default=np.nan) -> pd.Serie
     return pd.Series([default] * len(df), index=df.index, dtype="float64")
 
 
+def _first_existing_column(df: pd.DataFrame, names: Sequence[str]) -> str | None:
+    lowered = {str(col).lower(): str(col) for col in df.columns}
+    for name in names:
+        if name in df.columns:
+            return str(name)
+        match = lowered.get(str(name).lower())
+        if match is not None:
+            return match
+    return None
+
+
 def _normalize_edges_df(df: pd.DataFrame, *, default_weight_uS: float) -> pd.DataFrame:
     out = pd.DataFrame(index=df.index.copy())
     out["pre_id"] = _col_num(df, ("pre_id", "preId"))
@@ -94,7 +105,7 @@ def _normalize_edges_df(df: pd.DataFrame, *, default_weight_uS: float) -> pd.Dat
 
 
 def _infer_pre_id_from_syn_file(path: Path) -> int | None:
-    m = re.search(r"(\d+)_synapses_new\.csv$", path.name)
+    m = re.search(r"(\d+)_synapses(?:_new)?\.csv$", path.name)
     if m:
         return int(m.group(1))
     # Common layout: .../<nid>/<nid>_synapses_new.csv
@@ -109,15 +120,26 @@ def _rows_from_synapse_csv(path: Path, *, default_weight_uS: float) -> pd.DataFr
         raise ValueError(f"Cannot infer pre_id from synapse file name: {path}")
 
     df = pd.read_csv(path, low_memory=False)
-    if "post_id" not in df.columns:
-        raise ValueError(f"Missing post_id column: {path}")
+    post_col = _first_existing_column(
+        df,
+        (
+            "post_id",
+            "postId",
+            "bodyId_post",
+            "bodyid_post",
+            "post_bodyId",
+            "post_bodyid",
+        ),
+    )
+    if post_col is None:
+        return pd.DataFrame()
 
     if "type" not in df.columns:
         df["type"] = "pre"
     if "type" in df.columns:
         df = df[df["type"].astype(str).str.lower() == "pre"].copy()
 
-    df["post_id"] = pd.to_numeric(df["post_id"], errors="coerce")
+    df["post_id"] = pd.to_numeric(df[post_col], errors="coerce")
     df = df[df["post_id"].notna()].copy()
     if df.empty:
         return pd.DataFrame()
@@ -243,7 +265,7 @@ def _build_cache_from_synapses(
     workers: int = 1,
     chunk_size: int = 64,
 ) -> Dict[str, Any]:
-    files = sorted(swc_root.rglob("*_synapses_new.csv"))
+    files = _discover_synapse_csvs(swc_root)
     total_rows = 0
     ok_files = 0
     bad_files = 0
@@ -312,6 +334,22 @@ def _build_cache_from_synapses(
         "chunk_size": chunk_size_use,
         "elapsed_s": elapsed,
     }
+
+
+def _discover_synapse_csvs(swc_root: Path) -> List[Path]:
+    by_neuron_folder: Dict[tuple[Path, int | None], Path] = {}
+    for path in sorted(swc_root.rglob("*_synapses.csv")):
+        by_neuron_folder[(_synapse_parent_key(path), _infer_pre_id_from_syn_file(path))] = path
+    for path in sorted(swc_root.rglob("*_synapses_new.csv")):
+        by_neuron_folder[(_synapse_parent_key(path), _infer_pre_id_from_syn_file(path))] = path
+    return sorted(by_neuron_folder.values())
+
+
+def _synapse_parent_key(path: Path) -> Path:
+    try:
+        return path.parent.resolve()
+    except Exception:
+        return path.parent
 
 
 def _rows_from_synapse_chunk(

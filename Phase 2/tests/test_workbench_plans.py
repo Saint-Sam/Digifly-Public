@@ -76,7 +76,12 @@ def test_default_preset_is_public_single_neuron_smoke():
     _ensure_import_path()
     from digifly.phase2.workbench.presets import preset_options
 
-    assert preset_options()[0] == ("Single Neuron Debug", "single-neuron-debug")
+    assert preset_options() == [
+        ("Single Giant Fiber", "single-neuron-debug"),
+        ("Simple Escape", "simple-escape"),
+        ("Escape With PSI", "escape-with-psi"),
+        ("Full Escape", "full-escape"),
+    ]
 
 
 def test_single_neuron_preset_uses_four_pulse_demo():
@@ -93,6 +98,73 @@ def test_single_neuron_preset_uses_four_pulse_demo():
     assert float(state["pulse_train_stop_ms"]) == 900.0
     assert int(state["pulse_train_max_pulses"]) == 4
     assert bool(state["pulse_train_include_base"]) is False
+
+
+def test_public_escape_presets_define_expected_neuron_sets():
+    _ensure_import_path()
+    from digifly.phase2.workbench.presets import apply_preset
+    from digifly.phase2.workbench.runner import build_execution_plan
+    from digifly.phase2.workbench.validation import validate_state
+
+    expected = {
+        "simple-escape": [10000, 10002, 10068, 10110],
+        "escape-with-psi": [10000, 10002, 10068, 10110, 11446, 11654],
+        "full-escape": [
+            10000,
+            10002,
+            10068,
+            10110,
+            11446,
+            11654,
+            10074,
+            10361,
+            18309,
+            169914,
+            10014,
+            10088,
+            10589,
+            10592,
+            10892,
+        ],
+    }
+
+    for slug, ids in expected.items():
+        state = apply_preset(slug)
+        assert validate_state(state).ok
+        plan = build_execution_plan(state, preset_slug=slug)
+        assert plan.payload["selection"]["mode"] == "custom"
+        assert plan.payload["selection"]["neuron_ids"] == ids
+        assert plan.payload["seeds"] == [10000, 10002]
+        assert plan.payload["edge_cache"]["enabled"] is True
+        assert plan.payload["edge_cache"]["build_mode"] == "from_synapses_csv"
+
+
+def test_advanced_presets_remain_available_by_slug():
+    _ensure_import_path()
+    from digifly.phase2.workbench.presets import apply_preset
+
+    assert apply_preset("hemilineage-project-baseline")["runner_kind"] == "hemilineage_project"
+
+
+def test_edge_cache_discovers_legacy_synapse_csv_fallback(tmp_path):
+    _ensure_import_path()
+    from digifly.phase2.graph.edge_cache import _discover_synapse_csvs, _rows_from_synapse_csv
+
+    root = tmp_path / "export_swc"
+    both = root / "MN" / "A" / "10000"
+    legacy_only = root / "MN" / "B" / "10002"
+    both.mkdir(parents=True)
+    legacy_only.mkdir(parents=True)
+    (both / "10000_synapses.csv").write_text("bodyId_pre,bodyId_post\n", encoding="utf-8")
+    (both / "10000_synapses_new.csv").write_text("bodyId_pre,bodyId_post\n", encoding="utf-8")
+    legacy_path = legacy_only / "10002_synapses.csv"
+    legacy_path.write_text("x,y,z,type,bodyId_post\n1,2,3,pre,10000\n", encoding="utf-8")
+
+    files = [path.name for path in _discover_synapse_csvs(root)]
+
+    assert files == ["10000_synapses_new.csv", "10002_synapses.csv"]
+    rows = _rows_from_synapse_csv(legacy_path, default_weight_uS=0.000003)
+    assert rows[["pre_id", "post_id"]].to_dict("records") == [{"pre_id": 10002, "post_id": 10000}]
 
 
 def test_default_state_writes_shared_runs_under_swc_hemi_runs(tmp_path, monkeypatch):

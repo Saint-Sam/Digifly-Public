@@ -65,6 +65,15 @@ docker compose --profile test run --rm phase2-test
 
 The Docker image installs NEURON, compiles the Phase 2 `.mod` mechanisms, and mounts the repo at `/workspace`. See `../docs/phase2_docker_setup.md`.
 
+## Public Workbench Presets
+
+The Phase 2 Workbench exposes four public defaults:
+
+- `Single Giant Fiber`: one giant fiber neuron, `10000`.
+- `Simple Escape`: giant fibers `10000/10002` plus TTMns `10068/10110`.
+- `Escape With PSI`: simple escape plus PSI neurons `11446/11654`.
+- `Full Escape`: escape with PSI plus DLMns `10074, 10361, 18309, 169914, 10014, 10088, 10589, 10592, 10892`.
+
 ## Main Entry Points
 
 - `digifly.phase2.api.run_walking_simulation`
