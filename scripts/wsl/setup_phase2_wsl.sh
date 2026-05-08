@@ -3,6 +3,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+# Allow users to run setup directly from Windows Git Bash too.
+# shellcheck source=scripts/wsl/launch_helpers.sh
+source "${SCRIPT_DIR}/launch_helpers.sh"
+ensure_wsl_when_started_from_windows_bash "${REPO_ROOT}" "scripts/wsl/setup_phase2_wsl.sh" "$@"
+maybe_print_launch_check "${REPO_ROOT}" "$@"
+
 VENV_DIR="${DIGIFLY_WSL_VENV:-${REPO_ROOT}/.venv-wsl}"
 REQ_FILE="${SCRIPT_DIR}/requirements-phase2-wsl.txt"
 PHASE2_ROOT="${REPO_ROOT}/Phase 2"
@@ -38,10 +45,6 @@ APT_PACKAGES=(
   python3-venv
 )
 
-is_wsl() {
-  grep -qi microsoft /proc/version 2>/dev/null || grep -qi microsoft /proc/sys/kernel/osrelease 2>/dev/null
-}
-
 install_apt_packages() {
   if ! command -v apt-get >/dev/null 2>&1; then
     echo "[digifly-wsl] apt-get not found; skipping Ubuntu package install."
@@ -49,11 +52,31 @@ install_apt_packages() {
   fi
 
   echo "[digifly-wsl] Installing Ubuntu packages needed by NEURON, MPI, and PyVista..."
+  if ! sudo -n true >/dev/null 2>&1; then
+    local sudo_user distro_name
+    sudo_user="$(whoami)"
+    distro_name="${WSL_DISTRO_NAME:-<your-distro-name>}"
+    cat <<MSG
+[digifly-wsl] sudo may ask for the Linux password for '${sudo_user}'.
+[digifly-wsl] This is the password created when this WSL distro was first set up, not your Windows password.
+[digifly-wsl] If you do not know it, open PowerShell and reset it with:
+[digifly-wsl]   wsl -d ${distro_name} -u root passwd ${sudo_user}
+MSG
+  fi
   sudo apt-get update
   sudo apt-get install -y --no-install-recommends "${APT_PACKAGES[@]}"
 }
 
 create_venv() {
+  if ! command -v python3 >/dev/null 2>&1; then
+    cat >&2 <<'MSG'
+[digifly-wsl] python3 is not installed in this Linux environment.
+[digifly-wsl] On Ubuntu/WSL, install it with:
+[digifly-wsl]   sudo apt-get update && sudo apt-get install -y python3 python3-venv python3-dev
+MSG
+    exit 1
+  fi
+
   if [[ ! -d "${VENV_DIR}" ]]; then
     echo "[digifly-wsl] Creating Python virtual environment: ${VENV_DIR}"
     python3 -m venv "${VENV_DIR}"

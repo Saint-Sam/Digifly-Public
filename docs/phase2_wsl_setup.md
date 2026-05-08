@@ -4,9 +4,24 @@ WSL is the Windows path for running native Linux NEURON and launching the full P
 
 Docker remains the easiest browser-only runtime. Use WSL when you want the real mutation app window and your Windows machine has Ubuntu/WSL available.
 
-## Quick Start From Ubuntu
+## Quick Start
 
-Open the Ubuntu CLI, go to the downloaded repo, and run:
+From Windows, you can run the `.sh` from Git Bash or another Bash-compatible
+shell. The launcher detects that it is not inside WSL and relaunches itself in
+your default WSL distro:
+
+```bash
+cd /c/Users/<you>/path/to/Digifly-Public
+bash Start_Digifly_Phase2_WSL.sh
+```
+
+For the most reliable Windows double-click launch, use the companion batch file:
+
+```text
+Start_Digifly_Phase2_WSL.bat
+```
+
+Or open the Ubuntu/WSL CLI, go to the downloaded repo, and run:
 
 ```bash
 cd /mnt/c/Users/<you>/path/to/Digifly-Public
@@ -26,7 +41,7 @@ The PyVista app launches the staged VIP glia morphology mutation app and connect
 
 ## Requirements
 
-- Windows with WSL and Ubuntu installed.
+- Windows with WSL and Ubuntu, Debian, or another apt-based WSL distro installed.
 - WSLg for desktop GUI windows, or a separately configured X server.
 - Internet access on first setup so Ubuntu and Python packages can install.
 
@@ -64,10 +79,16 @@ Skip automatically opening the Windows browser:
 DIGIFLY_OPEN_BROWSER=0 bash Start_Digifly_Phase2_WSL.sh
 ```
 
+Use a non-default WSL distro when needed:
+
+```bash
+DIGIFLY_WSL_DISTRO=Ubuntu-24.04 bash Start_Digifly_Phase2_WSL.sh
+```
+
 ## Docker Versus WSL
 
 Use Docker when you want the simplest reproducible browser runtime and the Plotly browser visualizer.
 
-Use WSL when you want NEURON installed in Ubuntu and the workbench button to launch the full PyVista morphology mutation app.
+Use WSL when you want NEURON installed in Linux and the workbench button to launch the full PyVista morphology mutation app.
 
 Both paths use the same repo folders and the same public workbench presets.

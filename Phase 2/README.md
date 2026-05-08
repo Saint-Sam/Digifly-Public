@@ -67,13 +67,13 @@ docker compose --profile test run --rm phase2-test
 
 The Docker image installs NEURON, compiles the Phase 2 `.mod` mechanisms, and mounts the repo at `/workspace`. See `../docs/phase2_docker_setup.md`.
 
-Use WSL from the Ubuntu CLI when you want NEURON installed in Ubuntu and the real PyVista mutation app:
+Use WSL when you want NEURON installed in Linux and the real PyVista mutation app. On Windows, double-click `Start_Digifly_Phase2_WSL.bat` for the most reliable one-click WSL launch. If `.sh` files are associated with Git Bash, double-clicking `Start_Digifly_Phase2_WSL.sh` also relaunches in your default WSL distro; from an Ubuntu/WSL terminal, it runs directly:
 
 ```bash
 bash Start_Digifly_Phase2_WSL.sh
 ```
 
-The WSL path creates `.venv-wsl`, compiles the local NEURON mechanisms, starts JupyterLab, and enables the workbench `Open Mutation App` button when WSLg/X display support is available. See `../docs/phase2_wsl_setup.md`.
+The WSL path creates `.venv-wsl`, compiles the local NEURON mechanisms, starts JupyterLab, and enables the workbench `Open Mutation App` button when WSLg/X display support is available. Set `DIGIFLY_WSL_DISTRO=<distro-name>` when you want a non-default WSL distro. See `../docs/phase2_wsl_setup.md`.
 
 ## Public Workbench Presets
 

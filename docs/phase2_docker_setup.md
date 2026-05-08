@@ -156,4 +156,4 @@ If Ubuntu/WSL is available and you want the full PyVista morphology mutation app
 bash Start_Digifly_Phase2_WSL.sh
 ```
 
-That path installs NEURON into a WSL virtual environment and starts JupyterLab from the Ubuntu CLI. See `phase2_wsl_setup.md`.
+That path installs NEURON into a WSL virtual environment and starts JupyterLab. On Windows, double-click `Start_Digifly_Phase2_WSL.bat` for the most reliable one-click WSL launch; from Git Bash, the `.sh` relaunches in the default WSL distro first. See `phase2_wsl_setup.md`.

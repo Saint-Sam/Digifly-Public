@@ -3,6 +3,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+# Allow users to run this script directly from Windows Git Bash too.
+# shellcheck source=scripts/wsl/launch_helpers.sh
+source "${SCRIPT_DIR}/launch_helpers.sh"
+ensure_wsl_when_started_from_windows_bash "${REPO_ROOT}" "./Start_Digifly_Phase2_WSL.sh" "$@"
+maybe_print_launch_check "${REPO_ROOT}" "$@"
+
 VENV_DIR="${DIGIFLY_WSL_VENV:-${REPO_ROOT}/.venv-wsl}"
 PHASE2_ROOT="${REPO_ROOT}/Phase 2"
 SWC_DIR_DEFAULT="${REPO_ROOT}/Phase 1/manc_v1.2.1/export_swc"
