@@ -20,6 +20,7 @@ notebooks = [
     "ipywidgets>=8.1,<9",
     "jupyterlab_widgets>=3,<4",
     "jupyterlab>=4,<5",
+    "ipykernel>=6,<7",
     "matplotlib",
     "navis",
     "networkx",
@@ -33,6 +34,7 @@ notebooks = [
 mutation-app = [
     "ipywidgets>=8.1,<9",
     "jupyterlab_widgets>=3,<4",
+    "ipykernel>=6,<7",
     "matplotlib",
     "numpy",
     "pandas",

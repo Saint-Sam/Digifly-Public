@@ -103,7 +103,7 @@ MSG
   python -m pip install --upgrade -r "${REQ_FILE}"
 }
 
-verify_jupyter_widgets() {
+verify_jupyter_stack() {
   # shellcheck source=/dev/null
   source "${VENV_DIR}/bin/activate"
 
@@ -113,6 +113,9 @@ from importlib.metadata import PackageNotFoundError, version
 required = {
     "ipywidgets": "8.",
     "jupyterlab_widgets": "3.",
+    "jupyterlab": "4.",
+    "notebook": "7.",
+    "ipykernel": "6.",
 }
 
 for package, prefix in required.items():
@@ -123,7 +126,7 @@ for package, prefix in required.items():
     if not installed.startswith(prefix):
         raise SystemExit(f"{package} {installed} is installed, expected {prefix}x")
 
-print("[digifly-wsl] Jupyter widget stack is compatible with JupyterLab 4.")
+print("[digifly-wsl] JupyterLab, kernel, and widget stack are compatible.")
 PY
 }
 
@@ -159,7 +162,7 @@ if [[ "${PYTHON_ONLY}" != "1" ]]; then
   install_apt_packages
 fi
 create_venv
-verify_jupyter_widgets
+verify_jupyter_stack
 
 if [[ "${PYTHON_ONLY}" != "1" ]]; then
   compile_mechanisms

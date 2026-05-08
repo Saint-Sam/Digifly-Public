@@ -45,6 +45,7 @@ ipywidgets>=8.1,<9
 jupyterlab_widgets>=3,<4
 jupyterlab>=4,<5
 notebook>=7,<8
+ipykernel>=6,<7
 ```
 
 If a notebook shows a browser error like `Failed to load model class 'VBoxModel'` with `@jupyter-widgets/controls`, restart the runtime/kernel and clear stale widget outputs before re-running the workbench cell.
