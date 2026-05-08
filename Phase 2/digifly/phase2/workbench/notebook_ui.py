@@ -47,10 +47,10 @@ class Phase2WorkbenchUI:
             tooltip="Open a Plotly browser-native flow visualizer for the most recent completed workbench run.",
         )
         self.mutation_button = widgets.Button(
-            description="Open PyVista Desktop App",
+            description="Open Mutation App",
             button_style="warning",
             disabled=True,
-            tooltip="Desktop-only PyVista app. Docker/headless sessions should use Open Browser Visualizer.",
+            tooltip="Launch the full PyVista mutation app for the latest run. Use WSL/desktop Python, not Docker/headless Jupyter.",
         )
         self.status_html = widgets.HTML()
         self.notes_html = widgets.HTML()

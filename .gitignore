@@ -23,6 +23,8 @@ build/
 .ruff_cache/
 *.log
 *.tmp
+/.digifly_wsl/
+/.venv-wsl/
 
 # Local credentials
 Neuprint Token.txt

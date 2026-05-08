@@ -38,9 +38,11 @@ env NEURON_MODULE_OPTIONS=-nogui python -m pytest -q tests
 
 The `NEURON_MODULE_OPTIONS=-nogui` setting avoids display-window startup issues on headless or notebook-driven runs.
 
-## Docker Runtime
+## Windows Runtime Options
 
-For Windows users, the recommended Phase 2 runtime is Docker instead of native Windows NEURON:
+For Windows users, Docker and WSL are both supported.
+
+Use Docker when you want the simplest browser-only runtime:
 
 ```text
 Open START_HERE_Digifly_Phase2.ipynb from the repo root and run its single code cell
@@ -64,6 +66,14 @@ docker compose --profile test run --rm phase2-test
 ```
 
 The Docker image installs NEURON, compiles the Phase 2 `.mod` mechanisms, and mounts the repo at `/workspace`. See `../docs/phase2_docker_setup.md`.
+
+Use WSL from the Ubuntu CLI when you want NEURON installed in Ubuntu and the real PyVista mutation app:
+
+```bash
+bash Start_Digifly_Phase2_WSL.sh
+```
+
+The WSL path creates `.venv-wsl`, compiles the local NEURON mechanisms, starts JupyterLab, and enables the workbench `Open Mutation App` button when WSLg/X display support is available. See `../docs/phase2_wsl_setup.md`.
 
 ## Public Workbench Presets
 
@@ -102,7 +112,7 @@ The standalone VIP glia morphology mutation app is staged under `apps/VIP_Glia_S
 
 Use `apps/VIP_Glia_Sim/notebooks/test_launch_morphology_mutation_standalone.ipynb` for a clean public smoke-test launch. The notebook resolves the copied app root, checks dependencies, prints the launch command, runs an app `--help` probe, and launches the PyVista desktop app from a final explicit cell.
 
-The PyVista mutation app is a desktop GUI path. In Docker/JupyterLab, use the workbench `Open Browser Visualizer` button after a run completes; it renders the latest run directly in the browser with Plotly.
+The PyVista mutation app is a desktop GUI path. In Docker/JupyterLab, use the workbench `Open Browser Visualizer` button after a run completes; it renders the latest run directly in the browser with Plotly. In WSL with WSLg/X display support, use the workbench `Open Mutation App` button to launch the full mutation app from the latest run.
 
 SWC exports are intentionally not tracked. Set `DIGIFLY_SWC_DIR`, or copy `apps/VIP_Glia_Sim/notebooks/local_config.example.py` to the ignored `local_config.py` and point `SWC_DIR` at a real `export_swc` folder. Shared-run outputs are written under `SWC_DIR/hemi_runs`, so Docker runs launched from Jupyter persist in `Phase 1/manc_v1.2.1/export_swc/hemi_runs` on the host repo. For local testing, the launcher can seed `Phase 1/manc_v1.2.1/export_swc` by copying requested neuron folders from a configured source export.
 

@@ -147,3 +147,13 @@ VS Code will use `.devcontainer/devcontainer.json`, build the same Phase 2 image
 ## Why Docker
 
 Phase 2 needs Python, NEURON, MPI/build tools, and compiled `.mod` mechanisms. That combination is fragile on native Windows. Docker keeps the simulation runtime Linux-based and reproducible while still letting Windows users work from a normal browser and repo folder.
+
+## WSL Alternative
+
+If Ubuntu/WSL is available and you want the full PyVista morphology mutation app, use the WSL launcher instead:
+
+```bash
+bash Start_Digifly_Phase2_WSL.sh
+```
+
+That path installs NEURON into a WSL virtual environment and starts JupyterLab from the Ubuntu CLI. See `phase2_wsl_setup.md`.

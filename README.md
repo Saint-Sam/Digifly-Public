@@ -40,7 +40,9 @@ Alternatively, place a local token in `Phase 1/Neuprint Token.txt`. The local pr
 python -m pip install -e ".[notebooks]"
 ```
 
-For Phase 2 on Windows, use Docker instead of native NEURON setup. The simplest path is:
+For Phase 2 on Windows, there are two supported paths.
+
+Use Docker for the simplest browser-only runtime:
 
 ```text
 Open START_HERE_Digifly_Phase2.ipynb and run the single code cell.
@@ -69,6 +71,14 @@ docker compose up --build phase2-jupyter
 Then open `http://localhost:8888` and use `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`.
 After a run finishes, use **Open Browser Visualizer** in the workbench to view the activity animation inside JupyterLab.
 See `docs/phase2_docker_setup.md` for the full Windows-first path, including the optional prebuilt GitHub Container Registry image.
+
+Use WSL from the Ubuntu CLI when you want NEURON installed in Ubuntu and the full PyVista mutation app launch path:
+
+```bash
+bash Start_Digifly_Phase2_WSL.sh
+```
+
+The WSL launcher creates a repo-local `.venv-wsl`, compiles the NEURON mechanisms, starts JupyterLab, and lets the workbench open the real VIP glia morphology mutation app after a run completes. See `docs/phase2_wsl_setup.md`.
 
 ## To-do
 
