@@ -71,6 +71,7 @@ docker compose up --build phase2-jupyter
 Then open `http://localhost:8888` and use `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`.
 After a run finishes, use **Open Browser Visualizer** in the workbench to view the activity animation inside JupyterLab.
 See `docs/phase2_docker_setup.md` for the full Windows-first path, including the optional prebuilt GitHub Container Registry image.
+See `docs/phase2_colab_notes.md` for the planned Colab/browser-notebook path.
 
 Use WSL when you want NEURON installed in Linux and the full PyVista mutation app launch path. On Windows, double-click `Start_Digifly_Phase2_WSL.bat` for the most reliable one-click WSL launch. If `.sh` files are associated with Git Bash, double-clicking `Start_Digifly_Phase2_WSL.sh` also relaunches in your default WSL distro; from an Ubuntu/WSL terminal, it runs directly:
 

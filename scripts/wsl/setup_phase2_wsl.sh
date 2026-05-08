@@ -14,6 +14,21 @@ VENV_DIR="${DIGIFLY_WSL_VENV:-${REPO_ROOT}/.venv-wsl}"
 REQ_FILE="${SCRIPT_DIR}/requirements-phase2-wsl.txt"
 PHASE2_ROOT="${REPO_ROOT}/Phase 2"
 MECH_DIR="${PHASE2_ROOT}/data"
+PYTHON_ONLY=0
+
+for arg in "$@"; do
+  case "${arg}" in
+    --python-only)
+      PYTHON_ONLY=1
+      ;;
+    --check-launch)
+      ;;
+    *)
+      echo "[digifly-wsl] Unknown setup argument: ${arg}" >&2
+      exit 2
+      ;;
+  esac
+done
 
 APT_PACKAGES=(
   build-essential
@@ -85,7 +100,31 @@ MSG
   # shellcheck source=/dev/null
   source "${VENV_DIR}/bin/activate"
   python -m pip install --upgrade pip wheel "setuptools<81"
-  python -m pip install -r "${REQ_FILE}"
+  python -m pip install --upgrade -r "${REQ_FILE}"
+}
+
+verify_jupyter_widgets() {
+  # shellcheck source=/dev/null
+  source "${VENV_DIR}/bin/activate"
+
+  python - <<'PY'
+from importlib.metadata import PackageNotFoundError, version
+
+required = {
+    "ipywidgets": "8.",
+    "jupyterlab_widgets": "3.",
+}
+
+for package, prefix in required.items():
+    try:
+        installed = version(package)
+    except PackageNotFoundError as exc:
+        raise SystemExit(f"{package} is not installed") from exc
+    if not installed.startswith(prefix):
+        raise SystemExit(f"{package} {installed} is installed, expected {prefix}x")
+
+print("[digifly-wsl] Jupyter widget stack is compatible with JupyterLab 4.")
+PY
 }
 
 compile_mechanisms() {
@@ -116,8 +155,16 @@ if ! is_wsl; then
   echo "[digifly-wsl] This does not look like WSL. Continuing anyway."
 fi
 
-install_apt_packages
+if [[ "${PYTHON_ONLY}" != "1" ]]; then
+  install_apt_packages
+fi
 create_venv
-compile_mechanisms
+verify_jupyter_widgets
+
+if [[ "${PYTHON_ONLY}" != "1" ]]; then
+  compile_mechanisms
+else
+  echo "[digifly-wsl] Python dependencies updated; skipping apt packages and mechanism compilation."
+fi
 
 echo "[digifly-wsl] Setup complete."

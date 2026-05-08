@@ -28,9 +28,36 @@ open_browser() {
   fi
 }
 
+widget_stack_needs_upgrade() {
+  # shellcheck source=/dev/null
+  source "${VENV_DIR}/bin/activate"
+
+  python - <<'PY'
+from importlib.metadata import PackageNotFoundError, version
+
+required = {
+    "ipywidgets": "8.",
+    "jupyterlab_widgets": "3.",
+}
+
+for package, prefix in required.items():
+    try:
+        installed = version(package)
+    except PackageNotFoundError:
+        raise SystemExit(1)
+    if not installed.startswith(prefix):
+        raise SystemExit(1)
+PY
+}
+
 if [[ ! -x "${VENV_DIR}/bin/python" ]]; then
   echo "[digifly-wsl] First run detected. Installing the WSL runtime..."
   "${SCRIPT_DIR}/setup_phase2_wsl.sh"
+elif widget_stack_needs_upgrade; then
+  :
+else
+  echo "[digifly-wsl] Updating Jupyter widget packages for JupyterLab compatibility..."
+  "${SCRIPT_DIR}/setup_phase2_wsl.sh" --python-only
 fi
 
 # shellcheck source=/dev/null

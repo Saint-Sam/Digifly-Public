@@ -17,8 +17,9 @@ dependencies = [
 [project.optional-dependencies]
 notebooks = [
     "ipython",
-    "ipywidgets",
-    "jupyterlab",
+    "ipywidgets>=8.1,<9",
+    "jupyterlab_widgets>=3,<4",
+    "jupyterlab>=4,<5",
     "matplotlib",
     "navis",
     "networkx",
@@ -30,7 +31,8 @@ notebooks = [
     "trimesh",
 ]
 mutation-app = [
-    "ipywidgets",
+    "ipywidgets>=8.1,<9",
+    "jupyterlab_widgets>=3,<4",
     "matplotlib",
     "numpy",
     "pandas",

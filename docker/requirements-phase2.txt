@@ -9,9 +9,10 @@ matplotlib
 networkx
 openpyxl
 plotly
-ipywidgets
-jupyterlab
-notebook
+ipywidgets>=8.1,<9
+jupyterlab_widgets>=3,<4
+jupyterlab>=4,<5
+notebook>=7,<8
 tqdm
 pyarrow
 PyYAML
