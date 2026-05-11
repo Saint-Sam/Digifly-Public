@@ -30,6 +30,8 @@ bash Start_Digifly_Phase2_WSL.sh
 
 On first launch, the script installs Ubuntu packages, creates `.venv-wsl`, installs the Python dependencies, compiles the NEURON `.mod` mechanisms, and starts JupyterLab.
 
+If a previous launch was interrupted and left `.venv-wsl` incomplete, the launcher moves the broken environment aside and rebuilds it automatically.
+
 After JupyterLab opens:
 
 1. Open `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb` if it is not already open.

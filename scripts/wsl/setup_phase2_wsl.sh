@@ -60,6 +60,22 @@ APT_PACKAGES=(
   python3-venv
 )
 
+venv_is_usable() {
+  [[ -x "${VENV_DIR}/bin/python" && -f "${VENV_DIR}/bin/activate" ]]
+}
+
+move_broken_venv_aside() {
+  if [[ ! -e "${VENV_DIR}" || -L "${VENV_DIR}" || venv_is_usable ]]; then
+    return
+  fi
+
+  local backup_dir
+  backup_dir="${VENV_DIR}.broken.$(date +%Y%m%d-%H%M%S)"
+  echo "[digifly-wsl] Found an incomplete Python environment: ${VENV_DIR}"
+  echo "[digifly-wsl] Moving it aside so setup can rebuild cleanly: ${backup_dir}"
+  mv "${VENV_DIR}" "${backup_dir}"
+}
+
 install_apt_packages() {
   if ! command -v apt-get >/dev/null 2>&1; then
     echo "[digifly-wsl] apt-get not found; skipping Ubuntu package install."
@@ -92,9 +108,20 @@ MSG
     exit 1
   fi
 
-  if [[ ! -d "${VENV_DIR}" ]]; then
+  move_broken_venv_aside
+
+  if ! venv_is_usable; then
     echo "[digifly-wsl] Creating Python virtual environment: ${VENV_DIR}"
     python3 -m venv "${VENV_DIR}"
+  fi
+
+  if ! venv_is_usable; then
+    cat >&2 <<MSG
+[digifly-wsl] Python virtual environment was not created correctly:
+[digifly-wsl]   ${VENV_DIR}
+[digifly-wsl] Make sure python3-venv installed successfully, then run the launcher again.
+MSG
+    exit 1
   fi
 
   # shellcheck source=/dev/null
@@ -104,6 +131,11 @@ MSG
 }
 
 verify_jupyter_stack() {
+  if ! venv_is_usable; then
+    echo "[digifly-wsl] Python virtual environment is missing or incomplete: ${VENV_DIR}" >&2
+    return 1
+  fi
+
   # shellcheck source=/dev/null
   source "${VENV_DIR}/bin/activate"
 
@@ -131,6 +163,11 @@ PY
 }
 
 compile_mechanisms() {
+  if ! venv_is_usable; then
+    echo "[digifly-wsl] Python virtual environment is missing or incomplete: ${VENV_DIR}" >&2
+    return 1
+  fi
+
   # shellcheck source=/dev/null
   source "${VENV_DIR}/bin/activate"
 

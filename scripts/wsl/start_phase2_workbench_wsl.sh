@@ -28,7 +28,15 @@ open_browser() {
   fi
 }
 
+venv_is_usable() {
+  [[ -x "${VENV_DIR}/bin/python" && -f "${VENV_DIR}/bin/activate" ]]
+}
+
 jupyter_stack_is_compatible() {
+  if ! venv_is_usable; then
+    return 1
+  fi
+
   # shellcheck source=/dev/null
   source "${VENV_DIR}/bin/activate"
 
@@ -53,8 +61,8 @@ for package, prefix in required.items():
 PY
 }
 
-if [[ ! -x "${VENV_DIR}/bin/python" ]]; then
-  echo "[digifly-wsl] First run detected. Installing the WSL runtime..."
+if ! venv_is_usable; then
+  echo "[digifly-wsl] WSL runtime is missing or incomplete. Installing the WSL runtime..."
   "${SCRIPT_DIR}/setup_phase2_wsl.sh"
 elif jupyter_stack_is_compatible; then
   :
