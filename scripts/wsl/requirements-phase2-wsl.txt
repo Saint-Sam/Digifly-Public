@@ -1,5 +1,6 @@
 setuptools<81
-neuron>=8.2.6,<9
+neuron>=8.2.6,<9; python_version < "3.14"
+neuron>=9,<10; python_version >= "3.14"
 neuprint-python
 numpy
 pandas

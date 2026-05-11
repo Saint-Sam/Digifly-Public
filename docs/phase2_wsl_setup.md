@@ -32,6 +32,8 @@ On first launch, the script installs Ubuntu packages, creates `.venv-wsl`, insta
 
 If a previous launch was interrupted and left `.venv-wsl` incomplete, the launcher moves the broken environment aside and rebuilds it automatically.
 
+The WSL requirements keep NEURON 8.x on older Python runtimes and allow NEURON 9.x on Python 3.14+, where NEURON 8 wheels are not published.
+
 After JupyterLab opens:
 
 1. Open `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb` if it is not already open.
