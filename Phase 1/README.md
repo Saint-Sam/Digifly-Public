@@ -28,12 +28,20 @@ The notebook launches `digifly_phase1.menu.main_menu()`. The default menu shows 
 - `choice_2_batch_filter_export.py`: reads an Excel body-ID list, filters IDs by a selected size metric, and exports kept/dropped/failed reports plus a filtered SWC bundle.
 - `choice_3_metadata_template.py`: exports a NeuronCriteria-style metadata CSV for downstream Phase 2/3 planning.
 - `choice_4_pathfinding.py`: runs male-CNS pathfinding between selected upstream/downstream neurons and can save the combined annotated path table.
+- `choice_8_connectivity_matrix.py` (menu option 5): builds pre->post sparse edge tables and optional wide connectivity matrices from synapse parquet files. It can run one parquet file or apply the same neuron/parameter filters across the male-CNS, FAFB, and BANC parquet files. Source/target neurons can be restricted by explicit body IDs, ID files, or neuPrint type/instance queries such as `EPG` and `type:PEG`. Matrix outputs can also be displayed and saved as heatmap PNG plots.
+- `choice_9_parquet_head.py` (menu option 6): previews the top rows of selected parquet files, defaulting to `head(10)`, with optional column selection.
 
 Additional one-off utility choices are kept in code but hidden from the default menu. Type `U` in the menu, or call `main_menu(show_utilities=True)`, to reveal:
 
-- `choice_5_glia_volume.py`: queries MANC glia, computes skeleton bounding-box size metrics, and writes CSV/parquet volume tables.
-- `choice_6_label_coverage.py`: reports labeled vs unlabeled neuron counts in the active dataset.
-- `choice_7_proximity_scan.py`: scans exported SWCs from a master metadata CSV for proximity to reference skeleton IDs.
+- `choice_5_glia_volume.py` (menu option 7): queries MANC glia, computes skeleton bounding-box size metrics, and writes CSV/parquet volume tables.
+- `choice_6_label_coverage.py` (menu option 8): reports labeled vs unlabeled neuron counts in the active dataset.
+- `choice_7_proximity_scan.py` (menu option 9): scans exported SWCs from a master metadata CSV for proximity to reference skeleton IDs.
+
+The connectivity-matrix choice prefers DuckDB for streaming SQL over large parquet files. Install it in the notebook kernel if needed:
+
+```python
+%pip install duckdb
+```
 
 Shared legacy workflow code lives in `workflow_core.py`, and token/client handling lives in `token_store.py` and `clients.py`.
 
