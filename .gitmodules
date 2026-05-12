@@ -1,0 +1,4 @@
+[submodule "Phase 2/apps/Elliott_Sparrow_2012_Beam"]
+	path = Phase 2/apps/Elliott_Sparrow_2012_Beam
+	url = git@github.com:Saint-Sam/Elliott_Sparrow_2012_Beam.git
+	branch = main
