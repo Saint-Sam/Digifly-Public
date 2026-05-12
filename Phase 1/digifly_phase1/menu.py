@@ -13,6 +13,8 @@ from . import choice_4_pathfinding
 from . import choice_5_glia_volume
 from . import choice_6_label_coverage
 from . import choice_7_proximity_scan
+from . import choice_8_connectivity_matrix
+from . import choice_9_parquet_head
 
 
 @dataclass(frozen=True)
@@ -56,26 +58,41 @@ CORE_CHOICES: list[Choice] = [
         "intermediate summaries, and can save the combined path table.",
         choice_4_pathfinding.run,
     ),
+    Choice(
+        "5",
+        choice_8_connectivity_matrix.TITLE,
+        "Builds pre->post synapse-count edge tables and connectivity matrices "
+        "from selected synapse parquet files. You can select one file or apply "
+        "the same neuron/parameter filters across male-CNS, FAFB, and BANC.",
+        choice_8_connectivity_matrix.run,
+    ),
+    Choice(
+        "6",
+        choice_9_parquet_head.TITLE,
+        "Lists Phase 1 parquet files and displays the top rows, defaulting to "
+        "head(10), with optional column selection.",
+        choice_9_parquet_head.run,
+    ),
 ]
 
 
 UTILITY_CHOICES: list[Choice] = [
     Choice(
-        "5",
+        "7",
         choice_5_glia_volume.TITLE,
         "Queries MANC glia, computes skeleton bounding-box size metrics, and "
         "exports glia volume tables as CSV and parquet for Phase 3 support.",
         choice_5_glia_volume.run,
     ),
     Choice(
-        "6",
+        "8",
         choice_6_label_coverage.TITLE,
         "Counts labeled vs unlabeled neurons in the active dataset using type "
         "and instance fields, with an optional strict-unlabeled bodyId sample.",
         choice_6_label_coverage.run,
     ),
     Choice(
-        "7",
+        "9",
         choice_7_proximity_scan.TITLE,
         "Loads a master metadata CSV from Choice 1, compares exported SWCs "
         "against reference skeletons, and saves neurons within the requested "

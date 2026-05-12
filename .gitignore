@@ -41,6 +41,9 @@ Neuprint Token.txt
 /Phase 1/*/export_swc/
 /Phase 1/*/outputs/
 /Phase 1/motor_neuron_query/outputs/
+/Phase 1/banc/*.parquet
+/Phase 1/fafb/*.parquet
+/Phase 1/male-cns_v0.9/*.parquet
 *.swc
 
 # Future Phase 2 large data / runtime artifacts
