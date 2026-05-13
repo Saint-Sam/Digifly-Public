@@ -56,6 +56,25 @@ def _phase_timer(label: str, *, collector: Optional[List[Dict[str, Any]]] = None
 _SWC_ID_INDEX_CACHE: Dict[str, Dict[str, Any]] = {}
 
 
+def _apply_config_synapse_group_overrides(net: Network, cfg: Dict[str, Any]) -> List[Dict[str, Any]]:
+    groups = cfg.get("synapse_group_overrides") or []
+    if not groups:
+        return []
+    if hasattr(net, "reset_synapse_parameters"):
+        net.reset_synapse_parameters()
+    if not hasattr(net, "apply_synapse_group_overrides"):
+        raise RuntimeError("CONFIG['synapse_group_overrides'] was provided, but Network cannot apply it.")
+    summary = list(net.apply_synapse_group_overrides(list(groups)) or [])
+    for row in summary:
+        print(
+            "[synapse-override]",
+            str(row.get("name") or ""),
+            f"matched={int(row.get('matched_synapses') or 0)}",
+            f"weight_mult={float(row.get('weight_mult') or 1.0):.6g}",
+        )
+    return summary
+
+
 def _extract_id_hint_from_swc_path(p: Path) -> Optional[int]:
     """
     Fast ID hint extraction from SWC path/name.
@@ -722,6 +741,9 @@ def run_walking_simulation(
             with _phase_timer("single: apply gaps", collector=phase_timings):
                 apply_gap_config(net, cfg)
 
+            with _phase_timer("single: apply synapse overrides", collector=phase_timings):
+                _apply_config_synapse_group_overrides(net, cfg)
+
             # record
             with _phase_timer("single: record setup", collector=phase_timings):
                 spike_map = _record_setup(net, cfg, seeds, neuron_ids)
@@ -801,6 +823,9 @@ def run_walking_simulation(
 
             with _phase_timer("apply gaps", collector=phase_timings):
                 apply_gap_config(net, cfg)
+
+            with _phase_timer("apply synapse overrides", collector=phase_timings):
+                _apply_config_synapse_group_overrides(net, cfg)
 
             # record
             with _phase_timer("record setup", collector=phase_timings):

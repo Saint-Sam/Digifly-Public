@@ -158,6 +158,11 @@ def _compile_gap_mechanisms(root: Path) -> str | None:
 
     nrnivmodl: str | None = None
     runtime_data_root: Path | None = None
+    candidate_bins: List[Path] = []
+
+    env_nrnivmodl = os.environ.get("NRNIVMODL", "").strip()
+    if env_nrnivmodl:
+        candidate_bins.append(Path(env_nrnivmodl).expanduser())
 
     try:
         import neuron  # type: ignore
@@ -166,24 +171,30 @@ def _compile_gap_mechanisms(root: Path) -> str | None:
         runtime_data_root = (runtime_pkg_root / ".data").resolve()
         candidate = (runtime_data_root / "bin" / "nrnivmodl").resolve()
         if candidate.exists():
-            nrnivmodl = str(candidate)
+            candidate_bins.append(candidate)
+        for parent in Path(neuron.__file__).resolve().parents:
+            candidate = (parent / "bin" / "nrnivmodl").resolve()
+            if candidate.exists():
+                candidate_bins.append(candidate)
     except Exception:
         runtime_data_root = None
 
-    if nrnivmodl is None:
-        py_bin_candidate = (Path(sys.executable).resolve().parent / "nrnivmodl").resolve()
-        if py_bin_candidate.exists():
-            nrnivmodl = str(py_bin_candidate)
+    py_bin_candidate = (Path(sys.executable).resolve().parent / "nrnivmodl").resolve()
+    if py_bin_candidate.exists():
+        candidate_bins.append(py_bin_candidate)
 
-    if nrnivmodl is None:
-        which_candidate = shutil.which("nrnivmodl")
-        if which_candidate:
-            nrnivmodl = which_candidate
+    app_candidate = Path("/Applications/NEURON/bin/nrnivmodl")
+    if app_candidate.exists():
+        candidate_bins.append(app_candidate)
 
-    if nrnivmodl is None:
-        app_candidate = Path("/Applications/NEURON/bin/nrnivmodl")
-        if app_candidate.exists():
-            nrnivmodl = str(app_candidate)
+    which_candidate = shutil.which("nrnivmodl")
+    if which_candidate:
+        candidate_bins.append(Path(which_candidate).expanduser())
+
+    for candidate in _dedupe_paths(candidate_bins):
+        if candidate.exists():
+            nrnivmodl = str(candidate.resolve())
+            break
 
     if not nrnivmodl:
         return f"{root}: skipped compile (nrnivmodl not found)"
@@ -195,6 +206,10 @@ def _compile_gap_mechanisms(root: Path) -> str | None:
         parent_root = nrnivmodl_path.parent.parent
         if (parent_root / "bin").exists():
             wheel_data_root = parent_root
+    compile_env.setdefault("NEURON_MODULE_OPTIONS", "-nogui")
+    if Path("/Applications/NEURON/bin").exists():
+        compile_env["PATH"] = f"/Applications/NEURON/bin:{compile_env.get('PATH', '')}"
+
     if wheel_data_root is not None and (wheel_data_root / "bin" / "nrnivmech_makefile").exists():
         compile_env["NRNHOME"] = str(wheel_data_root)
     elif wheel_data_root is not None and (wheel_data_root / "bin" / "nrnmech_makefile").exists():

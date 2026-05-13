@@ -42,6 +42,14 @@ Key groups:
 
   predictedNT is ignored when tau/erev columns exist.
 
+  Runtime/build synapse overrides:
+    synapse_group_overrides (optional): list of groups with selectors
+      (pre_ids/post_ids/pairs) and weight_mult/delay_mult/tau1_mult/tau2_mult/
+      e_rev_shift_mV. The normal runner applies these after chemical synapses
+      are wired; the live-cache runner accepts the same groups per cached run.
+      `digifly.phase2.graph.connection_equalization` can generate these groups
+      from an edges table when paired pathways need matched summed conductance.
+
 - Stimulation:
     iclamp_* globals and/or per-driver specs through drivers dict.
     Driver specs support:

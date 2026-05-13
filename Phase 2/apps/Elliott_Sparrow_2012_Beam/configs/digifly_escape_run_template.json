@@ -1,0 +1,54 @@
+{
+  "run_id": "elliott_sparrow_2012_escape_wildtype",
+  "selection": {
+    "mode": "custom",
+    "neuron_ids": [10000, 10002, 10068, 10110]
+  },
+  "seeds": [10000, 10002],
+  "swc_dir": "Phase 1/manc_v1.2.1/export_swc",
+  "morph_swc_dir": "Phase 1/manc_v1.2.1/export_swc",
+  "runs_root": "Phase 2/apps/Elliott_Sparrow_2012_Beam/runs",
+  "edges_root": "Phase 1/manc_v1.2.1/export_swc/edges",
+  "master_csv": "Phase 2/data/all_neurons_neuroncriteria_template.csv",
+  "edge_cache": {
+    "enabled": true,
+    "build_if_missing": true,
+    "force_rebuild": false,
+    "build_mode": "from_synapses_csv",
+    "query": {
+      "mode": "loaded_subgraph",
+      "include_loaded": true
+    }
+  },
+  "tstop_ms": 80.0,
+  "dt_ms": 0.025,
+  "iclamp_location": "ais",
+  "iclamp_amp_nA": 1.0,
+  "iclamp_delay_ms": 20.0,
+  "iclamp_dur_ms": 1.0,
+  "default_weight_uS": 0.000006,
+  "syn_tau1_ms": 0.5,
+  "syn_tau2_ms": 3.0,
+  "syn_e_rev_mV": 0.0,
+  "post_active": true,
+  "record": {
+    "soma_v": "all",
+    "spikes": "all",
+    "spike_thresh_mV": 0.0
+  },
+  "gap": {
+    "enabled": false,
+    "mechanisms_dir": "Phase 2/data",
+    "default_site": "ais",
+    "default_g_uS": 0.001,
+    "pairs": []
+  },
+  "elliott_sparrow_condition": {
+    "condition": "phase2_gated_jump",
+    "stim_time_ms": 20.0,
+    "left_ttmn_id": 10068,
+    "right_ttmn_id": 10110,
+    "beam_gate": "TTMn spike presence in spike_times.csv",
+    "expected_transform": "Use beam_waveform_model.py after Phase 2 completes."
+  }
+}

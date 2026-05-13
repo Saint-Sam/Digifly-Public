@@ -66,13 +66,50 @@ def execute_plan(state: Mapping[str, Any], *, preset_slug: str, phase2_root: str
     record_execution_status(bundle_dir, status="planned")
     try:
         if plan.runner_kind == "shared_runner":
-            from digifly.phase2.walking.runner import run_walking_simulation
+            if bool(state.get("live_cache_enabled", False)):
+                from digifly.phase2.cache import run_cached_simulation
 
-            out_dir = Path(run_walking_simulation(plan.payload)).expanduser().resolve()
+                session_root_raw = clean_optional_text(state.get("live_cache_session_root"))
+                session_root = (
+                    Path(session_root_raw).expanduser().resolve()
+                    if session_root_raw
+                    else Path(phase2_root).expanduser().resolve()
+                    / "workbench_runs"
+                    / "_phase2_live_cache"
+                    / plan.run_id
+                )
+                response = run_cached_simulation(
+                    plan.payload,
+                    session_root=session_root,
+                    run_id=plan.run_id,
+                    nproc=max(1, int(state.get("live_cache_nproc") or 1)),
+                    force_restart=bool(state.get("live_cache_force_restart", False)),
+                    runtime_overrides={
+                        "tstop_ms": float(plan.payload.get("tstop_ms", 0.0)),
+                        "dt_ms": float(plan.payload.get("dt_ms", 0.1)),
+                        "progress": bool(plan.payload.get("progress", True)),
+                        "use_tqdm": bool(plan.payload.get("use_tqdm", True)),
+                    },
+                    stim_overrides=dict(plan.payload.get("stim") or {}),
+                    record_overrides=dict(plan.payload.get("record") or {}),
+                    stim_target_ids=[int(x) for x in list(plan.payload.get("seeds") or [])]
+                    or None,
+                    auto_install_python=bool(state.get("live_cache_auto_install_python", True)),
+                )
+                out_dir = Path(response.get("out_dir") or response.get("baseline_out_dir")).expanduser().resolve()
+            else:
+                from digifly.phase2.walking.runner import run_walking_simulation
+
+                response = {}
+                session_root = None
+                out_dir = Path(run_walking_simulation(plan.payload)).expanduser().resolve()
             result = {
                 "runner_kind": "shared_runner",
                 "output_dir": str(out_dir),
             }
+            if bool(state.get("live_cache_enabled", False)):
+                result["cache_session_root"] = str(session_root)
+                result["cache_protocol_version"] = response.get("cache_protocol_version")
             write_plan_copy(out_dir, state=state, plan=plan.to_dict())
             record_execution_status(out_dir, status="completed", result=result)
         else:

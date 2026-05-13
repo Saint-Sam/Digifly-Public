@@ -87,6 +87,8 @@ The Phase 2 Workbench exposes four public defaults:
 ## Main Entry Points
 
 - `digifly.phase2.api.run_walking_simulation`
+- `digifly.phase2.api.run_cached_simulation`
+- `digifly.phase2.api.ensure_phase2_environment`
 - `digifly.phase2.api.build_config`
 - `digifly.phase2.hemi.sim_project.run_full_hemilineage_project`
 - `digifly.phase2.hemi.sim_project.run_hemilineage_benchmark`
@@ -105,6 +107,14 @@ The Hemilineage Simulations notebooks contain many experimental modes that shoul
 - the proposed future Phase 2 Simulation Workbench layout
 
 The first scaffold of that workbench now exists in `digifly/phase2/workbench/` plus `notebooks/Digifly_Phase2_Workbench.ipynb`.
+
+## Live Cache, MPI, and CoreNEURON
+
+Phase 2 now exposes a reusable live simulation cache through `digifly.phase2.api.run_cached_simulation`. It builds a NEURON network once, keeps it alive in a background Python process, and accepts repeated runtime-safe reruns for changing duration, dt, current clamps, recording, selected stimulation targets, and supported synapse/gap/cell overrides. Use `nproc > 1` to launch the cache under `mpiexec`; the helper sets the distributed `ParallelContext` backend and reuses the same request/response protocol from notebooks.
+
+One-shot runs still use the existing `enable_coreneuron`, `coreneuron_gpu`, and `coreneuron_nthread` config fields. Live cached reruns intentionally execute on regular NEURON after the warm build because CoreNEURON is not reliable for mutating and reusing an already-built network inside a long-lived notebook session.
+
+Notebook apps should call `ensure_phase2_environment(auto_install_python=True)` before launching simulations. That helper detects macOS, WSL, Docker, MPI, `nrnivmodl`, and gap mechanism paths; it can install missing Python packages into the active notebook kernel. System runtimes such as OpenMPI, Docker, WSL packages, and the NEURON desktop app are detected and reported rather than silently installed.
 
 ## Mutation App
 

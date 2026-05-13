@@ -13,20 +13,20 @@ def main() -> int:
         if str(path) not in sys.path:
             sys.path.insert(0, str(path))
 
-    from neuron import h, load_mechanisms
+    from digifly.phase2.api import ensure_phase2_environment
 
-    mech_dir = Path(os.environ.get("DIGIFLY_GAP_MECH_DIR", "/opt/digifly-mechanisms"))
-    names = ("Gap", "RectGap", "HeteroRectGap")
-    missing = [name for name in names if not hasattr(h, name)]
-    if missing:
-        try:
-            load_mechanisms(str(mech_dir))
-        except RuntimeError as exc:
-            if "already exists" not in str(exc):
-                raise
-    missing = [name for name in names if not hasattr(h, name)]
-    if missing:
-        raise RuntimeError(f"Missing compiled NEURON mechanisms: {missing}")
+    report = ensure_phase2_environment(
+        profiles=("core", "notebook"),
+        auto_install_python=False,
+        check_gap_mechanisms=True,
+        quiet=True,
+    )
+    if report.get("missing_python_packages"):
+        raise RuntimeError(f"Missing Python packages in container: {report['missing_python_packages']}")
+    if report.get("gap_mechanisms_available") is False:
+        raise RuntimeError(f"Gap mechanisms are unavailable: {report.get('errors')}")
+
+    mech_dir = Path(report.get("gap_mechanisms_dir") or os.environ.get("DIGIFLY_GAP_MECH_DIR", "/opt/digifly-mechanisms"))
 
     import digifly.phase2.api  # noqa: F401
     import digifly.phase2.neuron_build.network  # noqa: F401

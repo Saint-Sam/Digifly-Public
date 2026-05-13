@@ -1,0 +1,170 @@
+{
+  "paper": {
+    "title": "In vivo measurement of muscle output in intact Drosophila",
+    "authors": ["Christopher J.H. Elliott", "John C. Sparrow"],
+    "journal": "Methods",
+    "volume": "56",
+    "pages": "78-86",
+    "year": 2012,
+    "doi": "10.1016/j.ymeth.2011.10.005"
+  },
+  "apparatus": {
+    "fiber_length_mm": 160.0,
+    "platform_size_mm": [5.0, 5.0],
+    "platform_distance_from_movable_end_mm": 7.5,
+    "photodiode_distance_mm": [0.5, 1.0],
+    "linear_displacement_limit_um": 500.0,
+    "sensitivity_uV_per_um": 0.5,
+    "calibration_mass_range_mg": [10.0, 100.0]
+  },
+  "stimulus": {
+    "adult_jump_eye_stim_voltage_V": 28.0,
+    "adult_jump_eye_stim_width_ms": 1.0,
+    "adult_jump_threshold_multiple": 10.0,
+    "animal_age_days": 3
+  },
+  "targets": [
+    {
+      "figure": "1C-1D",
+      "condition": "wildtype_one_leg",
+      "genotype": "Canton-S",
+      "readout": "vertical beam displacement",
+      "unit": "um",
+      "target": {
+        "response_probability": 1.0,
+        "peak_vector_um_estimate": 290.0,
+        "trace_duration_ms": 50.0,
+        "qualitative": "consistent impulse-like responses to repeated stimuli"
+      },
+      "source_note": "Peak is visually estimated from Fig. 1Dii; trace duration from scale bar."
+    },
+    {
+      "figure": "1C-1D",
+      "condition": "shakB2_one_leg",
+      "genotype": "shak-B2",
+      "readout": "vertical beam displacement",
+      "unit": "um",
+      "target": {
+        "response_probability_estimate": 0.5,
+        "qualitative": "all-or-none responses"
+      },
+      "source_note": "Paper text states all-or-none waveform for one mesothoracic leg."
+    },
+    {
+      "figure": "1C-1D",
+      "condition": "shakB2_six_leg",
+      "genotype": "shak-B2",
+      "readout": "vertical beam displacement",
+      "unit": "um",
+      "target": {
+        "fly_jump_probability": 0.5,
+        "successful_peak_fraction_of_wildtype": 0.45,
+        "polarity": "often upward first deflection",
+        "qualitative": "variable latency and amplitude"
+      },
+      "source_note": "Paper text: about 50% fail; successful output less than 50% wild type."
+    },
+    {
+      "figure": "3A-3C",
+      "condition": "wildtype_jump",
+      "genotype": "Canton-S",
+      "readout": "six-leg jump beam trace",
+      "unit": "uV or um",
+      "target": {
+        "trace_duration_ms": 50.0,
+        "qualitative": "consistent downward force, variable horizontal forces"
+      },
+      "source_note": "Fig. 3A trace scale is 50 uV and 50 ms."
+    },
+    {
+      "figure": "3A-3C",
+      "condition": "amph26_jump",
+      "genotype": "amph26 null",
+      "readout": "six-leg jump beam trace",
+      "unit": "fraction_of_wildtype",
+      "target": {
+        "jump_gain_fraction_estimate": 0.06,
+        "walking_force_change": "not significant",
+        "walking_speed_change": "not significant",
+        "qualitative": "jump output close to recording noise"
+      },
+      "source_note": "Jump fraction is a visual proxy from Fig. 3Ci; paper text emphasizes minimal TTM energy."
+    },
+    {
+      "figure": "3B",
+      "condition": "walking",
+      "genotype": "Canton-S or amph26 null",
+      "readout": "walking force",
+      "unit": "uN",
+      "target": {
+        "peak_to_peak_force_uN": 100.0,
+        "trace_duration_ms": 1000.0,
+        "qualitative": "erratic walking with occasional platform release steps"
+      },
+      "source_note": "Paper text gives about 100 uN for the example."
+    },
+    {
+      "figure": "4",
+      "condition": "adhesion_grip",
+      "genotype": "wild type",
+      "readout": "grip force",
+      "unit": "uN",
+      "target": {
+        "trace_duration_ms": 500.0,
+        "qualitative": "increasing force followed by at least two rapid release drops"
+      },
+      "source_note": "Fig. 4 trace scale is 100 uN and 500 ms."
+    },
+    {
+      "figure": "5",
+      "condition": "flight_downdraft",
+      "genotype": "wild type",
+      "readout": "flight downdraft force",
+      "unit": "uN",
+      "target": {
+        "mean_downforce_uN": 5.0,
+        "vertical_oscillation_hz": 14.95,
+        "vertical_oscillation_hz_se": 3.38,
+        "horizontal_oscillation_hz": 10.88,
+        "horizontal_oscillation_hz_se": 3.05,
+        "wingbeat_hz_context": 200.0,
+        "trace_duration_ms": 1000.0
+      },
+      "source_note": "Paper text provides mean downforce and oscillation frequencies."
+    },
+    {
+      "figure": "6",
+      "condition": "larval_peristalsis_wildtype",
+      "genotype": "wild type",
+      "readout": "larval bodywall contraction force",
+      "unit": "uN",
+      "target": {
+        "force_amplitude_uN_estimate": 420.0,
+        "contractions_per_min_estimate": 12.0,
+        "velocity_mm_per_s_estimate": 0.65
+      },
+      "source_note": "Values are visual estimates from Fig. 6C-D."
+    },
+    {
+      "figure": "6",
+      "condition": "larval_peristalsis_parkin25",
+      "genotype": "parkin25",
+      "readout": "larval bodywall contraction force",
+      "unit": "uN",
+      "target": {
+        "force_amplitude_uN_estimate": 420.0,
+        "contractions_per_min_estimate": 5.0,
+        "velocity_mm_per_s_estimate": 0.35,
+        "qualitative": "similar force amplitude, lower contraction frequency"
+      },
+      "source_note": "Paper text states similar amplitude but lower frequency; values are visual estimates."
+    }
+  ],
+  "calibration_todo": [
+    "Digitize the PDF traces for Fig. 1C, Fig. 3A-B, Fig. 4, Fig. 5, and Fig. 6B.",
+    "Digitize the bar plots for Fig. 1D, Fig. 3C, and Fig. 6C-D.",
+    "Fit beam resonance and damping separately for vertical and horizontal axes.",
+    "Replace visual-estimate targets with digitized means, SEs, and trace templates."
+  ]
+}
+
