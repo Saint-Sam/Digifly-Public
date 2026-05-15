@@ -6,26 +6,24 @@ Docker remains the easiest browser-only runtime. Use WSL when you want the real 
 
 ## Quick Start
 
-From Windows, you can run the `.sh` from Git Bash or another Bash-compatible
-shell. The launcher detects that it is not inside WSL and relaunches itself in
-your default WSL distro:
-
-```bash
-cd /c/Users/<you>/path/to/Digifly-Public
-bash Start_Digifly_Phase2_WSL.sh
-```
-
-For the most reliable Windows double-click launch, use the companion batch file:
+For the most reliable Windows launch, double-click:
 
 ```text
-Start_Digifly_Phase2_WSL.bat
+Windows-WSL.bat
 ```
 
-Or open the Ubuntu/WSL CLI, go to the downloaded repo, and run:
+The batch launcher opens the repo in your default WSL distro and runs the WSL setup/start script. To use a non-default distro, set `DIGIFLY_WSL_DISTRO` before launching:
+
+```text
+set DIGIFLY_WSL_DISTRO=Ubuntu-24.04
+Windows-WSL.bat
+```
+
+Or open the Ubuntu/WSL CLI, go to the downloaded repo, and run directly:
 
 ```bash
 cd /mnt/c/Users/<you>/path/to/Digifly-Public
-bash Start_Digifly_Phase2_WSL.sh
+bash scripts/wsl/start_phase2_workbench_wsl.sh
 ```
 
 On first launch, the script installs Ubuntu packages, creates `.venv-wsl`, installs the Python dependencies, compiles the NEURON `.mod` mechanisms, and starts JupyterLab.
@@ -36,7 +34,7 @@ The WSL requirements keep NEURON 8.x on older Python runtimes and allow NEURON 9
 
 After JupyterLab opens:
 
-1. Open `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb` if it is not already open.
+1. Open `Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb` if it is not already open.
 2. Select a preset.
 3. Click `Run`.
 4. After the run completes, click `Open Mutation App`.
@@ -74,19 +72,20 @@ NEURON_MODULE_OPTIONS="-nogui"
 Override the Jupyter port when needed:
 
 ```bash
-DIGIFLY_JUPYTER_PORT=8890 bash Start_Digifly_Phase2_WSL.sh
+DIGIFLY_JUPYTER_PORT=8890 bash scripts/wsl/start_phase2_workbench_wsl.sh
 ```
 
 Skip automatically opening the Windows browser:
 
 ```bash
-DIGIFLY_OPEN_BROWSER=0 bash Start_Digifly_Phase2_WSL.sh
+DIGIFLY_OPEN_BROWSER=0 bash scripts/wsl/start_phase2_workbench_wsl.sh
 ```
 
 Use a non-default WSL distro when needed:
 
 ```bash
-DIGIFLY_WSL_DISTRO=Ubuntu-24.04 bash Start_Digifly_Phase2_WSL.sh
+set DIGIFLY_WSL_DISTRO=Ubuntu-24.04
+Windows-WSL.bat
 ```
 
 ## Widget Troubleshooting
@@ -97,7 +96,7 @@ If JupyterLab shows a JavaScript error such as:
 Failed to load model class 'VBoxModel' from module '@jupyter-widgets/controls'
 ```
 
-the kernel and JupyterLab frontend are using incompatible or stale widget state. The WSL launcher checks for JupyterLab 4, Notebook 7, ipykernel 6, and the ipywidgets 8 stack, then repairs the Python packages automatically when needed. After that upgrade, close the old notebook tab, restart JupyterLab from `Start_Digifly_Phase2_WSL.bat`, reopen `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`, and rerun the workbench cell.
+the kernel and JupyterLab frontend are using incompatible or stale widget state. The WSL launcher checks for JupyterLab 4, Notebook 7, ipykernel 6, and the ipywidgets 8 stack, then repairs the Python packages automatically when needed. After that upgrade, close the old notebook tab, restart JupyterLab from `Windows-WSL.bat`, reopen `Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb`, and rerun the workbench cell.
 
 For a manual repair from the repo root inside WSL:
 

@@ -71,6 +71,8 @@ Neuprint Token.txt
 /Phase 2/apps/VIP_Glia_Sim/notebooks/debug/**/*.svg
 /Phase 2/apps/VIP_Glia_Sim/notebooks/debug/**/morphology_mutation_*/
 /Phase 2/outputs/
+/Phase 2/Projects/*/outputs/*
+!/Phase 2/Projects/*/outputs/.gitkeep
 /Phase 2/raw_data/
 
 # Future Phase 3 generated artifacts

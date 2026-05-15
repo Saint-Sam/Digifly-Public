@@ -2,7 +2,7 @@ from pathlib import Path
 import nbformat
 from nbformat.v4 import new_notebook, new_code_cell, new_markdown_cell
 
-NOTEBOOK_PATH = Path("notebooks/run_simulation.ipynb")
+NOTEBOOK_PATH = Path("Projects/baseline_run_simulation/run_simulation.ipynb")
 NOTEBOOK_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 cells = []

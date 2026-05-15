@@ -9,10 +9,12 @@ This public copy is intentionally lean. It includes the framework code, tests, m
 - `digifly/phase2/`: shared simulation package
 - `digifly/phase2/workbench/`: notebook-first control surface, presets, validation, manifests, and execution helpers
 - `digifly/tools/`: repo validation and small helper launchers
+- `Projects/`: canonical project notebooks and project-local output folders
 - `apps/VIP_Glia_Sim/`: standalone PyVista morphology mutation app and testing launch notebooks
 - `data/*.mod`: NEURON gap-junction mechanism sources
-- `notebooks/run_simulation.ipynb`: unified Phase 2 runner notebook
-- `notebooks/Digifly_Phase2_Workbench.ipynb`: interactive workbench notebook built on the public preset/manifest layer
+- `Projects/baseline_run_simulation/run_simulation.ipynb`: unified Phase 2 runner project notebook
+- `Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb`: interactive workbench project notebook built on the public preset/manifest layer
+- `Projects/elliott_sparrow_2012_beam/launch_elliott_sparrow_beam.ipynb`: Elliott/Sparrow beam project notebook
 - `notebooks/launch_browser_flow_visualizer.ipynb`: browser-native Plotly flow visualizer for completed runs
 - `tests/`: focused framework tests
 - `config/structure_manifest.yaml`: lightweight structure validation manifest
@@ -45,10 +47,10 @@ For Windows users, Docker and WSL are both supported.
 Use Docker when you want the simplest browser-only runtime:
 
 ```text
-Open START_HERE_Digifly_Phase2.ipynb from the repo root and run its single code cell
+Windows-Docker.bat
 ```
 
-That start notebook opens the Phase 2 Workbench through Docker. If Windows does not know how to open `.ipynb` files yet, double-click `Start_Digifly_Phase2_Windows.bat` from the repo root to open the start notebook.
+That launcher starts Docker and opens the standard Phase 2 Workbench directly.
 
 Manual startup:
 
@@ -56,7 +58,7 @@ Manual startup:
 docker compose up --build phase2-jupyter
 ```
 
-Open `http://localhost:8888`, then open `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`.
+Open `http://localhost:8888`, then open `Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb`.
 After a run completes, click `Open Browser Visualizer` to view the morphology/activity animation directly in JupyterLab.
 
 To test the container:
@@ -67,13 +69,13 @@ docker compose --profile test run --rm phase2-test
 
 The Docker image installs NEURON, compiles the Phase 2 `.mod` mechanisms, and mounts the repo at `/workspace`. See `../docs/phase2_docker_setup.md`.
 
-Use WSL when you want NEURON installed in Linux and the real PyVista mutation app. On Windows, double-click `Start_Digifly_Phase2_WSL.bat` for the most reliable one-click WSL launch. If `.sh` files are associated with Git Bash, double-clicking `Start_Digifly_Phase2_WSL.sh` also relaunches in your default WSL distro; from an Ubuntu/WSL terminal, it runs directly:
+Use WSL when you want NEURON installed in Linux and the real PyVista mutation app. On Windows, double-click `Windows-WSL.bat`; from an Ubuntu/WSL terminal, run:
 
 ```bash
-bash Start_Digifly_Phase2_WSL.sh
+bash scripts/wsl/start_phase2_workbench_wsl.sh
 ```
 
-The WSL path creates `.venv-wsl`, compiles the local NEURON mechanisms, starts JupyterLab, and enables the workbench `Open Mutation App` button when WSLg/X display support is available. Set `DIGIFLY_WSL_DISTRO=<distro-name>` when you want a non-default WSL distro. See `../docs/phase2_wsl_setup.md`.
+The WSL path creates `.venv-wsl`, compiles the local NEURON mechanisms, starts JupyterLab, and enables the workbench `Open Mutation App` button when WSLg/X display support is available. Set `DIGIFLY_WSL_DISTRO=<distro-name>` before running `Windows-WSL.bat` when you want a non-default WSL distro. See `../docs/phase2_wsl_setup.md`.
 
 ## Public Workbench Presets
 
@@ -95,7 +97,7 @@ The Phase 2 Workbench exposes four public defaults:
 - `digifly.phase2.workbench.launch_workbench`
 - `digifly.phase2.workbench.launch_browser_flow_visualizer`
 
-The notebook `notebooks/Digifly_Phase2_Workbench.ipynb` is now the notebook-first public control surface. `notebooks/run_simulation.ipynb` remains the lower-level runner notebook.
+The notebook `Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb` is now the notebook-first public control surface. `Projects/baseline_run_simulation/run_simulation.ipynb` is the lower-level runner project notebook.
 
 ## Workbench Planning
 
@@ -106,7 +108,7 @@ The Hemilineage Simulations notebooks contain many experimental modes that shoul
 - error-log and run-artifact requirements
 - the proposed future Phase 2 Simulation Workbench layout
 
-The first scaffold of that workbench now exists in `digifly/phase2/workbench/` plus `notebooks/Digifly_Phase2_Workbench.ipynb`.
+The first scaffold of that workbench now exists in `digifly/phase2/workbench/` plus `Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb`.
 
 ## Live Cache, MPI, and CoreNEURON
 
@@ -124,7 +126,7 @@ Use `apps/VIP_Glia_Sim/notebooks/test_launch_morphology_mutation_standalone.ipyn
 
 The PyVista mutation app is a desktop GUI path. In Docker/JupyterLab, use the workbench `Open Browser Visualizer` button after a run completes; it renders the latest run directly in the browser with Plotly. In WSL with WSLg/X display support, use the workbench `Open Mutation App` button to launch the full mutation app from the latest run.
 
-SWC exports are intentionally not tracked. Set `DIGIFLY_SWC_DIR`, or copy `apps/VIP_Glia_Sim/notebooks/local_config.example.py` to the ignored `local_config.py` and point `SWC_DIR` at a real `export_swc` folder. Shared-run outputs are written under `SWC_DIR/hemi_runs`, so Docker runs launched from Jupyter persist in `Phase 1/manc_v1.2.1/export_swc/hemi_runs` on the host repo. For local testing, the launcher can seed `Phase 1/manc_v1.2.1/export_swc` by copying requested neuron folders from a configured source export.
+SWC exports are intentionally not tracked. Set `DIGIFLY_SWC_DIR`, or copy `apps/VIP_Glia_Sim/notebooks/local_config.example.py` to the ignored `local_config.py` and point `SWC_DIR` at a real `export_swc` folder. Project notebooks route shared-run outputs under their own `Projects/<project>/outputs/runs` folders. For local testing, the launcher can seed `Phase 1/manc_v1.2.1/export_swc` by copying requested neuron folders from a configured source export.
 
 ## Mechanism Notes
 

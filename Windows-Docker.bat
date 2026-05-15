@@ -26,7 +26,7 @@ if errorlevel 1 (
 
 set "DIGIFLY_PORT=8888"
 set "DIGIFLY_JUPYTER_PORT=%DIGIFLY_PORT%"
-set "DIGIFLY_NOTEBOOK_URL=http://localhost:%DIGIFLY_PORT%/lab/tree/START_HERE_Digifly_Phase2.ipynb"
+set "DIGIFLY_WORKBENCH_URL=http://localhost:%DIGIFLY_PORT%/lab/tree/Phase%%202/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb"
 
 echo Starting Digifly Phase 2 Docker runtime...
 docker compose up --build -d phase2-jupyter
@@ -58,14 +58,12 @@ timeout /t 2 /nobreak >nul
 goto wait_for_jupyter
 
 :open_notebook
-echo Opening Digifly one-click notebook...
-start "" "%DIGIFLY_NOTEBOOK_URL%"
+echo Opening Digifly Phase 2 Workbench...
+start "" "%DIGIFLY_WORKBENCH_URL%"
 
 echo.
 echo If the browser did not open, paste this into Chrome or Edge:
-echo %DIGIFLY_NOTEBOOK_URL%
-echo.
-echo In the notebook, run the single code cell. It will open the Phase 2 Workbench through Docker.
+echo %DIGIFLY_WORKBENCH_URL%
 echo.
 echo To stop Digifly later, run:
 echo docker compose down

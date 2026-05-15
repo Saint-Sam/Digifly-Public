@@ -6,24 +6,16 @@ This is the recommended Phase 2 path for Windows users. It avoids native Windows
 
 1. Install Docker Desktop.
 2. Clone or download the Digifly Public repo.
-3. Open this notebook from the repo folder and run its single code cell:
+3. Double-click this Command Prompt launcher from the repo folder:
 
 ```text
-START_HERE_Digifly_Phase2.ipynb
+Windows-Docker.bat
 ```
 
-The notebook starts Docker when needed and opens the Docker-hosted Phase 2 Workbench.
-
-If Windows does not know how to open `.ipynb` files yet, double-click this Command Prompt launcher from the repo folder:
+The launcher uses Command Prompt, not PowerShell. It starts Docker Compose in the background and opens the standard Phase 2 Workbench:
 
 ```text
-Start_Digifly_Phase2_Windows.bat
-```
-
-The launcher uses Command Prompt, not PowerShell. It starts Docker Compose in the background and opens the same start notebook:
-
-```text
-START_HERE_Digifly_Phase2.ipynb
+Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb
 ```
 
 4. In the Workbench, use the `Single Neuron Debug` preset, then click `Run`. After the run finishes, click `Open Browser Visualizer`.
@@ -55,7 +47,7 @@ http://localhost:8889
 In JupyterLab, open:
 
 ```text
-START_HERE_Digifly_Phase2.ipynb
+Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb
 ```
 
 After a workbench run completes, click `Open Browser Visualizer` to load the latest run into the Plotly browser-native flow viewer. This path works inside Docker on Windows because it renders in JupyterLab and does not require PyVista, VTK desktop windows, or a Windows NEURON install.
@@ -119,12 +111,16 @@ This maps to the same folder in the downloaded repo:
 Phase 1/manc_v1.2.1/export_swc
 ```
 
-Generated outputs stay in ignored repo folders such as `Phase 2/outputs/` and notebook debug folders.
-
-Completed shared-run outputs also persist under:
+Generated outputs stay in ignored project folders such as:
 
 ```text
-Phase 1/manc_v1.2.1/export_swc/hemi_runs
+Phase 2/Projects/phase2_workbench/outputs/
+```
+
+The project workbench routes completed shared-run outputs under:
+
+```text
+Phase 2/Projects/phase2_workbench/outputs/runs
 ```
 
 The standalone browser viewer can be opened from:
@@ -152,8 +148,8 @@ Phase 2 needs Python, NEURON, MPI/build tools, and compiled `.mod` mechanisms. T
 
 If Ubuntu/WSL is available and you want the full PyVista morphology mutation app, use the WSL launcher instead:
 
-```bash
-bash Start_Digifly_Phase2_WSL.sh
+```text
+Windows-WSL.bat
 ```
 
-That path installs NEURON into a WSL virtual environment and starts JupyterLab. On Windows, double-click `Start_Digifly_Phase2_WSL.bat` for the most reliable one-click WSL launch; from Git Bash, the `.sh` relaunches in the default WSL distro first. See `phase2_wsl_setup.md`.
+That path installs NEURON into a WSL virtual environment and starts JupyterLab through Ubuntu/WSL. See `phase2_wsl_setup.md`.

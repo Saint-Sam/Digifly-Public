@@ -592,7 +592,7 @@ The cache redesign note points toward a structural cache plus runtime overlays. 
 The first public version can be a notebook named:
 
 ```text
-Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb
+Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb
 ```
 
 Later it can become a small app built on the same schema and runner code.

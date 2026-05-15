@@ -2,12 +2,14 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, Mapping
 
 
 def prepare_workbench_bundle(phase2_root: str | Path, *, run_id: str, preset_slug: str, state: Mapping[str, Any], plan: Mapping[str, Any]) -> Path:
-    bundle_dir = (Path(phase2_root).expanduser().resolve() / "workbench_runs" / str(run_id)).resolve()
+    bundle_root = _workbench_runs_root(phase2_root)
+    bundle_dir = (bundle_root / str(run_id)).resolve()
     bundle_dir.mkdir(parents=True, exist_ok=True)
     _write_json(bundle_dir / "workbench_state.json", state)
     _write_json(bundle_dir / "execution_plan.json", plan)
@@ -23,6 +25,13 @@ def prepare_workbench_bundle(phase2_root: str | Path, *, run_id: str, preset_slu
     )
     _ensure_placeholder_logs(bundle_dir)
     return bundle_dir
+
+
+def _workbench_runs_root(phase2_root: str | Path) -> Path:
+    env_root = os.environ.get("DIGIFLY_WORKBENCH_RUNS_ROOT", "").strip()
+    if env_root:
+        return Path(env_root).expanduser().resolve()
+    return Path(phase2_root).expanduser().resolve() / "workbench_runs"
 
 
 def record_execution_status(target_dir: str | Path, *, status: str, result: Mapping[str, Any] | None = None, failure: Mapping[str, Any] | None = None) -> None:

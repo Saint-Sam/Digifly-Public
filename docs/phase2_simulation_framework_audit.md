@@ -31,7 +31,7 @@ Included:
 - `Phase 2/data/Gap.mod`
 - `Phase 2/data/RectGap.mod`
 - `Phase 2/data/HeteroRectGap.mod`
-- `Phase 2/notebooks/run_simulation.ipynb`
+- `Phase 2/Projects/baseline_run_simulation/run_simulation.ipynb`
 
 Excluded on purpose:
 
@@ -206,7 +206,7 @@ They may contain useful results, but they are not framework code.
 
 ### Public Canonical Notebook
 
-- `Phase 2/notebooks/run_simulation.ipynb`
+- `Phase 2/Projects/baseline_run_simulation/run_simulation.ipynb`
 
 This is the best starting notebook for GitHub because it is already a unified runner surface.
 

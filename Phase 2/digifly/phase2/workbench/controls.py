@@ -887,6 +887,10 @@ def _apply_environment_path_defaults(state: Dict[str, Any]) -> None:
             state["swc_dir"] = str(swc_root)
             state["runs_root"] = str((swc_root / "hemi_runs").resolve())
 
+    runs_root = os.environ.get("DIGIFLY_RUNS_ROOT", "").strip()
+    if runs_root:
+        state["runs_root"] = str(Path(runs_root).expanduser().resolve())
+
     morph_swc_dir = os.environ.get("DIGIFLY_MORPH_SWC_DIR", "").strip()
     if morph_swc_dir:
         state["morph_swc_dir"] = morph_swc_dir
@@ -897,7 +901,10 @@ def _apply_environment_path_defaults(state: Dict[str, Any]) -> None:
 
     phase2_root = os.environ.get("DIGIFLY_PHASE2_ROOT", "").strip()
     workspace = os.environ.get("DIGIFLY_WORKSPACE", "").strip()
-    if phase2_root:
+    projects_root = os.environ.get("DIGIFLY_PROJECTS_ROOT", "").strip()
+    if projects_root:
+        state["projects_root"] = str(Path(projects_root).expanduser().resolve())
+    elif phase2_root:
         state["projects_root"] = str((Path(phase2_root).expanduser() / "outputs" / "workbench_projects").resolve())
     elif workspace:
         state["projects_root"] = str((Path(workspace).expanduser() / "Phase 2" / "outputs" / "workbench_projects").resolve())

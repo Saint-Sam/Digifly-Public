@@ -93,7 +93,7 @@ Included:
 - `tests/`
 - `config/structure_manifest.yaml`
 - `data/*.mod`
-- `notebooks/run_simulation.ipynb`
+- `Projects/baseline_run_simulation/run_simulation.ipynb`
 - `apps/VIP_Glia_Sim/` standalone morphology mutation app and launcher notebooks
 
 Excluded:

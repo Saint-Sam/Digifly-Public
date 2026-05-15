@@ -26,10 +26,10 @@ if errorlevel 1 (
 
 if defined DIGIFLY_WSL_DISTRO (
     echo Starting Digifly Phase 2 WSL runtime in %DIGIFLY_WSL_DISTRO%...
-    wsl.exe -d "%DIGIFLY_WSL_DISTRO%" --cd "%CD%" bash ./Start_Digifly_Phase2_WSL.sh %*
+    wsl.exe -d "%DIGIFLY_WSL_DISTRO%" --cd "%CD%" bash scripts/wsl/start_phase2_workbench_wsl.sh %*
 ) else (
     echo Starting Digifly Phase 2 WSL runtime in the default WSL distro...
-    wsl.exe --cd "%CD%" bash ./Start_Digifly_Phase2_WSL.sh %*
+    wsl.exe --cd "%CD%" bash scripts/wsl/start_phase2_workbench_wsl.sh %*
 )
 
 if errorlevel 1 (

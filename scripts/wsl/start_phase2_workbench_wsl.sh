@@ -7,14 +7,14 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 # Allow users to run this script directly from Windows Git Bash too.
 # shellcheck source=scripts/wsl/launch_helpers.sh
 source "${SCRIPT_DIR}/launch_helpers.sh"
-ensure_wsl_when_started_from_windows_bash "${REPO_ROOT}" "./Start_Digifly_Phase2_WSL.sh" "$@"
+ensure_wsl_when_started_from_windows_bash "${REPO_ROOT}" "scripts/wsl/start_phase2_workbench_wsl.sh" "$@"
 maybe_print_launch_check "${REPO_ROOT}" "$@"
 
 VENV_DIR="${DIGIFLY_WSL_VENV:-${REPO_ROOT}/.venv-wsl}"
 PHASE2_ROOT="${REPO_ROOT}/Phase 2"
 SWC_DIR_DEFAULT="${REPO_ROOT}/Phase 1/manc_v1.2.1/export_swc"
 PORT="${DIGIFLY_JUPYTER_PORT:-8888}"
-WORKBENCH_PATH="/lab/tree/Phase%202/notebooks/Digifly_Phase2_Workbench.ipynb"
+WORKBENCH_PATH="/lab/tree/Phase%202/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb"
 WORKBENCH_URL="http://localhost:${PORT}${WORKBENCH_PATH}"
 
 open_browser() {

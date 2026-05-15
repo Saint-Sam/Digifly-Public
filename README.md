@@ -10,13 +10,15 @@ This repo keeps the active Digifly phase-based layout so notebooks, helper files
 
 ## Current Contents
 
-- `START_HERE_Digifly_Phase2.ipynb`: notebook launcher that starts/opens the Docker-hosted Phase 2 Workbench.
+- `Windows-Docker.bat`: Windows launcher for the Docker-hosted Phase 2 Workbench.
+- `Windows-WSL.bat`: Windows launcher for the WSL-hosted Phase 2 Workbench and PyVista mutation app path.
 - `Phase 1/Phase 1.ipynb`: sanitized public copy of the current Phase 1 notebook.
 - `Phase 1/phase1_bridge.py`: current Phase 1 bridge/helper module.
 - `Phase 1/filter_ids_by_size_and_export_swc.py`: helper used by the Phase 1 notebook for Excel ID filtering and SWC export.
 - `Phase 1/digifly_phase1/`: modular Phase 1 package with the menu, token handling, and one module per current Choice.
 - `Phase 2/`: lean public staging copy of the reusable NEURON simulation framework.
-- `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`: notebook-first interactive workbench for shared runs and hemilineage project runs.
+- `Phase 2/Projects/`: project-specific notebooks and local output folders built on the shared Phase 2 code.
+- `Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb`: notebook-first interactive workbench for shared runs and hemilineage project runs.
 - `Phase 2/notebooks/launch_browser_flow_visualizer.ipynb`: browser-native Plotly flow viewer for Docker/JupyterLab sessions.
 - `Phase 2/apps/VIP_Glia_Sim/`: standalone morphology mutation app imported from the current `VIP_Glia_Sim` source.
 - `Phase 3/`: staged Phase 3 working tree, with cache/checkpoint files excluded.
@@ -45,21 +47,13 @@ For Phase 2 on Windows, there are two supported paths.
 Use Docker for the simplest browser-only runtime:
 
 ```text
-Open START_HERE_Digifly_Phase2.ipynb and run the single code cell.
+Windows-Docker.bat
 ```
 
-If the notebook is opened outside Docker, that cell starts Docker and opens the Docker-hosted Phase 2 Workbench. If the notebook is already opened inside Docker, it opens the Workbench directly.
-
-If Windows does not know how to open `.ipynb` files yet, double-click:
+That Command Prompt launcher starts Docker and opens the standard Phase 2 Workbench directly:
 
 ```text
-Start_Digifly_Phase2_Windows.bat
-```
-
-That Command Prompt launcher starts Docker and opens:
-
-```text
-START_HERE_Digifly_Phase2.ipynb
+Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb
 ```
 
 Manual Docker startup also works:
@@ -68,18 +62,18 @@ Manual Docker startup also works:
 docker compose up --build phase2-jupyter
 ```
 
-Then open `http://localhost:8888` and use `Phase 2/notebooks/Digifly_Phase2_Workbench.ipynb`.
+Then open `http://localhost:8888` and use `Phase 2/Projects/phase2_workbench/Digifly_Phase2_Workbench.ipynb`.
 After a run finishes, use **Open Browser Visualizer** in the workbench to view the activity animation inside JupyterLab.
 See `docs/phase2_docker_setup.md` for the full Windows-first path, including the optional prebuilt GitHub Container Registry image.
 See `docs/phase2_colab_notes.md` for the planned Colab/browser-notebook path.
 
-Use WSL when you want NEURON installed in Linux and the full PyVista mutation app launch path. On Windows, double-click `Start_Digifly_Phase2_WSL.bat` for the most reliable one-click WSL launch. If `.sh` files are associated with Git Bash, double-clicking `Start_Digifly_Phase2_WSL.sh` also relaunches in your default WSL distro; from an Ubuntu/WSL terminal, it runs directly:
+Use WSL when you want NEURON installed in Linux and the full PyVista mutation app launch path. On Windows, double-click `Windows-WSL.bat`; from an Ubuntu/WSL terminal, run:
 
 ```bash
-bash Start_Digifly_Phase2_WSL.sh
+bash scripts/wsl/start_phase2_workbench_wsl.sh
 ```
 
-The WSL launcher creates a repo-local `.venv-wsl`, compiles the NEURON mechanisms, starts JupyterLab, and lets the workbench open the real VIP glia morphology mutation app after a run completes. Set `DIGIFLY_WSL_DISTRO=<distro-name>` when you want a non-default WSL distro. See `docs/phase2_wsl_setup.md`.
+The WSL launcher creates a repo-local `.venv-wsl`, compiles the NEURON mechanisms, starts JupyterLab, and lets the workbench open the real VIP glia morphology mutation app after a run completes. Set `DIGIFLY_WSL_DISTRO=<distro-name>` before running `Windows-WSL.bat` when you want a non-default WSL distro. See `docs/phase2_wsl_setup.md`.
 
 ## To-do
 
