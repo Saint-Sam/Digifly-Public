@@ -2793,6 +2793,49 @@ def _make_pair_tasks(upstream_ids, downstream_ids):
                 continue
             tasks.append((up_id, down_id))
     return tasks
+
+
+def _query_one_pair(
+    up_id: int,
+    down_id: int,
+    use_all_paths: bool,
+    min_weight: int,
+    path_kwargs: dict,
+):
+    """
+    Query one upstream/downstream pair for Choice 4 pathfinding.
+
+    Called by run_pair_path_queries_parallel(). The returned table keeps the
+    neuPrint path rows and adds endpoint columns used by the downstream
+    neurotransmitter filters and path summaries.
+    """
+    client = get_male_cns_client()
+
+    if use_all_paths:
+        df = neu.fetch_paths(
+            upstream_bodyId=up_id,
+            downstream_bodyId=down_id,
+            min_weight=min_weight,
+            client=client,
+            **(path_kwargs or {})
+        )
+    else:
+        df = neu.fetch_shortest_paths(
+            upstream_bodyId=up_id,
+            downstream_bodyId=down_id,
+            min_weight=min_weight,
+            client=client
+        )
+
+    if df is None or df.empty:
+        return None
+
+    df = df.copy()
+    df["upstream"] = up_id
+    df["downstream"] = down_id
+    return df
+
+
 def run_pair_path_queries_parallel(
     upstream_ids,
     downstream_ids,
